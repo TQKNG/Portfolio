@@ -11,10 +11,11 @@ const Index = () => {
         {/* Navigation */}
         <nav className="flex items-center justify-between border-b-4 border-brutalist-ink px-6 py-4">
           <Link to="/" className="text-xl font-bold text-brutalist-ink">
-            JLM*
+            KN
           </Link>
           <div className="flex gap-1">
             <a href="#work" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">WORK</a>
+             <a href="#work" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">BLOG</a>
             <a href="#about" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">INFO</a>
             <a href="#contact" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">MAIL</a>
           </div>
@@ -97,7 +98,7 @@ const Index = () => {
                 <form className="space-y-4 max-w-xl">
                   <input
                     type="email"
-                    placeholder="YOUR@EMAIL.COM"
+                    placeholder="khanhnguyen.trq@gmail.com"
                     className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-red"
                   />
                   <textarea
@@ -116,18 +117,18 @@ const Index = () => {
 
               {/* Copyright */}
               <div className="border-t-4 border-brutalist-ink px-6 py-4 flex justify-between items-center">
-                <span className="text-xs font-bold text-brutalist-muted">© {new Date().getFullYear()} JULIA LOYD MOHR</span>
+                <span className="text-xs font-bold text-brutalist-muted">© {new Date().getFullYear()} KHANH NGUYEN</span>
                 <div className="flex gap-4">
-                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">IG</a>
-                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">BE</a>
-                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">LI</a>
+                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">LINKEDIN</a>
+                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">GITHUB</a>
+                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">DEV</a>
                 </div>
               </div>
             </footer>
           </div>
 
           {/* Corner accent */}
-          <div className="absolute bottom-0 left-0 h-32 w-32 bg-brutalist-teal hidden lg:block" />
+  
         </div>
       </div>
     </PageTransition>
