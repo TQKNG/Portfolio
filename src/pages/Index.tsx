@@ -126,9 +126,6 @@ const Index = () => {
               </div>
             </footer>
           </div>
-
-          {/* Corner accent */}
-  
         </div>
       </div>
     </PageTransition>
