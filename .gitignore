@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build and coverage output
+dist/
+coverage/
+.vite/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs and runtime files
+*.log
+logs/
+*.pid
+*.pid.lock
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Bun debug output
+bun-debug.log
