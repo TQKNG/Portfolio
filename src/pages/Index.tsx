@@ -119,9 +119,20 @@ const Index = () => {
               <div className="border-t-4 border-brutalist-ink px-6 py-4 flex justify-between items-center">
                 <span className="text-xs font-bold text-brutalist-muted">© {new Date().getFullYear()} KHANH NGUYEN</span>
                 <div className="flex gap-4">
-                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">LINKEDIN</a>
-                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">GITHUB</a>
-                  <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">DEV</a>
+                  <a href="https://www.linkedin.com/in/khanhngt"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="LinkedIn" className="text-brutalist-muted transition-colors hover:text-brutalist-ink">
+                    <img src="/assets/linkedin.svg" alt="" className="h-5 w-5" />
+                  </a>
+                  <a href="https://github.com/TQKNG" 
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="GitHub" className="text-brutalist-muted transition-colors hover:text-brutalist-ink">
+                    <img src="/assets/github.svg" alt="" className="h-5 w-5" />
+                  </a>
+                  <a href="https://dev.to/khanh_nguyen_04b1205f5a91" aria-label="DEV.to" 
+                   target="_blank" rel="noopener noreferrer"className="text-brutalist-muted transition-colors hover:text-brutalist-ink">
+                    <img src="/assets/devto.svg" alt="" className="h-5 w-5" />
+                  </a>
                 </div>
               </div>
             </footer>
