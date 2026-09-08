@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { AssetImage } from "@/components/ui/AssetImage";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Project } from "@/types";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -50,8 +51,9 @@ export const ProjectCard = ({ project, onHover }: ProjectCardProps) => {
         
         {/* Image with grayscale effect */}
         {isIntersecting && (
-          <img
+          <AssetImage
             src={project.heroImage}
+            localSrc={project.localHeroImage}
             alt={project.title}
             loading="lazy"
             onLoad={() => setImageLoaded(true)}

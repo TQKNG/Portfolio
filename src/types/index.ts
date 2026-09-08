@@ -19,6 +19,7 @@ export interface Designer {
 export interface ProjectImage {
   id: string;
   url: string;
+  localUrl?: string;
   alt: string;
   width: "full" | "half";
   caption?: string;
@@ -35,6 +36,7 @@ export interface Project {
   team: string;
   timeline: string;
   heroImage: string;
+  localHeroImage?: string;
   images: ProjectImage[];
   gridWidth: 3 | 6 | 12;
   featured: boolean;

@@ -1,111 +1,17 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
 import { PageTransition } from "@/components/animations/PageTransition";
+import { BlogSection } from "@/components/blog/BlogSection";
+import { SiteNav } from "@/components/navigation/SiteNav";
+import { AssetImage } from "@/components/ui/AssetImage";
 import { getAllProjects } from "@/data/projects";
 
 const Index = () => {
   const projects = getAllProjects();
-  const [activeNav, setActiveNav] = useState("work");
-  const scrollPanelRef = useRef<HTMLDivElement>(null);
-  const pendingNavRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    const sections = ["work", "blog", "about", "contact"]
-      .map((sectionId) => document.getElementById(sectionId))
-      .filter((section): section is HTMLElement => section !== null);
-
-    const updateActiveNav = () => {
-      const scrollPanel = scrollPanelRef.current;
-      if (!scrollPanel || sections.length === 0) return;
-
-      const activationPoint =
-        scrollPanel.getBoundingClientRect().top + scrollPanel.clientHeight * 0.25;
-      let currentSection = sections[0];
-
-      sections.forEach((section) => {
-        if (section.getBoundingClientRect().top <= activationPoint) {
-          currentSection = section;
-        }
-      });
-
-      const currentNav =
-        currentSection.getAttribute("data-nav-id") ?? currentSection.id;
-      const pendingNav = pendingNavRef.current;
-
-      if (pendingNav && pendingNav !== currentNav) return;
-
-      pendingNavRef.current = null;
-      setActiveNav(currentNav);
-    };
-
-    updateActiveNav();
-    scrollPanelRef.current?.addEventListener("scroll", updateActiveNav);
-    window.addEventListener("scroll", updateActiveNav);
-
-    return () => {
-      scrollPanelRef.current?.removeEventListener("scroll", updateActiveNav);
-      window.removeEventListener("scroll", updateActiveNav);
-    };
-  }, []);
-
-  const handleNavClick = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    sectionId: string,
-    navId: string,
-  ) => {
-    event.preventDefault();
-    pendingNavRef.current = navId;
-    setActiveNav(navId);
-    document.getElementById(sectionId)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  const navLinkClass = (navId: string) =>
-    activeNav === navId
-      ? "border-2 border-brutalist-ink bg-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-cream"
-      : "border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream";
 
   return (
     <PageTransition>
       <div className="min-h-screen bg-brutalist-cream font-mono">
-        {/* Navigation */}
-        <nav className="flex items-center justify-between border-b-4 border-brutalist-ink px-6 py-4">
-          <Link to="/" className="text-xl font-bold text-brutalist-ink">
-            KN
-          </Link>
-          <div className="flex gap-1">
-            <a
-              href="#work"
-              onClick={(event) => handleNavClick(event, "work", "work")}
-              className={navLinkClass("work")}
-            >
-              WORK
-            </a>
-            <a
-              href="#blog"
-              onClick={(event) => handleNavClick(event, "blog", "blog")}
-              className={navLinkClass("blog")}
-            >
-              BLOG
-            </a>
-            <a
-              href="#about"
-              onClick={(event) => handleNavClick(event, "about", "info")}
-              className={navLinkClass("info")}
-            >
-              INFO
-            </a>
-            <a
-              href="#contact"
-              onClick={(event) => handleNavClick(event, "contact", "mail")}
-              className={navLinkClass("mail")}
-            >
-              MAIL
-            </a>
-          </div>
-        </nav>
+        <SiteNav />
 
         {/* Hero Content - Two Column Layout */}
         <div className="relative grid min-h-[90vh] grid-cols-1 lg:grid-cols-2">
@@ -125,7 +31,7 @@ const Index = () => {
 
           {/* Right Panel - Scrollable Projects + Footer */}
           <div
-            ref={scrollPanelRef}
+            data-site-scroll-panel
             className="lg:h-[90vh] lg:overflow-y-auto"
           >
             <section id="work" data-nav-id="work">
@@ -145,8 +51,9 @@ const Index = () => {
                     className="group block transition-all"
                   >
                     <div className="aspect-[16/10] overflow-hidden border-4 border-brutalist-ink">
-                      <img
+                      <AssetImage
                         src={project.heroImage}
+                        localSrc={project.localHeroImage}
                         alt={project.title}
                         className="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0 group-hover:scale-105"
                       />
@@ -169,32 +76,7 @@ const Index = () => {
               </div>
             </section>
 
-            <section
-              id="blog"
-              data-nav-id="blog"
-              className="border-t-4 border-brutalist-ink"
-            >
-              <div className="p-4 pb-4 lg:p-6 lg:pb-4">
-                <h4 className="text-xl font-bold text-brutalist-ink">
-                  LET&apos;S SHARE
-                </h4>
-                <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-                  THOUGHTS ON CODE, DESIGN, AND THE WORK IN BETWEEN
-                </p>
-              </div>
-              <div className="mx-6 mb-6 border-4 border-dashed border-brutalist-ink p-8 lg:p-12">
-                <p className="text-xs font-bold tracking-widest text-brutalist-red">
-                  COMING SOON
-                </p>
-                <h3 className="mt-4 text-3xl font-bold text-brutalist-ink lg:text-5xl">
-                  NOTES ARE IN THE WORKS.
-                </h3>
-                <p className="mt-4 max-w-lg text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
-                  FIELD NOTES, BUILD LOGS, AND A FEW LESSONS FROM MAKING THINGS
-                  FOR THE WEB.
-                </p>
-              </div>
-            </section>
+            <BlogSection />
 
             {/* Footer inside scroll area */}
             <footer
@@ -290,7 +172,7 @@ const Index = () => {
                     className="text-brutalist-muted transition-colors hover:text-brutalist-ink"
                   >
                     <img
-                      src="/assets/linkedin.svg"
+                      src="/assets/icons/social/linkedin.svg"
                       alt=""
                       className="h-5 w-5"
                     />
@@ -302,7 +184,7 @@ const Index = () => {
                     aria-label="GitHub"
                     className="text-brutalist-muted transition-colors hover:text-brutalist-ink"
                   >
-                    <img src="/assets/github.svg" alt="" className="h-5 w-5" />
+                    <img src="/assets/icons/social/github.svg" alt="" className="h-5 w-5" />
                   </a>
                   <a
                     href="https://dev.to/khanh_nguyen_04b1205f5a91"
@@ -311,7 +193,7 @@ const Index = () => {
                     rel="noopener noreferrer"
                     className="text-brutalist-muted transition-colors hover:text-brutalist-ink"
                   >
-                    <img src="/assets/devto.svg" alt="" className="h-5 w-5" />
+                    <img src="/assets/icons/social/devto.svg" alt="" className="h-5 w-5" />
                   </a>
                 </div>
               </div>

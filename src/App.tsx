@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import { SkipToContent } from "@/components/accessibility/SkipToContent";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
+import BlogPost from "./pages/BlogPost";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import DesignSystem from "./pages/DesignSystem";
@@ -41,6 +42,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/design-system" element={<DesignSystem />} />
         <Route path="/hero-1" element={<Hero1 />} />
         <Route path="/hero-2" element={<Hero2 />} />

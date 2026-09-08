@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { ProjectNav } from "@/components/projects/ProjectNav";
+import { SiteNav } from "@/components/navigation/SiteNav";
 import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { getProjectBySlug, getNextProject } from "@/data/projects";
@@ -7,6 +8,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { AssetImage } from "@/components/ui/AssetImage";
 
 /**
  * ProjectDetail Page
@@ -29,23 +31,7 @@ const ProjectDetail = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-brutalist-cream font-mono">
-        {/* Navigation - same as Index */}
-        <nav className="flex items-center justify-between border-b-4 border-brutalist-ink px-6 py-4">
-          <Link to="/" className="text-xl font-bold text-brutalist-ink">
-            JLM*
-          </Link>
-          <div className="flex gap-1">
-            <Link to="/#work" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">
-              WORK
-            </Link>
-            <Link to="/#about" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">
-              INFO
-            </Link>
-            <Link to="/#contact" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">
-              MAIL
-            </Link>
-          </div>
-        </nav>
+        <SiteNav />
 
         {/* Project Title Section */}
         <section className="px-6 pt-12 pb-6 lg:px-12">
@@ -63,8 +49,9 @@ const ProjectDetail = () => {
           <FadeIn>
             <div className="border-4 border-brutalist-ink overflow-hidden">
               <AspectRatio ratio={16 / 9}>
-                <img
+                <AssetImage
                   src={project.heroImage}
+                  localSrc={project.localHeroImage}
                   alt={`${project.title} hero image`}
                   className="w-full h-full object-cover"
                 />
@@ -130,6 +117,7 @@ const ProjectDetail = () => {
                       <div className="grid md:grid-cols-2 gap-6">
                         <ProjectImage
                           src={image.url}
+                          localSrc={image.localUrl}
                           alt={image.alt}
                           caption={image.caption}
                         />
@@ -148,6 +136,7 @@ const ProjectDetail = () => {
                   <FadeIn key={image.id}>
                     <ProjectImage
                       src={image.url}
+                      localSrc={image.localUrl}
                       alt={image.alt}
                       caption={image.caption}
                     />
@@ -191,11 +180,12 @@ const ProjectDetail = () => {
  */
 interface ProjectImageProps {
   src: string;
+  localSrc?: string;
   alt: string;
   caption?: string;
 }
 
-const ProjectImage = ({ src, alt, caption }: ProjectImageProps) => {
+const ProjectImage = ({ src, localSrc, alt, caption }: ProjectImageProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [ref, isIntersecting] = useIntersectionObserver({
     rootMargin: "150px",
@@ -210,8 +200,9 @@ const ProjectImage = ({ src, alt, caption }: ProjectImageProps) => {
             <div className="absolute inset-0 w-full h-full bg-brutalist-ink/10 animate-pulse" />
           )}
           {isIntersecting && (
-            <img
+            <AssetImage
               src={src}
+              localSrc={localSrc}
               alt={alt}
               loading="lazy"
               onLoad={() => setImageLoaded(true)}
