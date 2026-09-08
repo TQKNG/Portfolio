@@ -1,9 +1,29 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { getAllProjects } from "@/data/projects";
 
 const Index = () => {
   const projects = getAllProjects();
+  const [activeNav, setActiveNav] = useState("work");
+
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+    navId: string,
+  ) => {
+    event.preventDefault();
+    setActiveNav(navId);
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const navLinkClass = (navId: string) =>
+    activeNav === navId
+      ? "border-2 border-brutalist-ink bg-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-cream"
+      : "border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream";
 
   return (
     <PageTransition>
@@ -14,10 +34,34 @@ const Index = () => {
             KN
           </Link>
           <div className="flex gap-1">
-            <a href="#work" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">WORK</a>
-             <a href="#work" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">BLOG</a>
-            <a href="#about" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">INFO</a>
-            <a href="#contact" className="border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream">MAIL</a>
+            <a
+              href="#work"
+              onClick={(event) => handleNavClick(event, "work", "work")}
+              className={navLinkClass("work")}
+            >
+              WORK
+            </a>
+            <a
+              href="#blog"
+              onClick={(event) => handleNavClick(event, "work", "blog")}
+              className={navLinkClass("blog")}
+            >
+              BLOG
+            </a>
+            <a
+              href="#about"
+              onClick={(event) => handleNavClick(event, "about", "info")}
+              className={navLinkClass("info")}
+            >
+              INFO
+            </a>
+            <a
+              href="#contact"
+              onClick={(event) => handleNavClick(event, "contact", "mail")}
+              className={navLinkClass("mail")}
+            >
+              MAIL
+            </a>
           </div>
         </nav>
 
@@ -26,7 +70,10 @@ const Index = () => {
           {/* Left Panel - Fixed Hero */}
           <div className="flex flex-col justify-center border-b-4 lg:border-b-0 lg:border-r-4 border-brutalist-ink p-8 lg:p-12">
             <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-bold leading-none text-brutalist-ink">
-              KHANH<br />NGUYEN<br />
+              KHANH
+              <br />
+              NGUYEN
+              <br />
             </h1>
             <div className="mt-8 h-4 w-32 bg-brutalist-red" />
             <p className="mt-6 text-xs tracking-widest text-brutalist-muted">
@@ -36,7 +83,15 @@ const Index = () => {
 
           {/* Right Panel - Scrollable Projects + Footer */}
           <div className="lg:h-[90vh] lg:overflow-y-auto" id="work">
-            <div className="p-6 space-y-6">
+            <div className="p-4 pb-4 lg:p-6 lg:pb-4">
+              <h4 className="text-xl font-bold text-brutalist-ink">
+                LET&apos;S EXPLORE
+              </h4>
+              <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
+                EXPLORE MY RECENT PROJECTS, BUILT WITH CURIOSITY AND INTENT
+              </p>
+            </div>
+            <div className="space-y-2 px-6 pb-6 pt-0">
               {projects.map((project) => (
                 <Link
                   key={project.id}
@@ -70,30 +125,58 @@ const Index = () => {
             {/* Footer inside scroll area */}
             <footer className="border-t-4 border-brutalist-ink mt-8" id="about">
               {/* Services Grid */}
+              <div className="p-4 pb-4 lg:p-6 lg:pb-4">
+                <h4 className="text-xl font-bold text-brutalist-ink">
+                  LET&apos;S MAKE AN IMPACT
+                </h4>
+                <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
+                  A FEW WAYS I TURN BOLD IDEAS INTO MEMORABLE EXPERIENCES
+                </p>
+              </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-8 lg:p-12">
                 <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">BRAND</h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">IDENTITY SYSTEMS THAT DEFINE YOUR VISUAL LANGUAGE</p>
+                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
+                    BRAND
+                  </h3>
+                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
+                    IDENTITY SYSTEMS THAT DEFINE YOUR VISUAL LANGUAGE
+                  </p>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">DIGITAL</h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">WEB EXPERIENCES BUILT FOR IMPACT</p>
+                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
+                    DIGITAL
+                  </h3>
+                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
+                    WEB EXPERIENCES BUILT FOR IMPACT
+                  </p>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">PRINT</h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">TANGIBLE DESIGN THAT LEAVES A MARK</p>
+                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
+                    PRINT
+                  </h3>
+                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
+                    TANGIBLE DESIGN THAT LEAVES A MARK
+                  </p>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">MOTION</h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">DYNAMIC VISUALS THAT TELL STORIES</p>
+                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
+                    MOTION
+                  </h3>
+                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
+                    DYNAMIC VISUALS THAT TELL STORIES
+                  </p>
                 </div>
               </div>
 
               {/* Contact CTA Section */}
-              <div className="p-8 border-t-4 border-brutalist-ink" id="contact">
+              <div className="border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact">
                 <div className="mb-6">
-                  <h4 className="text-xl font-bold text-brutalist-ink">LET'S WORK TOGETHER</h4>
-                  <p className="mt-1 text-xs text-brutalist-muted uppercase tracking-wide">DROP A MESSAGE AND I'LL GET BACK TO YOU WITHIN 24 HOURS</p>
+                  <h4 className="text-xl font-bold text-brutalist-ink">
+                    LET'S WORK TOGETHER
+                  </h4>
+                  <p className="mt-1 text-xs text-brutalist-muted uppercase tracking-wide">
+                    DROP A MESSAGE AND I'LL GET BACK TO YOU WITHIN 24 HOURS
+                  </p>
                 </div>
                 <form className="space-y-4 max-w-xl">
                   <input
@@ -117,20 +200,39 @@ const Index = () => {
 
               {/* Copyright */}
               <div className="border-t-4 border-brutalist-ink px-6 py-4 flex justify-between items-center">
-                <span className="text-xs font-bold text-brutalist-muted">© {new Date().getFullYear()} KHANH NGUYEN</span>
+                <span className="text-xs font-bold text-brutalist-muted">
+                  © {new Date().getFullYear()} KHANH NGUYEN
+                </span>
                 <div className="flex gap-4">
-                  <a href="https://www.linkedin.com/in/khanhngt"
-                  target="_blank" rel="noopener noreferrer"
-                  aria-label="LinkedIn" className="text-brutalist-muted transition-colors hover:text-brutalist-ink">
-                    <img src="/assets/linkedin.svg" alt="" className="h-5 w-5" />
+                  <a
+                    href="https://www.linkedin.com/in/khanhngt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="text-brutalist-muted transition-colors hover:text-brutalist-ink"
+                  >
+                    <img
+                      src="/assets/linkedin.svg"
+                      alt=""
+                      className="h-5 w-5"
+                    />
                   </a>
-                  <a href="https://github.com/TQKNG" 
-                  target="_blank" rel="noopener noreferrer"
-                  aria-label="GitHub" className="text-brutalist-muted transition-colors hover:text-brutalist-ink">
+                  <a
+                    href="https://github.com/TQKNG"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="text-brutalist-muted transition-colors hover:text-brutalist-ink"
+                  >
                     <img src="/assets/github.svg" alt="" className="h-5 w-5" />
                   </a>
-                  <a href="https://dev.to/khanh_nguyen_04b1205f5a91" aria-label="DEV.to" 
-                   target="_blank" rel="noopener noreferrer"className="text-brutalist-muted transition-colors hover:text-brutalist-ink">
+                  <a
+                    href="https://dev.to/khanh_nguyen_04b1205f5a91"
+                    aria-label="DEV.to"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brutalist-muted transition-colors hover:text-brutalist-ink"
+                  >
                     <img src="/assets/devto.svg" alt="" className="h-5 w-5" />
                   </a>
                 </div>
