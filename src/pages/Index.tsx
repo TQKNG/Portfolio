@@ -1,11 +1,52 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { getAllProjects } from "@/data/projects";
 
 const Index = () => {
   const projects = getAllProjects();
   const [activeNav, setActiveNav] = useState("work");
+  const scrollPanelRef = useRef<HTMLDivElement>(null);
+  const pendingNavRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const sections = ["work", "blog", "about", "contact"]
+      .map((sectionId) => document.getElementById(sectionId))
+      .filter((section): section is HTMLElement => section !== null);
+
+    const updateActiveNav = () => {
+      const scrollPanel = scrollPanelRef.current;
+      if (!scrollPanel || sections.length === 0) return;
+
+      const activationPoint =
+        scrollPanel.getBoundingClientRect().top + scrollPanel.clientHeight * 0.25;
+      let currentSection = sections[0];
+
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= activationPoint) {
+          currentSection = section;
+        }
+      });
+
+      const currentNav =
+        currentSection.getAttribute("data-nav-id") ?? currentSection.id;
+      const pendingNav = pendingNavRef.current;
+
+      if (pendingNav && pendingNav !== currentNav) return;
+
+      pendingNavRef.current = null;
+      setActiveNav(currentNav);
+    };
+
+    updateActiveNav();
+    scrollPanelRef.current?.addEventListener("scroll", updateActiveNav);
+    window.addEventListener("scroll", updateActiveNav);
+
+    return () => {
+      scrollPanelRef.current?.removeEventListener("scroll", updateActiveNav);
+      window.removeEventListener("scroll", updateActiveNav);
+    };
+  }, []);
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -13,6 +54,7 @@ const Index = () => {
     navId: string,
   ) => {
     event.preventDefault();
+    pendingNavRef.current = navId;
     setActiveNav(navId);
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
@@ -43,7 +85,7 @@ const Index = () => {
             </a>
             <a
               href="#blog"
-              onClick={(event) => handleNavClick(event, "work", "blog")}
+              onClick={(event) => handleNavClick(event, "blog", "blog")}
               className={navLinkClass("blog")}
             >
               BLOG
@@ -82,48 +124,84 @@ const Index = () => {
           </div>
 
           {/* Right Panel - Scrollable Projects + Footer */}
-          <div className="lg:h-[90vh] lg:overflow-y-auto" id="work">
-            <div className="p-4 pb-4 lg:p-6 lg:pb-4">
-              <h4 className="text-xl font-bold text-brutalist-ink">
-                LET&apos;S EXPLORE
-              </h4>
-              <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-                EXPLORE MY RECENT PROJECTS, BUILT WITH CURIOSITY AND INTENT
-              </p>
-            </div>
-            <div className="space-y-2 px-6 pb-6 pt-0">
-              {projects.map((project) => (
-                <Link
-                  key={project.id}
-                  to={`/projects/${project.slug}`}
-                  className="group block transition-all"
-                >
-                  <div className="aspect-[16/10] overflow-hidden border-4 border-brutalist-ink">
-                    <img
-                      src={project.heroImage}
-                      alt={project.title}
-                      className="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4 flex justify-between items-center">
-                    <div>
-                      <h3 className="text-sm font-bold text-brutalist-ink group-hover:text-brutalist-red">
-                        {project.title.toUpperCase()}
-                      </h3>
-                      <p className="text-xs text-brutalist-muted">
-                        {project.subtitle}
-                      </p>
+          <div
+            ref={scrollPanelRef}
+            className="lg:h-[90vh] lg:overflow-y-auto"
+          >
+            <section id="work" data-nav-id="work">
+              <div className="p-4 pb-4 lg:p-6 lg:pb-4">
+                <h4 className="text-xl font-bold text-brutalist-ink">
+                  LET&apos;S EXPLORE
+                </h4>
+                <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
+                  EXPLORE MY RECENT PROJECTS, BUILT WITH CURIOSITY AND INTENT
+                </p>
+              </div>
+              <div className="space-y-2 px-6 pb-6 pt-0">
+                {projects.map((project) => (
+                  <Link
+                    key={project.id}
+                    to={`/projects/${project.slug}`}
+                    className="group block transition-all"
+                  >
+                    <div className="aspect-[16/10] overflow-hidden border-4 border-brutalist-ink">
+                      <img
+                        src={project.heroImage}
+                        alt={project.title}
+                        className="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0 group-hover:scale-105"
+                      />
                     </div>
-                    <span className="text-xs font-bold text-brutalist-muted">
-                      {project.year}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                    <div className="p-4 flex justify-between items-center">
+                      <div>
+                        <h3 className="text-sm font-bold text-brutalist-ink group-hover:text-brutalist-red">
+                          {project.title.toUpperCase()}
+                        </h3>
+                        <p className="text-xs text-brutalist-muted">
+                          {project.subtitle}
+                        </p>
+                      </div>
+                      <span className="text-xs font-bold text-brutalist-muted">
+                        {project.year}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            <section
+              id="blog"
+              data-nav-id="blog"
+              className="border-t-4 border-brutalist-ink"
+            >
+              <div className="p-4 pb-4 lg:p-6 lg:pb-4">
+                <h4 className="text-xl font-bold text-brutalist-ink">
+                  LET&apos;S SHARE
+                </h4>
+                <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
+                  THOUGHTS ON CODE, DESIGN, AND THE WORK IN BETWEEN
+                </p>
+              </div>
+              <div className="mx-6 mb-6 border-4 border-dashed border-brutalist-ink p-8 lg:p-12">
+                <p className="text-xs font-bold tracking-widest text-brutalist-red">
+                  COMING SOON
+                </p>
+                <h3 className="mt-4 text-3xl font-bold text-brutalist-ink lg:text-5xl">
+                  NOTES ARE IN THE WORKS.
+                </h3>
+                <p className="mt-4 max-w-lg text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
+                  FIELD NOTES, BUILD LOGS, AND A FEW LESSONS FROM MAKING THINGS
+                  FOR THE WEB.
+                </p>
+              </div>
+            </section>
 
             {/* Footer inside scroll area */}
-            <footer className="border-t-4 border-brutalist-ink mt-8" id="about">
+            <footer
+              className="mt-8 border-t-4 border-brutalist-ink"
+              id="about"
+              data-nav-id="info"
+            >
               {/* Services Grid */}
               <div className="p-4 pb-4 lg:p-6 lg:pb-4">
                 <h4 className="text-xl font-bold text-brutalist-ink">
