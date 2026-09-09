@@ -24,7 +24,7 @@ export const projects: Project[] = [
     team: "2 Designers, 1 Strategist, 1 Copywriter",
     timeline: "3 months",
     heroImage: "https://images.unsplash.com/photo-1710799885122-428e63eff691?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDA2OTF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NjQ2NzIwMTh8&ixlib=rb-4.1.0&q=80&w=1080", // Photo by @felirbe on Unsplash
-    localPreviewVideo: "/assets/projects/brand-identity-refresh/preview.mp4",
+    previewVideo:"https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/video/ProductDemo_ChatBok.mp4",
     images: [
       {
         id: "1-1",
