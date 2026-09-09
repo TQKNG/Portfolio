@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { BlogSection } from "@/components/blog/BlogSection";
 import { SiteNav } from "@/components/navigation/SiteNav";
-import { AssetImage } from "@/components/ui/AssetImage";
+import { ProjectPreviewMedia } from "@/components/projects";
 import { getAllProjects } from "@/data/projects";
 
 const Index = () => {
@@ -51,12 +51,7 @@ const Index = () => {
                     className="group block transition-all"
                   >
                     <div className="aspect-[16/10] overflow-hidden border-4 border-brutalist-ink">
-                      <AssetImage
-                        src={project.heroImage}
-                        localSrc={project.localHeroImage}
-                        alt={project.title}
-                        className="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0 group-hover:scale-105"
-                      />
+                      <ProjectPreviewMedia project={project} />
                     </div>
                     <div className="p-4 flex justify-between items-center">
                       <div>

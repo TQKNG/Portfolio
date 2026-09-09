@@ -7,3 +7,4 @@ export { ProjectCard } from "./ProjectCard";
 export { ProjectGrid } from "./ProjectGrid";
 export { ProjectHero } from "./ProjectHero";
 export { ProjectNav } from "./ProjectNav";
+export { ProjectPreviewMedia } from "./ProjectPreviewMedia";

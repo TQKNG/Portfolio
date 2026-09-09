@@ -28,3 +28,6 @@ Thumbs.db
 
 # Bun debug output
 bun-debug.log
+
+# Media file
+*.mp4

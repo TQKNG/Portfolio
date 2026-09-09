@@ -37,6 +37,8 @@ export interface Project {
   timeline: string;
   heroImage: string;
   localHeroImage?: string;
+  previewVideo?: string;
+  localPreviewVideo?: string;
   images: ProjectImage[];
   gridWidth: 3 | 6 | 12;
   featured: boolean;
