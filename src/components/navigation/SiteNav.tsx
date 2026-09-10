@@ -98,12 +98,16 @@ export const SiteNav = () => {
 
   const navLinkClass = (navId: string) =>
     activeNav === navId
-      ? "border-2 border-brutalist-ink bg-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-cream"
-      : "border-2 border-brutalist-ink px-4 py-2 text-xs font-bold text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream";
+      ? "inline-flex min-h-11 items-center border-2 border-brutalist-ink bg-brutalist-ink px-2.5 text-[0.65rem] font-bold text-brutalist-cream focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red sm:px-4 sm:text-xs"
+      : "inline-flex min-h-11 items-center border-2 border-brutalist-ink px-2.5 text-[0.65rem] font-bold text-brutalist-ink transition-colors hover:bg-brutalist-ink hover:text-brutalist-cream focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red sm:px-4 sm:text-xs";
 
   return (
-    <nav className="flex items-center justify-between border-b-4 border-brutalist-ink px-6 py-4">
-      <Link to="/" className="text-xl font-bold text-brutalist-ink">
+    <nav aria-label="Primary" className="flex items-center justify-between border-b-4 border-brutalist-ink px-4 py-3 sm:px-6">
+      <Link
+        to="/"
+        aria-label="Khanh Nguyen home"
+        className="inline-flex min-h-11 min-w-11 items-center text-xl font-bold text-brutalist-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+      >
         KN
       </Link>
       <div className="flex gap-1">
@@ -113,6 +117,7 @@ export const SiteNav = () => {
             href={`/#${sectionId}`}
             onClick={(event) => handleNavClick(event, sectionId, navId)}
             className={navLinkClass(navId)}
+            aria-current={activeNav === navId ? "page" : undefined}
           >
             {label}
           </a>

@@ -25,16 +25,63 @@ export interface ProjectImage {
   caption?: string;
 }
 
+export type ProjectSectionId =
+  | "context"
+  | "problem"
+  | "approach"
+  | "solution"
+  | "results"
+  | "learnings";
+
+export interface ProjectMetric {
+  value: string;
+  label: string;
+  detail?: string;
+}
+
+export interface ProjectDecision {
+  observation: string;
+  decision: string;
+  result: string;
+}
+
+export interface ProjectMedia {
+  id: string;
+  type: "image" | "video";
+  src: string;
+  localSrc?: string;
+  poster?: string;
+  alt: string;
+  caption: string;
+  aspectRatio?: "wide" | "standard" | "portrait";
+}
+
+export interface ProjectSection {
+  id: ProjectSectionId;
+  title: string;
+  paragraphs: string[];
+  decisions?: ProjectDecision[];
+  media?: ProjectMedia[];
+}
+
 export interface Project {
   id: string;
   slug: string;
   title: string;
   subtitle?: string;
+  category?: string;
   year: string;
   description: string;
   role: string;
-  team: string;
-  timeline: string;
+  responsibilities?: string;
+  team?: string;
+  timeline?: string;
+  users?: string;
+  platform?: string;
+  status?: string;
+  technologies?: string[];
+  liveUrl?: string;
+  githubUrl?: string;
   heroImage: string;
   localHeroImage?: string;
   previewVideo?: string;
@@ -42,6 +89,8 @@ export interface Project {
   images: ProjectImage[];
   gridWidth: 3 | 6 | 12;
   featured: boolean;
+  metrics?: ProjectMetric[];
+  sections?: ProjectSection[];
 }
 
 export interface Testimonial {

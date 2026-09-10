@@ -15,7 +15,7 @@ interface ProjectCardProps {
  * ProjectCard Component - Brutalist Style
  * 
  * Interactive project preview card with brutalist styling.
- * Features heavy borders, grayscale images, and hover effects.
+ * Features heavy borders, full-color images, and hover effects.
  */
 export const ProjectCard = ({ project, onHover }: ProjectCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -43,13 +43,17 @@ export const ProjectCard = ({ project, onHover }: ProjectCardProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <AspectRatio ratio={aspectRatio} ref={ref}>
+      <AspectRatio
+        ratio={aspectRatio}
+        ref={ref}
+        className="bg-brutalist-ink"
+      >
         {/* Loading placeholder */}
         {!imageLoaded && (
           <div className="absolute inset-0 w-full h-full bg-brutalist-cream animate-pulse" />
         )}
         
-        {/* Image with grayscale effect */}
+        {/* Project image */}
         {isIntersecting && (
           <AssetImage
             src={project.heroImage}
@@ -58,8 +62,7 @@ export const ProjectCard = ({ project, onHover }: ProjectCardProps) => {
             loading="lazy"
             onLoad={() => setImageLoaded(true)}
             className={cn(
-              "w-full h-full object-cover transition-all duration-500",
-              "grayscale group-hover:grayscale-0 group-hover:scale-105",
+              "w-full h-full object-contain transition-opacity duration-500",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
           />

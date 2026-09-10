@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ReactNode } from "react";
 
 /**
@@ -31,13 +31,15 @@ interface PageTransitionProps {
 }
 
 export const PageTransition = ({ children }: PageTransitionProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      exit={shouldReduceMotion ? undefined : { opacity: 0, y: -20 }}
       transition={{
-        duration: 0.4,
+        duration: shouldReduceMotion ? 0 : 0.4,
         ease: [0.4, 0, 0.2, 1], // cubic-bezier for smooth easing
       }}
     >

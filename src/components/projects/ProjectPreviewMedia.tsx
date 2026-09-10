@@ -87,7 +87,10 @@ export const ProjectPreviewMedia = ({
 
   return (
     <div
-      className={cn("relative h-full w-full overflow-hidden", className)}
+      className={cn(
+        "relative h-full w-full overflow-hidden bg-brutalist-ink",
+        className,
+      )}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={stopPreview}
     >
@@ -96,7 +99,7 @@ export const ProjectPreviewMedia = ({
         localSrc={project.localHeroImage}
         alt={project.title}
         className={cn(
-          "h-full w-full object-cover grayscale transition-opacity duration-300",
+          "h-full w-full object-contain transition-opacity duration-300",
           isPreviewPlaying ? "opacity-0" : "opacity-100",
         )}
       />
@@ -117,7 +120,7 @@ export const ProjectPreviewMedia = ({
           onCanPlay={handleVideoCanPlay}
           onError={handleVideoError}
           className={cn(
-            "pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
+            "pointer-events-none absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
             isPreviewPlaying ? "opacity-100" : "opacity-0",
           )}
         />

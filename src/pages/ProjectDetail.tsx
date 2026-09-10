@@ -1,226 +1,175 @@
-import { useParams, Navigate, Link } from "react-router-dom";
-import { ProjectNav } from "@/components/projects/ProjectNav";
-import { SiteNav } from "@/components/navigation/SiteNav";
-import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
+import { useEffect } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { FadeIn } from "@/components/animations/FadeIn";
 import { PageTransition } from "@/components/animations/PageTransition";
-import { getProjectBySlug, getNextProject } from "@/data/projects";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { AssetImage } from "@/components/ui/AssetImage";
+import { SiteNav } from "@/components/navigation/SiteNav";
+import {
+  CaseStudySection,
+  ImpactMetrics,
+  ProjectFacts,
+  SectionIndex,
+} from "@/components/projects/ProjectCaseStudy";
+import { ProjectHero } from "@/components/projects/ProjectHero";
+import { ProjectNav } from "@/components/projects/ProjectNav";
+import {
+  getNextProject,
+  getPreviousProject,
+  getProjectBySlug,
+} from "@/data/projects";
+import { Project } from "@/types";
 
-/**
- * ProjectDetail Page
- * 
- * Brutalist-styled project case study page.
- * Consistent with Index page: heavy borders, uppercase mono type, red accents
- */
+const ensureMeta = (selector: string, attributes: Record<string, string>) => {
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
+
+  if (!element) {
+    element = document.createElement("meta");
+    document.head.appendChild(element);
+  }
+
+  Object.entries(attributes).forEach(([name, value]) => {
+    element?.setAttribute(name, value);
+  });
+};
+
+const useProjectMetadata = (project: Project) => {
+  useEffect(() => {
+    const title = `${project.title} case study | Khanh Nguyen`;
+    document.title = title;
+
+    ensureMeta('meta[name="description"]', {
+      name: "description",
+      content: project.description,
+    });
+    ensureMeta('meta[property="og:title"]', {
+      property: "og:title",
+      content: title,
+    });
+    ensureMeta('meta[property="og:description"]', {
+      property: "og:description",
+      content: project.description,
+    });
+    ensureMeta('meta[property="og:image"]', {
+      property: "og:image",
+      content: project.heroImage,
+    });
+    ensureMeta('meta[property="og:type"]', {
+      property: "og:type",
+      content: "article",
+    });
+
+    const structuredData = document.createElement("script");
+    structuredData.id = "project-structured-data";
+    structuredData.type = "application/ld+json";
+    structuredData.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.description,
+      image: project.heroImage,
+      dateCreated: project.year,
+      creator: {
+        "@type": "Person",
+        name: "Khanh Nguyen",
+      },
+    });
+    document.getElementById(structuredData.id)?.remove();
+    document.head.appendChild(structuredData);
+
+    return () => structuredData.remove();
+  }, [project]);
+};
+
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
-  const nextProject = slug ? getNextProject(slug) : null;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [slug]);
 
   if (!project) {
     return <Navigate to="/404" replace />;
   }
 
-  // Build services/deliverables list
-  const deliverables = [project.role, project.team, project.timeline].filter(Boolean);
+  return <ProjectDetailContent project={project} />;
+};
+
+const ProjectDetailContent = ({ project }: { project: Project }) => {
+  useProjectMetadata(project);
+
+  const previousProject = getPreviousProject(project.slug);
+  const nextProject = getNextProject(project.slug);
+  const sections = project.sections ?? [];
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-brutalist-cream font-mono">
+      <div className="min-h-screen bg-brutalist-cream font-mono text-brutalist-ink">
         <SiteNav />
 
-        {/* Project Title Section */}
-        <section className="px-6 pt-12 pb-6 lg:px-12">
-          <FadeIn>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-brutalist-ink leading-none">
-              {project.title.toUpperCase()}
-            </h1>
-            {/* Red accent bar - matches Index */}
-            <div className="mt-6 h-4 w-32 bg-brutalist-red" />
-          </FadeIn>
-        </section>
+        <main id="main-content" tabIndex={-1}>
+          <ProjectHero project={project} />
+          <ProjectFacts project={project} />
+          <ImpactMetrics metrics={project.metrics} />
 
-        {/* Hero Image - with 4px border */}
-        <section className="px-6 pb-8 lg:px-12">
-          <FadeIn>
-            <div className="border-4 border-brutalist-ink overflow-hidden">
-              <AspectRatio ratio={16 / 9}>
-                <AssetImage
-                  src={project.heroImage}
-                  localSrc={project.localHeroImage}
-                  alt={`${project.title} hero image`}
-                  className="w-full h-full object-cover"
-                />
-              </AspectRatio>
-            </div>
-          </FadeIn>
-        </section>
-
-        {/* Two-Column Metadata - with heavy border */}
-        <section className="px-6 py-8 lg:px-12 border-t-4 border-brutalist-ink">
-          <FadeIn>
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Left: Role & Tagline */}
-              <div>
-                <p className="text-xs font-bold text-brutalist-muted uppercase tracking-widest mb-2">
-                  {project.role?.split(',')[0]?.toUpperCase()}
-                </p>
-                {project.subtitle && (
-                  <h2 className="text-xl font-bold text-brutalist-ink">
-                    {project.subtitle.toUpperCase()}
-                  </h2>
-                )}
-              </div>
-
-              {/* Right: Services/Deliverables + Description */}
-              <div>
-                <p className="text-xs font-bold text-brutalist-muted uppercase tracking-widest mb-2">
-                  SERVICES / DELIVERABLES
-                </p>
-                <ul className="space-y-1 mb-6">
-                  {deliverables.map((item, index) => (
-                    <li key={index} className="text-xs text-brutalist-muted">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-brutalist-muted leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-        </section>
-
-        {/* Content Sections - Project Images with borders */}
-        <section className="px-6 pb-12 lg:px-12">
-          <FadeInStagger staggerDelay={0.15}>
-            <div className="space-y-8">
-              {project.images.map((image, index) => {
-                const nextImage = project.images[index + 1];
-                const isHalfWidth = image.width === "half";
-                const nextIsHalfWidth = nextImage?.width === "half";
-                
-                // Skip if this is the second of a pair
-                if (index > 0 && project.images[index - 1]?.width === "half" && isHalfWidth) {
-                  return null;
-                }
-
-                // Render side-by-side pair
-                if (isHalfWidth && nextIsHalfWidth) {
-                  return (
-                    <FadeIn key={image.id}>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <ProjectImage
-                          src={image.url}
-                          localSrc={image.localUrl}
-                          alt={image.alt}
-                          caption={image.caption}
-                        />
-                        <ProjectImage
-                          src={nextImage.url}
-                          alt={nextImage.alt}
-                          caption={nextImage.caption}
-                        />
-                      </div>
-                    </FadeIn>
-                  );
-                }
-
-                // Render full-width image
-                return (
-                  <FadeIn key={image.id}>
-                    <ProjectImage
-                      src={image.url}
-                      localSrc={image.localUrl}
-                      alt={image.alt}
-                      caption={image.caption}
+          {sections.length > 0 && (
+            <div className="mx-auto grid max-w-[1600px] gap-12 px-5 py-10 sm:px-8 lg:px-12 lg:py-16 xl:grid-cols-[190px_minmax(0,1fr)] xl:gap-16">
+              <aside className="hidden xl:block">
+                <SectionIndex sections={sections} />
+              </aside>
+              <article>
+                {sections.map((section) => (
+                  <FadeIn key={section.id}>
+                    <CaseStudySection
+                      section={section}
+                      fallbackMedia={project.images}
                     />
                   </FadeIn>
-                );
-              })}
+                ))}
+              </article>
             </div>
-          </FadeInStagger>
-        </section>
+          )}
 
-        {/* Next Project Navigation */}
-        <section className="px-6 py-12 lg:px-12 border-t-4 border-brutalist-ink">
-          <FadeIn>
-            <ProjectNav nextProject={nextProject} />
-          </FadeIn>
-        </section>
+          <section className="border-t-4 border-brutalist-ink px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+            <div className="mx-auto max-w-[1600px]">
+              <ProjectNav
+                previousProject={previousProject}
+                nextProject={nextProject}
+              />
+            </div>
+          </section>
+        </main>
 
-        {/* Footer - matches Index style */}
         <footer className="border-t-4 border-brutalist-ink">
-          <div className="px-6 py-4 flex justify-between items-center">
-            <span className="text-xs font-bold text-brutalist-muted">
-              © {new Date().getFullYear()} PORTFOLIO
-            </span>
-            <div className="flex gap-4">
-              <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">
-                INSTAGRAM
+          <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-5 py-5 text-xs font-bold uppercase tracking-[0.12em] text-brutalist-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
+            <span>© {new Date().getFullYear()} Khanh Nguyen</span>
+            <div className="flex gap-5">
+              <a
+                href="https://www.linkedin.com/in/khanhngt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+              >
+                LinkedIn
               </a>
-              <a href="#" className="text-xs font-bold text-brutalist-muted hover:text-brutalist-ink">
-                BEHANCE
+              <a
+                href="https://github.com/TQKNG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+              >
+                GitHub
               </a>
+              <Link
+                to="/#contact"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+              >
+                Mail
+              </Link>
             </div>
           </div>
         </footer>
       </div>
     </PageTransition>
-  );
-};
-
-/**
- * ProjectImage Component - Brutalist styled with heavy borders
- */
-interface ProjectImageProps {
-  src: string;
-  localSrc?: string;
-  alt: string;
-  caption?: string;
-}
-
-const ProjectImage = ({ src, localSrc, alt, caption }: ProjectImageProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [ref, isIntersecting] = useIntersectionObserver({
-    rootMargin: "150px",
-    threshold: 0.1,
-  });
-
-  return (
-    <figure>
-      <div className="border-4 border-brutalist-ink overflow-hidden">
-        <AspectRatio ratio={16 / 9} ref={ref}>
-          {!imageLoaded && (
-            <div className="absolute inset-0 w-full h-full bg-brutalist-ink/10 animate-pulse" />
-          )}
-          {isIntersecting && (
-            <AssetImage
-              src={src}
-              localSrc={localSrc}
-              alt={alt}
-              loading="lazy"
-              onLoad={() => setImageLoaded(true)}
-              className={cn(
-                "w-full h-full object-cover",
-                "transition-all duration-500",
-                imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105 blur-sm"
-              )}
-            />
-          )}
-        </AspectRatio>
-      </div>
-      {caption && (
-        <figcaption className="mt-3 text-xs font-bold text-brutalist-muted uppercase tracking-widest">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
   );
 };
 
