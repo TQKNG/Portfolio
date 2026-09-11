@@ -13,6 +13,8 @@ export {
   DecisionBlock,
   ImpactMetrics,
   ProjectFacts,
-  ProjectMediaFigure,
+  ProjectScreenshots,
   SectionIndex,
+  TechnologyStack,
+  WorkflowDiagram,
 } from "./ProjectCaseStudy";

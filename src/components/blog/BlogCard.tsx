@@ -35,7 +35,7 @@ export const BlogCard = ({ post }: BlogCardProps) => (
         <span>{formatDate(post.publishedAt)}</span>
         <span>{post.readingTime}</span>
       </div>
-      <h3 className="mt-3 text-xl font-bold text-brutalist-ink group-hover:text-brutalist-red">
+      <h3 className="mt-3 text-xl font-bold text-brutalist-ink group-hover:text-brutalist-teal">
         {post.title}
       </h3>
       <p className="mt-3 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">

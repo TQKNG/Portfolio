@@ -54,7 +54,7 @@ export const ContactSection = () => {
               placeholder="YOUR EMAIL"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 bg-transparent border-4 border-brutalist-ink px-4 py-3 font-mono text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-red uppercase"
+              className="flex-1 bg-transparent border-4 border-brutalist-ink px-4 py-3 font-mono text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal uppercase"
             />
             <a
               href={`mailto:${designer.email}?subject=Let's work together&body=Hi, I'd like to discuss a project with you.`}
@@ -63,7 +63,7 @@ export const ContactSection = () => {
               className={cn(
                 "flex items-center justify-center gap-2 px-6 py-3 border-4 font-mono text-sm font-bold uppercase transition-colors",
                 "border-brutalist-ink bg-brutalist-ink text-brutalist-cream",
-                "hover:bg-brutalist-red hover:border-brutalist-red"
+                "hover:bg-brutalist-teal hover:border-brutalist-teal"
               )}
             >
               SEND

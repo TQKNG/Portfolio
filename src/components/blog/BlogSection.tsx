@@ -33,7 +33,7 @@ export const BlogSection = () => {
   };
 
   return (
-    <section id="blog" data-nav-id="blog" className="border-t-4 border-brutalist-ink">
+    <section id="blog" data-nav-id="blog" className="scroll-mt-[72px] border-t-4 border-brutalist-ink">
       <div className="p-4 pb-4 lg:p-6 lg:pb-4">
         <h4 className="text-xl font-bold text-brutalist-ink">LET&apos;S SHARE</h4>
         <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
@@ -61,7 +61,7 @@ export const BlogSection = () => {
           <button
             type="button"
             onClick={() => setShowAll((current) => !current)}
-            className="border-4 border-brutalist-ink bg-brutalist-ink px-5 py-3 text-xs font-bold uppercase tracking-wide text-brutalist-cream transition-colors hover:bg-brutalist-red"
+            className="border-4 border-brutalist-ink bg-brutalist-ink px-5 py-3 text-xs font-bold uppercase tracking-wide text-brutalist-cream transition-colors hover:bg-brutalist-teal"
           >
             {showAll ? "Show less" : "View more"}
           </button>

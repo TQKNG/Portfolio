@@ -8,7 +8,7 @@ interface ProjectNavProps {
 }
 
 const linkFocus =
-  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream";
+  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream";
 
 export const ProjectNav = ({
   previousProject,
@@ -42,7 +42,7 @@ export const ProjectNav = ({
         {nextProject && (
           <Link
             to={`/projects/${nextProject.slug}`}
-            className={`group flex min-h-28 flex-col justify-between border-4 border-brutalist-ink bg-brutalist-red p-5 text-brutalist-cream transition-colors hover:bg-brutalist-ink ${linkFocus}`}
+            className={`group flex min-h-28 flex-col justify-between border-4 border-brutalist-ink bg-brutalist-teal p-5 text-brutalist-cream transition-colors hover:bg-brutalist-ink ${linkFocus}`}
           >
             <span className="flex items-center justify-between gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em]">
               Next project
@@ -61,14 +61,14 @@ export const ProjectNav = ({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Link
           to="/#work"
-          className={`inline-flex min-h-11 items-center text-xs font-bold uppercase tracking-[0.16em] text-brutalist-ink hover:text-brutalist-red ${linkFocus}`}
+          className={`inline-flex min-h-11 items-center text-xs font-bold uppercase tracking-[0.16em] text-brutalist-ink hover:text-brutalist-teal ${linkFocus}`}
         >
           Back to all projects
         </Link>
         <button
           type="button"
           onClick={scrollToTop}
-          className={`inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brutalist-ink hover:text-brutalist-red ${linkFocus}`}
+          className={`inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brutalist-ink hover:text-brutalist-teal ${linkFocus}`}
         >
           Back to top
           <ArrowUp aria-hidden="true" className="h-4 w-4" />

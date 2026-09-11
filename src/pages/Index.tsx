@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { BlogSection } from "@/components/blog/BlogSection";
 import { SiteNav } from "@/components/navigation/SiteNav";
@@ -14,68 +15,81 @@ const Index = () => {
         <SiteNav />
 
         {/* Hero Content - Two Column Layout */}
-        <div className="relative grid min-h-[90vh] grid-cols-1 lg:grid-cols-2">
-          {/* Left Panel - Fixed Hero */}
-          <div className="flex flex-col justify-center border-b-4 lg:border-b-0 lg:border-r-4 border-brutalist-ink p-8 lg:p-12">
-            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-bold leading-none text-brutalist-ink">
-              KHANH
-              <br />
-              NGUYEN
-              <br />
-            </h1>
-            <div className="mt-8 h-4 w-32 bg-brutalist-red" />
-            <p className="mt-6 text-xs tracking-widest text-brutalist-muted">
-              SOFTWARE ENGINEER / EST. 2023
-            </p>
+        <div className="relative grid min-h-[90vh] grid-cols-1 lg:grid-cols-2 lg:items-start">
+          {/* Left Panel - Sticky Hero */}
+          <div className="flex flex-col justify-center border-b-4 border-brutalist-ink p-8 lg:sticky lg:top-[72px] lg:h-[calc(100svh-72px)] lg:border-b-0 lg:border-r-4 lg:p-12">
+            <FadeInStagger staggerDelay={0.08}>
+              <FadeIn>
+                <h1 className="text-6xl font-bold leading-none text-brutalist-ink md:text-8xl lg:text-[clamp(5rem,7vw,10rem)]">
+                  KHANH
+                  <br />
+                  NGUYEN
+                  <br />
+                </h1>
+              </FadeIn>
+              <FadeIn>
+                <div className="mt-8 h-4 w-32 bg-brutalist-teal" />
+              </FadeIn>
+              <FadeIn>
+                <p className="mt-6 text-xs tracking-widest text-brutalist-muted">
+                  SOFTWARE ENGINEER / EST. 2023
+                </p>
+              </FadeIn>
+            </FadeInStagger>
           </div>
 
-          {/* Right Panel - Scrollable Projects + Footer */}
-          <div
-            data-site-scroll-panel
-            className="lg:h-[90vh] lg:overflow-y-auto"
-          >
-            <section id="work" data-nav-id="work">
+          {/* Right Panel - Projects + Footer */}
+          <div>
+            <section id="work" data-nav-id="work" className="scroll-mt-[72px]">
               <div className="p-4 pb-4 lg:p-6 lg:pb-4">
                 <h4 className="text-xl font-bold text-brutalist-ink">
                   LET&apos;S EXPLORE
                 </h4>
                 <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-                  EXPLORE MY RECENT PROJECTS, BUILT WITH CURIOSITY AND INTENT
+                  SELECT A PROJECT TO VIEW THE FULL CASE STUDY
                 </p>
               </div>
-              <div className="space-y-2 px-6 pb-6 pt-0">
+              <FadeInStagger className="space-y-2 px-6 pb-6 pt-0" staggerDelay={0.08}>
                 {projects.map((project) => (
-                  <Link
-                    key={project.id}
-                    to={`/projects/${project.slug}`}
-                    className="group block transition-all"
-                  >
-                    <div className="aspect-[16/10] overflow-hidden border-4 border-brutalist-ink">
-                      <ProjectPreviewMedia project={project} />
-                    </div>
-                    <div className="p-4 flex justify-between items-center">
-                      <div>
-                        <h3 className="text-sm font-bold text-brutalist-ink group-hover:text-brutalist-red">
-                          {project.title.toUpperCase()}
-                        </h3>
-                        <p className="text-xs text-brutalist-muted">
-                          {project.subtitle}
-                        </p>
+                  <FadeIn key={project.id}>
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      aria-label={`View ${project.title} case study`}
+                      className="group block cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-brutalist-teal"
+                    >
+                      <div className="relative aspect-[16/10] overflow-hidden border-4 border-brutalist-ink transition-colors group-hover:border-brutalist-teal group-focus-visible:border-brutalist-teal">
+                        <ProjectPreviewMedia
+                          project={project}
+                          className="transition-transform duration-300 group-hover:scale-[1.015] group-focus-visible:scale-[1.015] motion-reduce:transform-none"
+                        />
+                        <span className="absolute bottom-0 right-0 z-10 border-l-4 border-t-4 border-brutalist-ink bg-brutalist-cream px-4 py-3 text-xs font-bold text-brutalist-ink transition-colors group-hover:border-brutalist-teal group-hover:bg-brutalist-teal group-hover:text-brutalist-cream group-focus-visible:border-brutalist-teal group-focus-visible:bg-brutalist-teal group-focus-visible:text-brutalist-cream">
+                          VIEW CASE STUDY <span aria-hidden="true">→</span>
+                        </span>
                       </div>
-                      <span className="text-xs font-bold text-brutalist-muted">
-                        {project.year}
-                      </span>
-                    </div>
-                  </Link>
+                      <div className="flex items-center justify-between p-4">
+                        <div>
+                          <h3 className="text-sm font-bold text-brutalist-ink transition-colors group-hover:text-brutalist-teal">
+                            {project.title.toUpperCase()}
+                          </h3>
+                          <p className="text-xs text-brutalist-muted">
+                            {project.subtitle}
+                          </p>
+                        </div>
+                        <span className="text-xs font-bold text-brutalist-muted">
+                          {project.year}
+                        </span>
+                      </div>
+                    </Link>
+                  </FadeIn>
                 ))}
-              </div>
+              </FadeInStagger>
             </section>
 
             <BlogSection />
 
             {/* Footer inside scroll area */}
             <footer
-              className="mt-8 border-t-4 border-brutalist-ink"
+              className="mt-8 scroll-mt-[72px] border-t-4 border-brutalist-ink"
               id="about"
               data-nav-id="info"
             >
@@ -124,7 +138,7 @@ const Index = () => {
               </div>
 
               {/* Contact CTA Section */}
-              <div className="border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact">
+              <div className="scroll-mt-[72px] border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact">
                 <div className="mb-6">
                   <h4 className="text-xl font-bold text-brutalist-ink">
                     LET'S WORK TOGETHER
@@ -137,16 +151,16 @@ const Index = () => {
                   <input
                     type="email"
                     placeholder="khanhnguyen.trq@gmail.com"
-                    className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-red"
+                    className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal"
                   />
                   <textarea
                     placeholder="YOUR MESSAGE"
                     rows={4}
-                    className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-red resize-none"
+                    className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal resize-none"
                   />
                   <button
                     type="submit"
-                    className="border-4 border-brutalist-ink bg-brutalist-ink px-6 py-3 text-sm font-bold text-brutalist-cream transition-colors hover:bg-brutalist-red hover:border-brutalist-red"
+                    className="border-4 border-brutalist-ink bg-brutalist-ink px-6 py-3 text-sm font-bold text-brutalist-cream transition-colors hover:bg-brutalist-teal hover:border-brutalist-teal"
                   >
                     SEND →
                   </button>

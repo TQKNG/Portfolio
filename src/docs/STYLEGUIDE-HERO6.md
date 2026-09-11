@@ -13,8 +13,8 @@ Raw, bold aesthetic with strong geometry, high contrast, and utilitarian typogra
 | `--brutalist-ink` | `hsl(0, 0%, 10%)` | Primary text, borders |
 | `--brutalist-muted` | `hsl(0, 0%, 40%)` | Secondary text |
 | `--brutalist-placeholder` | `hsl(0, 0%, 60%)` | Input placeholders |
-| `--brutalist-red` | `hsl(0, 70%, 50%)` | Primary accent |
-| `--brutalist-teal` | `hsl(180, 50%, 40%)` | Secondary accent |
+| `--brutalist-teal` | `hsl(185, 80%, 28%)` | Primary accent |
+| `--brutalist-teal-bright` | `hsl(180, 65%, 50%)` | Accent text on dark surfaces |
 
 ---
 
@@ -73,7 +73,7 @@ Raw, bold aesthetic with strong geometry, high contrast, and utilitarian typogra
 ### Buttons
 ```
 Default: bg-[hsl(var(--brutalist-ink))] text-[hsl(var(--brutalist-cream))]
-Hover:   bg-[hsl(var(--brutalist-red))] border-[hsl(var(--brutalist-red))]
+Hover:   bg-[hsl(var(--brutalist-teal))] border-[hsl(var(--brutalist-teal))]
 ```
 
 ### Links
@@ -85,7 +85,7 @@ Hover:   bg-[hsl(var(--brutalist-ink))] text-[hsl(var(--brutalist-cream))]
 ### Project Cards
 ```
 Image:   grayscale → grayscale-0 + scale-105
-Title:   text-[hsl(var(--brutalist-ink))] → text-[hsl(var(--brutalist-red))]
+Title:   text-[hsl(var(--brutalist-ink))] → text-[hsl(var(--brutalist-teal))]
 ```
 
 ---
@@ -95,13 +95,12 @@ Title:   text-[hsl(var(--brutalist-ink))] → text-[hsl(var(--brutalist-red))]
 ### Input Fields
 - Border: `border-4`
 - Background: `transparent`
-- Focus: `ring-2 ring-[hsl(var(--brutalist-red))]`
+- Focus: `ring-2 ring-[hsl(var(--brutalist-teal))]`
 - Text: `font-bold uppercase`
 
 ### Accent Blocks
 - Solid color blocks used as visual punctuation
-- Red bar under hero name: `h-4 w-32`
-- Teal corner accent: `h-32 w-32`
+- Teal bar under hero name: `h-4 w-32`
 
 ---
 
@@ -109,7 +108,7 @@ Title:   text-[hsl(var(--brutalist-ink))] → text-[hsl(var(--brutalist-red))]
 
 - **Hero**: 2-column grid (`grid-cols-2`)
 - **Footer Services**: Responsive grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`)
-- **Scrollable Panel**: `h-[90vh] overflow-y-auto`
+- **Scrolling**: Standard document scrolling with a sticky desktop hero and navigation
 
 ---
 

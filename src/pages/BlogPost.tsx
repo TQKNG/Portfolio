@@ -16,7 +16,7 @@ const BlogPost = () => {
         <SiteNav />
         <main className="px-6 py-12 lg:px-12 lg:py-20">
           <article className="mx-auto max-w-3xl">
-            <Link to="/#blog" className="text-xs font-bold uppercase text-brutalist-red hover:underline">
+            <Link to="/#blog" className="text-xs font-bold uppercase text-brutalist-teal hover:underline">
               ← Back to notes
             </Link>
             <div className="mt-10 flex flex-wrap gap-x-4 gap-y-2 text-[10px] font-bold uppercase tracking-wide text-brutalist-muted">

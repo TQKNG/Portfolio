@@ -45,15 +45,20 @@ export interface ProjectDecision {
   result: string;
 }
 
-export interface ProjectMedia {
-  id: string;
-  type: "image" | "video";
-  src: string;
-  localSrc?: string;
-  poster?: string;
-  alt: string;
-  caption: string;
-  aspectRatio?: "wide" | "standard" | "portrait";
+export interface ProjectWorkflowStep {
+  title: string;
+  detail?: string;
+}
+
+export interface ProjectWorkflow {
+  title: string;
+  description?: string;
+  steps: ProjectWorkflowStep[];
+}
+
+export interface ProjectTechnology {
+  name: string;
+  icon: string;
 }
 
 export interface ProjectSection {
@@ -61,7 +66,7 @@ export interface ProjectSection {
   title: string;
   paragraphs: string[];
   decisions?: ProjectDecision[];
-  media?: ProjectMedia[];
+  workflow?: ProjectWorkflow;
 }
 
 export interface Project {
@@ -79,7 +84,7 @@ export interface Project {
   users?: string;
   platform?: string;
   status?: string;
-  technologies?: string[];
+  technologies?: ProjectTechnology[];
   liveUrl?: string;
   githubUrl?: string;
   heroImage: string;

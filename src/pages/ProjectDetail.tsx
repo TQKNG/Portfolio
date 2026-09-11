@@ -7,7 +7,9 @@ import {
   CaseStudySection,
   ImpactMetrics,
   ProjectFacts,
+  ProjectScreenshots,
   SectionIndex,
+  TechnologyStack,
 } from "@/components/projects/ProjectCaseStudy";
 import { ProjectHero } from "@/components/projects/ProjectHero";
 import { ProjectNav } from "@/components/projects/ProjectNav";
@@ -109,7 +111,12 @@ const ProjectDetailContent = ({ project }: { project: Project }) => {
         <main id="main-content" tabIndex={-1}>
           <ProjectHero project={project} />
           <ProjectFacts project={project} />
+          <TechnologyStack technologies={project.technologies} />
           <ImpactMetrics metrics={project.metrics} />
+          <ProjectScreenshots
+            images={project.images}
+            projectTitle={project.title}
+          />
 
           {sections.length > 0 && (
             <div className="mx-auto grid max-w-[1600px] gap-12 px-5 py-10 sm:px-8 lg:px-12 lg:py-16 xl:grid-cols-[190px_minmax(0,1fr)] xl:gap-16">
@@ -119,10 +126,7 @@ const ProjectDetailContent = ({ project }: { project: Project }) => {
               <article>
                 {sections.map((section) => (
                   <FadeIn key={section.id}>
-                    <CaseStudySection
-                      section={section}
-                      fallbackMedia={project.images}
-                    />
+                    <CaseStudySection section={section} />
                   </FadeIn>
                 ))}
               </article>
@@ -147,7 +151,7 @@ const ProjectDetailContent = ({ project }: { project: Project }) => {
                 href="https://www.linkedin.com/in/khanhngt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal"
               >
                 LinkedIn
               </a>
@@ -155,13 +159,13 @@ const ProjectDetailContent = ({ project }: { project: Project }) => {
                 href="https://github.com/TQKNG"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal"
               >
                 GitHub
               </a>
               <Link
                 to="/#contact"
-                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal"
               >
                 Mail
               </Link>

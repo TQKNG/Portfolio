@@ -30,8 +30,8 @@ const StyleguideHero6 = () => {
             <ColorSwatch name="Ink" variable="--brutalist-ink" className="bg-brutalist-ink" />
             <ColorSwatch name="Muted" variable="--brutalist-muted" className="bg-brutalist-muted" />
             <ColorSwatch name="Placeholder" variable="--brutalist-placeholder" className="bg-brutalist-placeholder" />
-            <ColorSwatch name="Red" variable="--brutalist-red" className="bg-brutalist-red" />
             <ColorSwatch name="Teal" variable="--brutalist-teal" className="bg-brutalist-teal" />
+            <ColorSwatch name="Bright Teal" variable="--brutalist-teal-bright" className="bg-brutalist-teal-bright" />
           </div>
         </section>
 
@@ -118,7 +118,7 @@ const StyleguideHero6 = () => {
             <div>
               <h3 className="text-xl font-bold mb-4">Buttons</h3>
               <div className="flex gap-4 flex-wrap">
-                <button className="px-6 py-3 bg-brutalist-ink text-brutalist-cream border-4 border-brutalist-ink font-bold text-xs uppercase tracking-wider hover:bg-brutalist-red hover:border-brutalist-red transition-colors">
+                <button className="px-6 py-3 bg-brutalist-ink text-brutalist-cream border-4 border-brutalist-ink font-bold text-xs uppercase tracking-wider hover:bg-brutalist-teal hover:border-brutalist-teal transition-colors">
                   Default → Hover
                 </button>
               </div>
@@ -139,7 +139,7 @@ const StyleguideHero6 = () => {
                 <div className="aspect-[4/3] bg-brutalist-muted overflow-hidden">
                   <div className="w-full h-full bg-brutalist-placeholder grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"></div>
                 </div>
-                <p className="mt-2 text-sm font-bold group-hover:text-brutalist-red transition-colors">Project Title</p>
+                <p className="mt-2 text-sm font-bold group-hover:text-brutalist-teal transition-colors">Project Title</p>
                 <p className="text-xs text-brutalist-muted">Client · 2024</p>
               </div>
             </div>
@@ -153,12 +153,12 @@ const StyleguideHero6 = () => {
             <input 
               type="text" 
               placeholder="EMAIL ADDRESS"
-              className="w-full px-4 py-3 bg-transparent border-4 border-brutalist-ink text-brutalist-ink placeholder:text-brutalist-placeholder font-bold uppercase text-sm focus:outline-none focus:ring-2 focus:ring-brutalist-red"
+              className="w-full px-4 py-3 bg-transparent border-4 border-brutalist-ink text-brutalist-ink placeholder:text-brutalist-placeholder font-bold uppercase text-sm focus:outline-none focus:ring-2 focus:ring-brutalist-teal"
             />
             <textarea 
               placeholder="YOUR MESSAGE"
               rows={4}
-              className="w-full px-4 py-3 bg-transparent border-4 border-brutalist-ink text-brutalist-ink placeholder:text-brutalist-placeholder font-bold uppercase text-sm focus:outline-none focus:ring-2 focus:ring-brutalist-red resize-none"
+              className="w-full px-4 py-3 bg-transparent border-4 border-brutalist-ink text-brutalist-ink placeholder:text-brutalist-placeholder font-bold uppercase text-sm focus:outline-none focus:ring-2 focus:ring-brutalist-teal resize-none"
             />
           </div>
         </section>
@@ -168,7 +168,7 @@ const StyleguideHero6 = () => {
           <h2 className="text-3xl font-bold mb-6 border-b-4 border-brutalist-ink pb-2">Accent Blocks</h2>
           <div className="flex gap-8 items-end">
             <div>
-              <div className="h-4 w-32 bg-brutalist-red"></div>
+              <div className="h-4 w-32 bg-brutalist-teal"></div>
               <p className="mt-2 text-xs text-brutalist-muted">Red bar (h-4 w-32)</p>
             </div>
             <div>

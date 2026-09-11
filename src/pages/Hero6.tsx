@@ -34,7 +34,7 @@ export default function Hero6() {
           <h1 className="text-8xl font-bold leading-none text-brutalist-ink lg:text-[10rem]">
             JULIA<br />LOYD<br />MOHR
           </h1>
-          <div className="mt-8 h-4 w-32 bg-brutalist-red" />
+          <div className="mt-8 h-4 w-32 bg-brutalist-teal" />
           <p className="mt-6 text-xs tracking-widest text-brutalist-muted">
             DESIGNER / EST. 2015
           </p>
@@ -58,7 +58,7 @@ export default function Hero6() {
                 </div>
                 <div className="p-4 flex justify-between items-center">
                   <div>
-                    <h3 className="text-sm font-bold text-brutalist-ink group-hover:text-brutalist-red">
+                    <h3 className="text-sm font-bold text-brutalist-ink group-hover:text-brutalist-teal">
                       {project.title}
                     </h3>
                     <p className="text-xs text-brutalist-muted">
@@ -105,11 +105,11 @@ export default function Hero6() {
                 <input
                   type="email"
                   placeholder="YOUR@EMAIL.COM"
-                  className="flex-1 border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-red"
+                  className="flex-1 border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal"
                 />
                 <button
                   type="submit"
-                  className="border-4 border-brutalist-ink bg-brutalist-ink px-6 py-3 text-sm font-bold text-brutalist-cream transition-colors hover:bg-brutalist-red hover:border-brutalist-red"
+                  className="border-4 border-brutalist-ink bg-brutalist-ink px-6 py-3 text-sm font-bold text-brutalist-cream transition-colors hover:bg-brutalist-teal hover:border-brutalist-teal"
                 >
                   SEND →
                 </button>

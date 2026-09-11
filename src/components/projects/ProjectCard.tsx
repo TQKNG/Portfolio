@@ -75,7 +75,7 @@ export const ProjectCard = ({ project, onHover }: ProjectCardProps) => {
           <div>
             <h3 className={cn(
               "font-mono text-sm font-bold uppercase transition-colors",
-              isHovered ? "text-brutalist-red" : "text-brutalist-ink"
+              isHovered ? "text-brutalist-teal" : "text-brutalist-ink"
             )}>
               {project.title}
             </h3>

@@ -15,8 +15,8 @@ All colors MUST be HSL.
   --brutalist-ink: hsl(0 0% 10%);
   --brutalist-muted: hsl(0 0% 40%);
   --brutalist-placeholder: hsl(0 0% 60%);
-  --brutalist-red: hsl(0 70% 50%);
-  --brutalist-teal: hsl(180 50% 40%);
+  --brutalist-teal: hsl(185 80% 28%);
+  --brutalist-teal-bright: hsl(180 65% 50%);
   
   /* Portfolio Design System - Neutral Scale */
   --neutral-50: hsl(0 0% 98%);
@@ -132,8 +132,8 @@ All colors MUST be HSL.
   --color-brutalist-ink: var(--brutalist-ink);
   --color-brutalist-muted: var(--brutalist-muted);
   --color-brutalist-placeholder: var(--brutalist-placeholder);
-  --color-brutalist-red: var(--brutalist-red);
   --color-brutalist-teal: var(--brutalist-teal);
+  --color-brutalist-teal-bright: var(--brutalist-teal-bright);
   
   --color-neutral-50: var(--neutral-50);
   --color-neutral-100: var(--neutral-100);

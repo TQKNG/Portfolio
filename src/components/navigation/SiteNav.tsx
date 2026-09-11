@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
@@ -11,6 +12,7 @@ const navItems = [
 export const SiteNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const shouldReduceMotion = useReducedMotion();
   const [activeNav, setActiveNav] = useState("work");
   const pendingNavRef = useRef<string | null>(null);
 
@@ -23,21 +25,11 @@ export const SiteNav = () => {
     const sections = navItems
       .map(({ sectionId }) => document.getElementById(sectionId))
       .filter((section): section is HTMLElement => section !== null);
-    const scrollPanel = document.querySelector<HTMLElement>(
-      "[data-site-scroll-panel]",
-    );
 
-    if (!scrollPanel || sections.length === 0) return;
+    if (sections.length === 0) return;
 
     const updateActiveNav = () => {
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-      const viewportTop = isDesktop
-        ? scrollPanel.getBoundingClientRect().top
-        : 0;
-      const viewportHeight = isDesktop
-        ? scrollPanel.clientHeight
-        : window.innerHeight;
-      const activationPoint = viewportTop + viewportHeight * 0.25;
+      const activationPoint = window.innerHeight * 0.25;
       let currentSection = sections[0];
 
       sections.forEach((section) => {
@@ -57,7 +49,6 @@ export const SiteNav = () => {
     };
 
     updateActiveNav();
-    scrollPanel.addEventListener("scroll", updateActiveNav);
     window.addEventListener("scroll", updateActiveNav);
 
     const hash = window.location.hash.slice(1);
@@ -71,7 +62,6 @@ export const SiteNav = () => {
     }
 
     return () => {
-      scrollPanel.removeEventListener("scroll", updateActiveNav);
       window.removeEventListener("scroll", updateActiveNav);
     };
   }, [location.pathname]);
@@ -97,16 +87,18 @@ export const SiteNav = () => {
   };
 
   const navLinkClass = (navId: string) =>
-    activeNav === navId
-      ? "inline-flex min-h-11 items-center border-2 border-brutalist-ink bg-brutalist-ink px-2.5 text-[0.65rem] font-bold text-brutalist-cream focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red sm:px-4 sm:text-xs"
-      : "inline-flex min-h-11 items-center border-2 border-brutalist-ink px-2.5 text-[0.65rem] font-bold text-brutalist-ink transition-colors hover:bg-brutalist-ink hover:text-brutalist-cream focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red sm:px-4 sm:text-xs";
+    `relative inline-flex min-h-11 items-center overflow-hidden border-2 border-brutalist-ink px-2.5 text-[0.65rem] font-bold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal sm:px-4 sm:text-xs ${
+      activeNav === navId
+        ? "text-brutalist-cream"
+        : "text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream"
+    }`;
 
   return (
-    <nav aria-label="Primary" className="flex items-center justify-between border-b-4 border-brutalist-ink px-4 py-3 sm:px-6">
+    <nav aria-label="Primary" className="sticky top-0 z-50 flex items-center justify-between border-b-4 border-brutalist-ink bg-brutalist-cream px-4 py-3 sm:px-6">
       <Link
         to="/"
         aria-label="Khanh Nguyen home"
-        className="inline-flex min-h-11 min-w-11 items-center text-xl font-bold text-brutalist-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red"
+        className="inline-flex min-h-11 min-w-11 items-center text-xl font-bold text-brutalist-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal"
       >
         KN
       </Link>
@@ -119,7 +111,19 @@ export const SiteNav = () => {
             className={navLinkClass(navId)}
             aria-current={activeNav === navId ? "page" : undefined}
           >
-            {label}
+            {activeNav === navId && (
+              <motion.span
+                layoutId="active-primary-nav"
+                aria-hidden="true"
+                className="absolute inset-0 z-0 bg-brutalist-ink"
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { type: "spring", stiffness: 420, damping: 34 }
+                }
+              />
+            )}
+            <span className="relative z-10">{label}</span>
           </a>
         ))}
       </div>

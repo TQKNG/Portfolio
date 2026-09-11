@@ -1,5 +1,15 @@
 import { Project } from "@/types";
 
+const technologyIcons = {
+  react: "/assets/icons/technologies/react.svg",
+  typescript: "/assets/icons/technologies/typescript.svg",
+  restApi: "/assets/icons/technologies/rest-api.svg",
+  sql: "/assets/icons/technologies/sql.svg",
+  responsiveWeb: "/assets/icons/technologies/responsive-web.svg",
+  dataVisualization: "/assets/icons/technologies/data-visualization.svg",
+  pathSimplification: "/assets/icons/technologies/path-simplification.svg",
+} as const;
+
 const chatBokHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_brochure.png";
 const chatBokDemo =
@@ -31,6 +41,12 @@ export const projects: Project[] = [
       "Database connectivity, query workflows, diagnostics, and analytics",
     users: "Teams working with operational databases",
     platform: "Responsive web application",
+    technologies: [
+      { name: "React", icon: technologyIcons.react },
+      { name: "TypeScript", icon: technologyIcons.typescript },
+      { name: "REST APIs", icon: technologyIcons.restApi },
+      { name: "SQL", icon: technologyIcons.sql },
+    ],
     heroImage: chatBokHero,
     previewVideo: chatBokDemo,
     metrics: [
@@ -98,21 +114,31 @@ export const projects: Project[] = [
         title: "Solution",
         paragraphs: [
           "The resulting interface combines a friendly query surface with multi-database connection management, issue diagnostics, and descriptive analytics.",
-          "The product demo shows how those capabilities work together as a continuous task rather than an unexplained feature gallery.",
+          "The product views show how connection, query, and analysis tasks stay within one focused workflow.",
         ],
-        media: [
-          {
-            id: "chatbok-demo",
-            type: "video",
-            src: chatBokDemo,
-            localSrc: "/assets/projects/brand-identity-refresh/preview.mp4",
-            poster: chatBokHero,
-            alt: "ChatBOK product workflow demonstration",
-            caption:
-              "Notice how connection, query, and analysis tasks stay within one focused workflow.",
-            aspectRatio: "wide",
-          },
-        ],
+        workflow: {
+          title: "From question to trusted result",
+          description:
+            "A short, schema-aware path keeps the user oriented from connection through validation and analysis.",
+          steps: [
+            {
+              title: "Connect source",
+              detail: "Choose and establish the operational database connection.",
+            },
+            {
+              title: "Ask question",
+              detail: "Express the information need in natural language.",
+            },
+            {
+              title: "Validate query",
+              detail: "Use relevant schema context to check the generated response.",
+            },
+            {
+              title: "Inspect result",
+              detail: "Review the answer, diagnostics, and descriptive analysis together.",
+            },
+          ],
+        },
       },
       {
         id: "results",
@@ -131,7 +157,32 @@ export const projects: Project[] = [
         ],
       },
     ],
-    images: [],
+    images: [
+      {
+        id: "chatbok-product-overview",
+        url: chatBokHero,
+        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        width: "full",
+        caption:
+          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+      },
+      {
+        id: "chatbok-product-overview-02",
+        url: chatBokHero,
+        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        width: "full",
+        caption:
+          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+      },
+      {
+        id: "chatbok-product-overview-03",
+        url: chatBokHero,
+        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        width: "full",
+        caption:
+          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+      },
+    ],
     gridWidth: 12,
     featured: true,
   },
@@ -150,6 +201,12 @@ export const projects: Project[] = [
       "Reception workflows, health screening, notifications, and responsive UI",
     users: "Care-home visitors and reception teams",
     platform: "Desktop, tablet, and mobile web",
+    technologies: [
+      { name: "React", icon: technologyIcons.react },
+      { name: "TypeScript", icon: technologyIcons.typescript },
+      { name: "Responsive Web", icon: technologyIcons.responsiveWeb },
+      { name: "REST APIs", icon: technologyIcons.restApi },
+    ],
     heroImage: careHomeHero,
     previewVideo: careHomeDemo,
     metrics: [
@@ -207,8 +264,35 @@ export const projects: Project[] = [
         title: "Solution",
         paragraphs: [
           "The product combines fast check-in, health screening, navigation and scheduling, real-time alerts, a cross-platform interface, and visitor badge printing.",
-          "The overview below shows the relationship between the reception robot, shared display, and personal devices.",
+          "The product view shows the relationship between the reception robot, shared display, and personal devices.",
         ],
+        workflow: {
+          title: "A connected visitor arrival",
+          description:
+            "Each step carries the visitor forward while keeping reception staff and hosts informed.",
+          steps: [
+            {
+              title: "Check in",
+              detail: "Capture the visitor and destination details.",
+            },
+            {
+              title: "Screen",
+              detail: "Complete the required health and safety questions.",
+            },
+            {
+              title: "Guide",
+              detail: "Provide clear navigation to the correct destination.",
+            },
+            {
+              title: "Notify",
+              detail: "Alert the appropriate host or reception team member.",
+            },
+            {
+              title: "Print badge",
+              detail: "Create visible identification for the visit.",
+            },
+          ],
+        },
       },
       {
         id: "results",
@@ -227,7 +311,16 @@ export const projects: Project[] = [
         ],
       },
     ],
-    images: [],
+    images: [
+      {
+        id: "care-home-product-overview",
+        url: careHomeHero,
+        alt: "Care Home Reception App across reception robot, desktop, tablet, and mobile devices",
+        width: "full",
+        caption:
+          "The responsive reception workflow connects check-in, health screening, guidance, notifications, and badge printing across shared and personal devices.",
+      },
+    ],
     gridWidth: 6,
     featured: true,
   },
@@ -246,6 +339,18 @@ export const projects: Project[] = [
       "Operational dashboards, fleet visibility, engagement analytics, and performance",
     users: "Robot fleet operators and system administrators",
     platform: "Responsive web dashboard",
+    technologies: [
+      { name: "React", icon: technologyIcons.react },
+      { name: "TypeScript", icon: technologyIcons.typescript },
+      {
+        name: "Data Visualization",
+        icon: technologyIcons.dataVisualization,
+      },
+      {
+        name: "Ramer-Douglas-Peucker",
+        icon: technologyIcons.pathSimplification,
+      },
+    ],
     heroImage: robotSuiteHero,
     metrics: [
       {
@@ -314,6 +419,33 @@ export const projects: Project[] = [
           "The suite presents operational status, fleet inventory, alerts, task activity, and system health alongside robot configuration and engagement analytics.",
           "The dashboard keeps immediate operational signals prominent while allowing denser historical views to use aggregated and simplified paths.",
         ],
+        workflow: {
+          title: "From fleet history to fast insight",
+          description:
+            "The visualization pipeline reduces browser work while preserving the operational history needed for investigation.",
+          steps: [
+            {
+              title: "Collect history",
+              detail: "Load fleet events and time-series records.",
+            },
+            {
+              title: "Limit range",
+              detail: "Focus the visible data on the selected operating window.",
+            },
+            {
+              title: "Aggregate",
+              detail: "Group history into meaningful weekday summaries.",
+            },
+            {
+              title: "Simplify paths",
+              detail: "Reduce chart complexity while retaining the important shape.",
+            },
+            {
+              title: "Render insight",
+              detail: "Present responsive operational charts for investigation.",
+            },
+          ],
+        },
       },
       {
         id: "results",
@@ -332,7 +464,16 @@ export const projects: Project[] = [
         ],
       },
     ],
-    images: [],
+    images: [
+      {
+        id: "robot-suite-product-overview",
+        url: robotSuiteHero,
+        alt: "KCODE Robot Suite operational dashboard and robot engagement interface",
+        width: "full",
+        caption:
+          "The operational workspace combines fleet health, live monitoring, task activity, alerts, robot configuration, and engagement analytics.",
+      },
+    ],
     gridWidth: 6,
     featured: true,
   },

@@ -14,7 +14,7 @@ export const MarkdownContent = ({ content }: MarkdownContentProps) => (
         return <h1 key={index} className="pt-4 text-3xl font-bold">{trimmedBlock.slice(2)}</h1>;
       }
       if (trimmedBlock.startsWith("> ")) {
-        return <blockquote key={index} className="border-l-4 border-brutalist-red pl-4 italic">{trimmedBlock.slice(2)}</blockquote>;
+        return <blockquote key={index} className="border-l-4 border-brutalist-teal pl-4 italic">{trimmedBlock.slice(2)}</blockquote>;
       }
       return <p key={index}>{trimmedBlock}</p>;
     })}

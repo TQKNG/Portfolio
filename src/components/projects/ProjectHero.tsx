@@ -1,7 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { AssetImage } from "@/components/ui/AssetImage";
 import { Project } from "@/types";
 
 interface ProjectHeroProps {
@@ -14,7 +13,7 @@ export const ProjectHero = ({ project }: ProjectHeroProps) => (
       <FadeIn>
         <Link
           to="/#work"
-          className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brutalist-ink transition-colors hover:text-brutalist-red focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream"
+          className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brutalist-ink transition-colors hover:text-brutalist-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream"
         >
           <ArrowLeft aria-hidden="true" className="h-4 w-4" />
           Back to projects
@@ -23,7 +22,7 @@ export const ProjectHero = ({ project }: ProjectHeroProps) => (
         <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             {project.category && (
-              <p className="mb-5 inline-flex border-2 border-brutalist-ink bg-brutalist-red px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brutalist-cream">
+              <p className="mb-5 inline-flex border-2 border-brutalist-ink bg-brutalist-teal px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brutalist-cream">
                 {project.category}
               </p>
             )}
@@ -42,26 +41,7 @@ export const ProjectHero = ({ project }: ProjectHeroProps) => (
             </p>
           </div>
         </div>
-        <div className="mt-9 h-3 w-28 bg-brutalist-red lg:mt-12" />
-      </FadeIn>
-
-      <FadeIn className="mt-10 lg:mt-14">
-        <figure>
-          <div className="flex aspect-[16/9] max-h-[70vh] min-h-[240px] w-full items-center justify-center overflow-hidden border-4 border-brutalist-ink bg-brutalist-ink">
-            <AssetImage
-              src={project.heroImage}
-              localSrc={project.localHeroImage}
-              alt={`${project.title} product overview`}
-              width={1600}
-              height={900}
-              loading="eager"
-              className="h-full w-full object-contain"
-            />
-          </div>
-          <figcaption className="mt-3 max-w-3xl text-xs font-bold uppercase leading-relaxed tracking-[0.12em] text-brutalist-muted">
-            Product overview - the interface and workflows at the center of the case study.
-          </figcaption>
-        </figure>
+        <div className="mt-9 h-3 w-28 bg-brutalist-teal lg:mt-12" />
       </FadeIn>
     </div>
   </header>

@@ -1,15 +1,35 @@
-import { ExternalLink, Github } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Github,
+  Maximize2,
+} from "lucide-react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { AssetImage } from "@/components/ui/AssetImage";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import {
   Project,
   ProjectDecision,
   ProjectImage,
-  ProjectMedia,
   ProjectMetric,
   ProjectSection,
   ProjectSectionId,
+  ProjectTechnology,
+  ProjectWorkflow,
 } from "@/types";
 
 const sectionNumbers: Record<ProjectSectionId, string> = {
@@ -22,7 +42,23 @@ const sectionNumbers: Record<ProjectSectionId, string> = {
 };
 
 const focusClass =
-  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-red focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream";
+  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream";
+
+const revealContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
+};
+
+const revealItem: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const revealViewport = { once: true, amount: 0.15 } as const;
 
 const isValidLink = (value?: string) => {
   if (!value) return false;
@@ -48,7 +84,6 @@ export const ProjectFacts = ({ project }: ProjectFactsProps) => {
     ["Users / industry", project.users],
     ["Platform", project.platform],
     ["Project status", project.status],
-    ["Technology stack", project.technologies?.join(" · ")],
   ].filter((fact): fact is [string, string] => Boolean(fact[1]));
 
   const actions = [
@@ -66,7 +101,7 @@ export const ProjectFacts = ({ project }: ProjectFactsProps) => {
       <div className="mx-auto max-w-[1600px] px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
         <h2
           id="project-facts-heading"
-          className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-brutalist-red"
+          className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-brutalist-teal"
         >
           Project facts
         </h2>
@@ -94,7 +129,7 @@ export const ProjectFacts = ({ project }: ProjectFactsProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "inline-flex min-h-11 items-center gap-2 border-2 border-brutalist-ink bg-brutalist-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-brutalist-cream transition-colors hover:border-brutalist-red hover:bg-brutalist-red",
+                  "inline-flex min-h-11 items-center gap-2 border-2 border-brutalist-ink bg-brutalist-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-brutalist-cream transition-colors hover:border-brutalist-teal hover:bg-brutalist-teal",
                   focusClass,
                 )}
               >
@@ -109,11 +144,70 @@ export const ProjectFacts = ({ project }: ProjectFactsProps) => {
   );
 };
 
+interface TechnologyStackProps {
+  technologies?: ProjectTechnology[];
+}
+
+export const TechnologyStack = ({ technologies }: TechnologyStackProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (!technologies?.length) return null;
+
+  return (
+    <section
+      aria-labelledby="technology-stack-heading"
+      className="border-b-4 border-brutalist-ink"
+    >
+      <div className="mx-auto grid max-w-[1600px] gap-6 px-5 py-10 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-12">
+        <div className="lg:col-span-4">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brutalist-teal">
+            Technology stack
+          </p>
+          <h2
+            id="technology-stack-heading"
+            className="mt-3 text-3xl font-bold uppercase tracking-[-0.04em] text-brutalist-ink"
+          >
+            Built with
+          </h2>
+        </div>
+        <motion.ul
+          initial={shouldReduceMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={revealViewport}
+          variants={revealContainer}
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4"
+        >
+          {technologies.map((technology) => (
+            <motion.li
+              key={technology.name}
+              variants={shouldReduceMotion ? undefined : revealItem}
+              className="flex min-h-20 items-center gap-3 border-2 border-brutalist-ink px-4 py-3 text-xs font-bold uppercase tracking-[0.1em] text-brutalist-ink"
+            >
+              <img
+                src={technology.icon}
+                alt=""
+                aria-hidden="true"
+                width={32}
+                height={32}
+                loading="lazy"
+                className="h-8 w-8 shrink-0 object-contain"
+              />
+              <span>{technology.name}</span>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </div>
+    </section>
+  );
+};
+
 interface ImpactMetricsProps {
   metrics?: ProjectMetric[];
 }
 
 export const ImpactMetrics = ({ metrics }: ImpactMetricsProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
   if (!metrics?.length) return null;
 
   return (
@@ -124,22 +218,30 @@ export const ImpactMetrics = ({ metrics }: ImpactMetricsProps) => {
       <div className="mx-auto max-w-[1600px] px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
         <h2
           id="impact-heading"
-          className="text-xs font-bold uppercase tracking-[0.2em] text-brutalist-red"
+          className="text-xs font-bold uppercase tracking-[0.2em] text-brutalist-teal-bright"
         >
           Measured impact
         </h2>
-        <dl
+        <motion.dl
+          initial={shouldReduceMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={revealViewport}
+          variants={revealContainer}
           className={cn(
             "mt-8 grid gap-px border-2 border-brutalist-cream/50 bg-brutalist-cream/50",
             metrics.length === 1 ? "grid-cols-1" : "md:grid-cols-3",
           )}
         >
           {metrics.slice(0, 3).map((metric) => (
-            <div key={metric.label} className="bg-brutalist-ink p-6 lg:p-8">
+            <motion.div
+              key={metric.label}
+              variants={shouldReduceMotion ? undefined : revealItem}
+              className="bg-brutalist-ink p-6 lg:p-8"
+            >
               <dt className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brutalist-cream/70">
                 {metric.label}
               </dt>
-              <dd className="mt-4 text-[clamp(2.5rem,5vw,5.5rem)] font-bold leading-none tracking-[-0.06em] text-brutalist-red">
+              <dd className="mt-4 text-[clamp(2.5rem,5vw,5.5rem)] font-bold leading-none tracking-[-0.06em] text-brutalist-teal-bright">
                 {metric.value}
               </dd>
               {metric.detail && (
@@ -147,9 +249,9 @@ export const ImpactMetrics = ({ metrics }: ImpactMetricsProps) => {
                   {metric.detail}
                 </p>
               )}
-            </div>
+            </motion.div>
           ))}
-        </dl>
+        </motion.dl>
       </div>
     </section>
   );
@@ -163,9 +265,9 @@ interface DecisionBlockProps {
 export const DecisionBlock = ({ decision, index }: DecisionBlockProps) => (
   <aside
     aria-label={`Engineering decision ${index + 1}`}
-    className="border-l-4 border-brutalist-red bg-brutalist-ink px-5 py-6 text-brutalist-cream sm:px-7"
+    className="border-l-4 border-brutalist-teal bg-brutalist-ink px-5 py-6 text-brutalist-cream sm:px-7"
   >
-    <p className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-brutalist-red">
+    <p className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-brutalist-teal-bright">
       Decision {String(index + 1).padStart(2, "0")}
     </p>
     <dl className="grid gap-5 lg:grid-cols-3">
@@ -187,95 +289,260 @@ export const DecisionBlock = ({ decision, index }: DecisionBlockProps) => (
   </aside>
 );
 
-interface ProjectMediaFigureProps {
-  media: ProjectMedia;
-  priority?: boolean;
+interface ProjectScreenshotsProps {
+  images: ProjectImage[];
+  projectTitle: string;
 }
 
-export const ProjectMediaFigure = ({
-  media,
-  priority = false,
-}: ProjectMediaFigureProps) => {
-  const aspectClass = {
-    wide: "aspect-[16/9]",
-    standard: "aspect-[4/3]",
-    portrait: "aspect-[3/4]",
-  }[media.aspectRatio ?? "wide"];
+export const ProjectScreenshots = ({
+  images,
+  projectTitle,
+}: ProjectScreenshotsProps) => {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  if (images.length === 0) return null;
+
+  const selectedImage = selectedIndex === null ? null : images[selectedIndex];
+  const showPrevious = () => {
+    setSelectedIndex((current) =>
+      current === null ? 0 : (current - 1 + images.length) % images.length,
+    );
+  };
+  const showNext = () => {
+    setSelectedIndex((current) =>
+      current === null ? 0 : (current + 1) % images.length,
+    );
+  };
 
   return (
-    <figure>
-      <div
-        className={cn(
-          "flex w-full items-center justify-center overflow-hidden border-4 border-brutalist-ink bg-brutalist-ink",
-          aspectClass,
-        )}
+    <>
+      <section
+        aria-labelledby="product-screenshots-heading"
+        className="border-y-4 border-brutalist-ink"
       >
-        {media.type === "video" ? (
-          <video
-            controls
-            playsInline
-            preload="metadata"
-            poster={media.poster}
-            aria-label={media.alt}
-            className="h-full w-full object-contain"
+        <div className="mx-auto max-w-[1600px] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+          <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brutalist-teal">
+                Product screens
+              </p>
+              <h2
+                id="product-screenshots-heading"
+                className="mt-3 text-4xl font-bold uppercase tracking-[-0.05em] text-brutalist-ink sm:text-5xl"
+              >
+                Inside {projectTitle}
+              </h2>
+            </div>
+            <p className="max-w-md font-sans text-sm leading-relaxed text-brutalist-muted lg:col-span-4 lg:col-start-9">
+              Select any product view to inspect it at a larger size with supporting context.
+            </p>
+          </div>
+
+          <motion.div
+            initial={shouldReduceMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={revealViewport}
+            variants={revealContainer}
+            className="mt-10 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
           >
-            <source src={media.localSrc ?? media.src} type="video/mp4" />
-            {media.localSrc && <source src={media.src} type="video/mp4" />}
-            Your browser does not support embedded video.
-          </video>
-        ) : (
-          <AssetImage
-            src={media.src}
-            localSrc={media.localSrc}
-            alt={media.alt}
-            width={1600}
-            height={900}
-            loading={priority ? "eager" : "lazy"}
-            className="h-full w-full object-contain"
-          />
+            {images.map((image, index) => (
+              <motion.figure
+                key={image.id}
+                variants={shouldReduceMotion ? undefined : revealItem}
+                className="min-w-0"
+              >
+                <button
+                  type="button"
+                  onClick={() => setSelectedIndex(index)}
+                  aria-label={`Open ${image.alt} in expanded view`}
+                  className="group relative block w-full cursor-zoom-in overflow-hidden border-4 border-brutalist-ink bg-brutalist-ink text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal focus-visible:ring-offset-4 focus-visible:ring-offset-brutalist-cream"
+                >
+                  <span className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden">
+                    <AssetImage
+                      src={image.url}
+                      localSrc={image.localUrl}
+                      alt={image.alt}
+                      width={1600}
+                      height={900}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.015] group-focus-visible:scale-[1.015] motion-reduce:transform-none"
+                    />
+                  </span>
+                  <span className="absolute bottom-0 right-0 inline-flex items-center gap-2 border-l-4 border-t-4 border-brutalist-ink bg-brutalist-cream px-4 py-3 text-xs font-bold uppercase tracking-[0.1em] text-brutalist-ink transition-colors group-hover:bg-brutalist-teal group-hover:text-brutalist-cream group-focus-visible:bg-brutalist-teal group-focus-visible:text-brutalist-cream">
+                    View large
+                    <Maximize2 aria-hidden="true" className="h-4 w-4" />
+                  </span>
+                </button>
+                <figcaption className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-4 border-t-2 border-brutalist-ink pt-3 text-xs font-bold uppercase leading-relaxed tracking-[0.1em] text-brutalist-muted">
+                  <span className="text-brutalist-teal">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>{image.caption ?? image.alt}</span>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <Dialog
+        open={selectedImage !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedIndex(null);
+        }}
+      >
+        {selectedImage && (
+          <DialogContent
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") showPrevious();
+              if (event.key === "ArrowRight") showNext();
+            }}
+            className="max-h-[96vh] w-[96vw] max-w-[1600px] gap-4 overflow-y-auto border-4 border-brutalist-ink bg-brutalist-cream p-4 shadow-none sm:rounded-none lg:p-6"
+          >
+            <div className="pr-12">
+              <DialogTitle className="font-mono text-xl font-bold uppercase tracking-[-0.03em] text-brutalist-ink sm:text-2xl">
+                {projectTitle} - Screen {String(selectedIndex + 1).padStart(2, "0")}
+              </DialogTitle>
+              <DialogDescription className="mt-2 max-w-4xl font-sans text-sm leading-relaxed text-brutalist-muted">
+                {selectedImage.caption ?? selectedImage.alt}
+              </DialogDescription>
+            </div>
+
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={selectedImage.id}
+                initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.985 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.985 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
+                className="flex min-h-[240px] items-center justify-center overflow-hidden border-4 border-brutalist-ink bg-brutalist-ink"
+              >
+                <AssetImage
+                  src={selectedImage.url}
+                  localSrc={selectedImage.localUrl}
+                  alt={selectedImage.alt}
+                  width={1920}
+                  height={1080}
+                  className="max-h-[72vh] w-full object-contain"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-brutalist-muted">
+                {selectedIndex + 1} / {images.length}
+              </span>
+              {images.length > 1 && (
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={showPrevious}
+                    className={cn(
+                      "inline-flex min-h-11 items-center gap-2 border-2 border-brutalist-ink px-4 text-xs font-bold uppercase tracking-[0.1em] transition-colors hover:bg-brutalist-ink hover:text-brutalist-cream",
+                      focusClass,
+                    )}
+                  >
+                    <ChevronLeft aria-hidden="true" className="h-4 w-4" />
+                    Previous
+                  </button>
+                  <button
+                    type="button"
+                    onClick={showNext}
+                    className={cn(
+                      "inline-flex min-h-11 items-center gap-2 border-2 border-brutalist-ink px-4 text-xs font-bold uppercase tracking-[0.1em] transition-colors hover:bg-brutalist-ink hover:text-brutalist-cream",
+                      focusClass,
+                    )}
+                  >
+                    Next
+                    <ChevronRight aria-hidden="true" className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+          </DialogContent>
         )}
-      </div>
-      <figcaption className="mt-3 max-w-3xl text-xs font-bold uppercase leading-relaxed tracking-[0.1em] text-brutalist-muted">
-        {media.caption}
-      </figcaption>
-    </figure>
+      </Dialog>
+    </>
   );
 };
 
-const imageToMedia = (image: ProjectImage): ProjectMedia => ({
-  id: image.id,
-  type: "image",
-  src: image.url,
-  localSrc: image.localUrl,
-  alt: image.alt,
-  caption: image.caption ?? image.alt,
-  aspectRatio: image.width === "half" ? "standard" : "wide",
-});
+interface WorkflowDiagramProps {
+  workflow: ProjectWorkflow;
+}
+
+export const WorkflowDiagram = ({ workflow }: WorkflowDiagramProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <aside
+      aria-label={`${workflow.title} workflow diagram`}
+      className="mt-12 border-4 border-brutalist-ink bg-brutalist-ink p-5 text-brutalist-cream sm:p-7"
+    >
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-brutalist-teal-bright">
+        Solution workflow
+      </p>
+      <h3 className="mt-3 text-2xl font-bold uppercase tracking-[-0.04em] sm:text-3xl">
+        {workflow.title}
+      </h3>
+      {workflow.description && (
+        <p className="mt-3 max-w-3xl font-sans text-sm leading-relaxed text-brutalist-cream/70">
+          {workflow.description}
+        </p>
+      )}
+      <motion.ol
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={revealViewport}
+        variants={revealContainer}
+        className="mt-8 flex flex-col gap-3 lg:flex-row"
+      >
+        {workflow.steps.map((step, index) => (
+          <motion.li
+            key={`${step.title}-${index}`}
+            variants={shouldReduceMotion ? undefined : revealItem}
+            className="flex min-w-0 flex-1 flex-col gap-3 lg:flex-row lg:items-center"
+          >
+            <div className="h-full flex-1 border-2 border-brutalist-cream/50 p-4">
+              <span className="text-xs font-bold text-brutalist-teal-bright">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h4 className="mt-3 text-sm font-bold uppercase tracking-[0.08em]">
+                {step.title}
+              </h4>
+              {step.detail && (
+                <p className="mt-2 font-sans text-xs leading-relaxed text-brutalist-cream/70">
+                  {step.detail}
+                </p>
+              )}
+            </div>
+            {index < workflow.steps.length - 1 && (
+              <ArrowRight
+                aria-hidden="true"
+                className="h-5 w-5 shrink-0 rotate-90 self-center text-brutalist-teal-bright lg:rotate-0"
+              />
+            )}
+          </motion.li>
+        ))}
+      </motion.ol>
+    </aside>
+  );
+};
 
 interface CaseStudySectionProps {
   section: ProjectSection;
-  fallbackMedia?: ProjectImage[];
 }
 
-export const CaseStudySection = ({
-  section,
-  fallbackMedia = [],
-}: CaseStudySectionProps) => {
-  const media = section.media?.length
-    ? section.media
-    : section.id === "solution"
-      ? fallbackMedia.map(imageToMedia)
-      : [];
-
+export const CaseStudySection = ({ section }: CaseStudySectionProps) => {
   return (
     <section
       id={section.id}
       aria-labelledby={`${section.id}-heading`}
-      className="scroll-mt-8 border-t-4 border-brutalist-ink py-14 first:border-t-0 lg:py-24"
+      className="scroll-mt-[104px] border-t-4 border-brutalist-ink py-14 first:border-t-0 lg:py-24"
     >
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-3">
-          <p className="text-sm font-bold text-brutalist-red">
+          <p className="text-sm font-bold text-brutalist-teal">
             {sectionNumbers[section.id]}
           </p>
           <h2
@@ -302,25 +569,9 @@ export const CaseStudySection = ({
               ))}
             </div>
           ) : null}
+          {section.workflow && <WorkflowDiagram workflow={section.workflow} />}
         </div>
       </div>
-
-      {media.length > 0 && (
-        <div className="mt-12 space-y-8 lg:mt-16">
-          {media.map((item, index) => (
-            <div
-              key={item.id}
-              className={cn(
-                index > 0 && media.length > 1
-                  ? "lg:ml-auto lg:w-[68%]"
-                  : "w-full",
-              )}
-            >
-              <ProjectMediaFigure media={item} />
-            </div>
-          ))}
-        </div>
-      )}
     </section>
   );
 };
@@ -359,7 +610,7 @@ export const SectionIndex = ({ sections }: SectionIndexProps) => {
   }, [sectionIds]);
 
   return (
-    <nav aria-label="Case study sections" className="sticky top-8">
+    <nav aria-label="Case study sections" className="sticky top-[104px]">
       <p className="mb-4 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brutalist-muted">
         In this case study
       </p>
@@ -370,9 +621,9 @@ export const SectionIndex = ({ sections }: SectionIndexProps) => {
               href={`#${section.id}`}
               aria-current={activeSection === section.id ? "location" : undefined}
               className={cn(
-                "flex min-h-11 items-center gap-3 border-l-4 border-transparent px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:border-brutalist-red hover:text-brutalist-red",
+                "flex min-h-11 items-center gap-3 border-l-4 border-transparent px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:border-brutalist-teal hover:text-brutalist-teal",
                 activeSection === section.id
-                  ? "border-brutalist-red text-brutalist-red"
+                  ? "border-brutalist-teal text-brutalist-teal"
                   : "text-brutalist-muted",
                 focusClass,
               )}

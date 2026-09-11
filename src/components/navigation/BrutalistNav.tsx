@@ -23,7 +23,7 @@ export const BrutalistNav = () => {
     <nav className="border-b-4 border-brutalist-ink">
       <div className="flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link to="/" className="font-mono text-xs font-bold text-brutalist-ink hover:text-brutalist-red transition-colors">
+        <Link to="/" className="font-mono text-xs font-bold text-brutalist-ink hover:text-brutalist-teal transition-colors">
           {designer.name.toUpperCase()}
         </Link>
 
