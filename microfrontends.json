@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "applications": {
+    "portfolio": {
+      "development": {
+        "fallback": "www.khanhng.com"
+      }
+    },
+    "robot-suite": {
+      "routing": [
+        {
+          "paths": [
+            "/app/kcode-robot-suite",
+            "/app/kcode-robot-suite/:path*"
+          ]
+        }
+      ]
+    }
+  }
+}
