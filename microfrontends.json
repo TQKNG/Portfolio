@@ -6,7 +6,7 @@
         "fallback": "www.khanhng.com"
       }
     },
-    "robot-suite": {
+    "kcode-robot-suite": {
       "routing": [
         {
           "paths": [
