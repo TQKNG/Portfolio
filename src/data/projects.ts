@@ -14,6 +14,13 @@ const chatBokHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_brochure.png";
 const chatBokDemo =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/video/chatBok_Intro.mp4";
+const chatBokChatUI = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_chatUI.png"
+const chatBokConversation = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation.png"
+const chatBokConversationHistorical = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation-historical.png"
+const chatBokConversationAnalytic= "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation-analytic.png"
+const chatBokTestCase = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_test-case.png"
+
+
 const careHomeHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/carehome_brochure.png";
   const careHomeDemo =
@@ -167,21 +174,45 @@ export const projects: Project[] = [
           "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
       },
       {
-        id: "chatbok-product-overview-02",
-        url: chatBokHero,
+        id: "chatbok-chat-ui",
+        url: chatBokChatUI,
+        alt: "User friendly and custom branding user interface",
+        width: "full",
+        caption:
+          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+      },
+      {
+        id: "chatbok-conversation",
+        url: chatBokConversation,
+        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        width: "full",
+        caption:
+          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+      },
+       {
+        id: "chatbok-conversation-historical",
+        url: chatBokConversationHistorical,
         alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
         width: "full",
         caption:
           "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
       },
       {
-        id: "chatbok-product-overview-03",
-        url: chatBokHero,
+        id: "chatbok-conversation-analytic",
+        url: chatBokConversationAnalytic,
         alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
         width: "full",
         caption:
-          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+        "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
       },
+      {
+       id: "chatbok-test-case",
+       url: chatBokTestCase,
+       alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+       width: "full",
+       caption:
+         "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+     },
     ],
     gridWidth: 12,
     featured: true,
