@@ -373,6 +373,9 @@ export const projects: Project[] = [
     technologies: [
       { name: "React", icon: technologyIcons.react },
       { name: "TypeScript", icon: technologyIcons.typescript },
+      { name: "REST APIs", icon: technologyIcons.restApi },
+      { name: "SQL", icon: technologyIcons.sql },
+      { name: "Responsive Web", icon: technologyIcons.responsiveWeb },
       {
         name: "Data Visualization",
         icon: technologyIcons.dataVisualization,
