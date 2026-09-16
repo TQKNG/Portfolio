@@ -32,11 +32,19 @@ export const SiteNav = () => {
       const activationPoint = window.innerHeight * 0.25;
       let currentSection = sections[0];
 
-      sections.forEach((section) => {
-        if (section.getBoundingClientRect().top <= activationPoint) {
-          currentSection = section;
-        }
-      });
+      const isAtPageBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+
+      if (isAtPageBottom) {
+        currentSection = sections[sections.length - 1];
+      } else {
+        sections.forEach((section) => {
+          if (section.getBoundingClientRect().top <= activationPoint) {
+            currentSection = section;
+          }
+        });
+      }
 
       const currentNav =
         currentSection.getAttribute("data-nav-id") ?? currentSection.id;
@@ -80,6 +88,7 @@ export const SiteNav = () => {
       return;
     }
 
+    window.history.pushState(null, "", `/#${sectionId}`);
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
       block: "start",

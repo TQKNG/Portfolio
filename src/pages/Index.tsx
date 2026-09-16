@@ -150,7 +150,7 @@ const Index = () => {
               </section>
 
               {/* Contact CTA Section */}
-              <div className="scroll-mt-[72px] border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact">
+              <div className="scroll-mt-[72px] border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact" data-nav-id="mail">
                 <div className="mb-6">
                   <h4 className="text-xl font-bold text-brutalist-ink">
                     LET'S WORK TOGETHER
