@@ -21,6 +21,7 @@ interface FadeInProps {
   children: ReactNode;
   className?: string;
   variants?: Variants;
+  viewportAmount?: number;
 }
 
 const defaultVariants: Variants = {
@@ -32,7 +33,12 @@ const defaultVariants: Variants = {
   },
 };
 
-export const FadeIn = ({ children, className, variants = defaultVariants }: FadeInProps) => {
+export const FadeIn = ({
+  children,
+  className,
+  variants = defaultVariants,
+  viewportAmount = 0.2,
+}: FadeInProps) => {
   const shouldReduceMotion = useReducedMotion();
   const isInsideStagger = useContext(StaggerContext);
 
@@ -40,7 +46,7 @@ export const FadeIn = ({ children, className, variants = defaultVariants }: Fade
     <motion.div
       initial={shouldReduceMotion || isInsideStagger ? undefined : "hidden"}
       whileInView={shouldReduceMotion || isInsideStagger ? undefined : "visible"}
-      viewport={viewport}
+      viewport={{ ...viewport, amount: viewportAmount }}
       variants={shouldReduceMotion ? undefined : variants}
       className={className}
     >

@@ -15,6 +15,7 @@ type TextEffectProps = {
   children: string;
   per?: 'word' | 'char' | 'line';
   as?: keyof React.JSX.IntrinsicElements;
+  id?: string;
   variants?: {
     container?: Variants;
     item?: Variants;
@@ -153,6 +154,7 @@ export function TextEffect({
   children,
   per = 'word',
   as = 'p',
+  id,
   variants,
   className,
   preset,
@@ -204,6 +206,7 @@ export function TextEffect({
           animate='visible'
           exit='exit'
           aria-label={ariaLabel}
+          id={id}
           variants={delayedContainerVariants}
           className={cn('whitespace-pre-wrap', className)}
           onAnimationComplete={onAnimationComplete}

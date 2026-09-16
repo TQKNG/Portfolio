@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
+import { RevealRule } from "@/components/animations/RevealRule";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogFilterBar } from "@/components/blog/BlogFilterBar";
 import { getAllBlogPosts } from "@/data/blog";
@@ -33,24 +35,32 @@ export const BlogSection = () => {
   };
 
   return (
-    <section id="blog" data-nav-id="blog" className="scroll-mt-[72px] border-t-4 border-brutalist-ink">
-      <div className="p-4 pb-4 lg:p-6 lg:pb-4">
-        <h4 className="text-xl font-bold text-brutalist-ink">LET&apos;S SHARE</h4>
-        <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-          THOUGHTS ON CODE, DESIGN, AND THE WORK IN BETWEEN
-        </p>
-      </div>
-      <BlogFilterBar
-        options={filterOptions}
-        activeFilter={activeFilter}
-        onFilterChange={handleFilterChange}
-      />
-      {visiblePosts.length > 0 ? (
-        <div className="grid grid-cols-1 items-stretch gap-4 px-6 pb-6 sm:grid-cols-2 lg:grid-cols-3">
-          {visiblePosts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
+    <FadeIn viewportAmount={0.05}>
+      <section id="blog" data-nav-id="blog" className="scroll-mt-[72px] border-t-4 border-brutalist-ink">
+      <FadeIn>
+        <div className="p-4 pb-4 lg:p-6 lg:pb-4">
+          <RevealRule className="mb-5 h-1 w-24 bg-brutalist-teal" />
+          <h4 className="text-xl font-bold text-brutalist-ink">LET&apos;S SHARE</h4>
+          <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
+            THOUGHTS ON CODE, DESIGN, AND THE WORK IN BETWEEN
+          </p>
         </div>
+      </FadeIn>
+      <FadeIn>
+        <BlogFilterBar
+          options={filterOptions}
+          activeFilter={activeFilter}
+          onFilterChange={handleFilterChange}
+        />
+      </FadeIn>
+      {visiblePosts.length > 0 ? (
+        <FadeInStagger className="grid grid-cols-1 items-stretch gap-4 px-6 pb-6 sm:grid-cols-2 lg:grid-cols-3" staggerDelay={0.08}>
+          {visiblePosts.map((post) => (
+            <FadeIn key={post.slug} className="h-full">
+              <BlogCard post={post} />
+            </FadeIn>
+          ))}
+        </FadeInStagger>
       ) : (
         <div className="mx-6 mb-6 border-4 border-dashed border-brutalist-ink p-8 text-xs font-bold uppercase tracking-wide text-brutalist-muted">
           No notes match this filter yet.
@@ -67,6 +77,7 @@ export const BlogSection = () => {
           </button>
         </div>
       ) : null}
-    </section>
+      </section>
+    </FadeIn>
   );
 };

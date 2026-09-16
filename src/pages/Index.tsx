@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
+import { RevealRule } from "@/components/animations/RevealRule";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { BlogSection } from "@/components/blog/BlogSection";
 import { SiteNav } from "@/components/navigation/SiteNav";
 import { ProjectPreviewMedia } from "@/components/projects";
+import { TextEffect } from "@/components/ui/text-effect";
 import { getAllProjects } from "@/data/projects";
 
 const Index = () => {
   const projects = getAllProjects();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <PageTransition>
@@ -20,15 +24,23 @@ const Index = () => {
           <div className="flex flex-col justify-center border-b-4 border-brutalist-ink p-8 lg:sticky lg:top-[72px] lg:h-[calc(100svh-72px)] lg:border-b-0 lg:border-r-4 lg:p-12">
             <FadeInStagger staggerDelay={0.08}>
               <FadeIn>
-                <h1 className="text-6xl font-bold leading-none text-brutalist-ink md:text-8xl lg:text-[clamp(5rem,7vw,10rem)]">
-                  KHANH
-                  <br />
-                  NGUYEN
-                  <br />
-                </h1>
+                <TextEffect
+                  as="h1"
+                  per="line"
+                  preset="slide"
+                  delay={0.12}
+                  className="text-6xl font-bold leading-none text-brutalist-ink md:text-8xl lg:text-[clamp(5rem,7vw,10rem)]"
+                >
+                  {"KHANH\nNGUYEN"}
+                </TextEffect>
               </FadeIn>
               <FadeIn>
-                <div className="mt-8 h-4 w-32 bg-brutalist-teal" />
+                <motion.div
+                  initial={shouldReduceMotion ? false : { scaleX: 0, transformOrigin: "left" }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-8 h-4 w-32 bg-brutalist-teal"
+                />
               </FadeIn>
               <FadeIn>
                 <p className="mt-6 text-xs tracking-widest text-brutalist-muted">
@@ -40,15 +52,19 @@ const Index = () => {
 
           {/* Right Panel - Projects + Footer */}
           <div>
-            <section id="work" data-nav-id="work" className="scroll-mt-[72px]">
-              <div className="p-4 pb-4 lg:p-6 lg:pb-4">
-                <h4 className="text-xl font-bold text-brutalist-ink">
-                  LET&apos;S EXPLORE
-                </h4>
-                <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-                  SELECT A PROJECT TO VIEW THE FULL CASE STUDY
-                </p>
-              </div>
+            <FadeIn viewportAmount={0.05}>
+              <section id="work" data-nav-id="work" className="scroll-mt-[72px]">
+              <FadeIn>
+                <div className="p-4 pb-4 lg:p-6 lg:pb-4">
+                  <RevealRule className="mb-5 h-1 w-24 bg-brutalist-teal" />
+                  <h4 className="text-xl font-bold text-brutalist-ink">
+                    LET&apos;S EXPLORE
+                  </h4>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
+                    SELECT A PROJECT TO VIEW THE FULL CASE STUDY
+                  </p>
+                </div>
+              </FadeIn>
               <FadeInStagger className="space-y-2 px-6 pb-6 pt-0" staggerDelay={0.08}>
                 {projects.map((project) => (
                   <FadeIn key={project.id}>
@@ -83,7 +99,8 @@ const Index = () => {
                   </FadeIn>
                 ))}
               </FadeInStagger>
-            </section>
+              </section>
+            </FadeIn>
 
             <BlogSection />
 
@@ -94,21 +111,31 @@ const Index = () => {
               data-nav-id="info"
             >
               {/* Info Manifesto */}
-              <section aria-labelledby="info-heading">
-                <div className="border-b-4 border-brutalist-ink p-4 lg:p-6">
-                  <h2
-                    id="info-heading"
-                    className="mt-8 max-w-4xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-brutalist-ink sm:text-6xl lg:text-8xl"
-                  >
-                    I BUILD SOFTWARE FOR PEOPLE DOING DIFFICULT WORK.
-                  </h2>
-                  <p className="mt-8 max-w-2xl text-sm uppercase leading-relaxed tracking-wide text-brutalist-muted lg:text-base">
-                    Complex data, connected devices, and operational workflows should not feel chaotic. I design and engineer interfaces that make systems easier to understand and act on.
-                  </p>
-                </div>
+              <FadeIn viewportAmount={0.05}>
+                <section aria-labelledby="info-heading">
+                <FadeIn>
+                  <div className="border-b-4 border-brutalist-ink p-4 lg:p-6">
+                    <RevealRule className="mb-8 h-1 w-24 bg-brutalist-teal" />
+                    <TextEffect
+                      as="h2"
+                      id="info-heading"
+                      per="word"
+                      preset="slide"
+                      delay={0.08}
+                      className="max-w-4xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-brutalist-ink sm:text-6xl lg:text-8xl"
+                    >
+                      I BUILD SOFTWARE FOR PEOPLE DOING DIFFICULT WORK.
+                    </TextEffect>
+                    <FadeIn>
+                      <p className="mt-8 max-w-2xl text-sm uppercase leading-relaxed tracking-wide text-brutalist-muted lg:text-base">
+                        Complex data, connected devices, and operational workflows should not feel chaotic. I design and engineer interfaces that make systems easier to understand and act on.
+                      </p>
+                    </FadeIn>
+                  </div>
+                </FadeIn>
 
-                <div className="grid border-b-4 border-brutalist-ink md:grid-cols-3">
-                  <article className="border-b-4 border-brutalist-ink p-6 last:border-b-0 md:border-b-0 md:border-r-4 lg:p-8">
+                <FadeInStagger className="grid border-b-4 border-brutalist-ink md:grid-cols-3" staggerDelay={0.1}>
+                  <FadeIn className="border-b-4 border-brutalist-ink p-6 last:border-b-0 md:border-b-0 md:border-r-4 lg:p-8">
                     <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">01</p>
                     <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">
                       Make complexity visible
@@ -116,8 +143,8 @@ const Index = () => {
                     <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
                       Give people the context they need to make better decisions.
                     </p>
-                  </article>
-                  <article className="border-b-4 border-brutalist-ink p-6 last:border-b-0 md:border-b-0 md:border-r-4 lg:p-8">
+                  </FadeIn>
+                  <FadeIn className="border-b-4 border-brutalist-ink p-6 last:border-b-0 md:border-b-0 md:border-r-4 lg:p-8">
                     <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">02</p>
                     <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">
                       Reduce friction
@@ -125,8 +152,8 @@ const Index = () => {
                     <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
                       Remove unnecessary steps from important workflows.
                     </p>
-                  </article>
-                  <article className="p-6 lg:p-8">
+                  </FadeIn>
+                  <FadeIn className="p-6 lg:p-8">
                     <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">03</p>
                     <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">
                       Build for the real workflow
@@ -134,10 +161,10 @@ const Index = () => {
                     <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
                       Design around how people actually work, not how systems are organized.
                     </p>
-                  </article>
-                </div>
+                  </FadeIn>
+                </FadeInStagger>
 
-                <div className="flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between lg:p-8">
+                <FadeIn className="flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between lg:p-8">
                   <div>
                     <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-brutalist-teal">
                       #DATA #AUTOMATION #ROBOTICS #PRODUCT SYSTEMS
@@ -146,20 +173,26 @@ const Index = () => {
                   <p className="max-w-sm text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted lg:text-right">
                     From the first question to the final interface, I look for the clearer path through the system.
                   </p>
-                </div>
-              </section>
+                </FadeIn>
+                </section>
+              </FadeIn>
 
               {/* Contact CTA Section */}
-              <div className="scroll-mt-[72px] border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact" data-nav-id="mail">
-                <div className="mb-6">
-                  <h4 className="text-xl font-bold text-brutalist-ink">
-                    LET'S WORK TOGETHER
-                  </h4>
-                  <p className="mt-1 text-xs text-brutalist-muted uppercase tracking-wide">
-                    DROP A MESSAGE AND I'LL GET BACK TO YOU WITHIN 24 HOURS
-                  </p>
-                </div>
-                <form className="space-y-4 max-w-xl">
+              <FadeIn viewportAmount={0.1}>
+                <div className="scroll-mt-[72px] border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact" data-nav-id="mail">
+                <FadeIn>
+                  <div className="mb-6">
+                    <RevealRule className="mb-5 h-1 w-24 bg-brutalist-teal" />
+                    <h4 className="text-xl font-bold text-brutalist-ink">
+                      LET&apos;S WORK TOGETHER
+                    </h4>
+                    <p className="mt-1 text-xs text-brutalist-muted uppercase tracking-wide">
+                      DROP A MESSAGE AND I&apos;LL GET BACK TO YOU WITHIN 24 HOURS
+                    </p>
+                  </div>
+                </FadeIn>
+                <FadeIn>
+                  <form className="space-y-4 max-w-xl">
                   <input
                     type="email"
                     placeholder="khanhnguyen.trq@gmail.com"
@@ -176,8 +209,10 @@ const Index = () => {
                   >
                     SEND →
                   </button>
-                </form>
-              </div>
+                  </form>
+                </FadeIn>
+                </div>
+              </FadeIn>
 
               {/* Copyright */}
               <div className="border-t-4 border-brutalist-ink px-6 py-4 flex justify-between items-center">
