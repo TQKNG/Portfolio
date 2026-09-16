@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Info Manifesto Review</title>
+    <style>
+      :root {
+        --cream: #f3eedf;
+        --ink: #171b1b;
+        --muted: #68706d;
+        --teal: #147d78;
+        --line: 4px;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--cream); color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+      main { max-width: 1500px; margin: 0 auto; padding: 32px; }
+      .review-label { color: var(--teal); font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+      .review-title { max-width: 900px; margin: 24px 0 12px; font-size: clamp(42px, 7vw, 104px); line-height: .9; letter-spacing: -.07em; text-transform: uppercase; }
+      .review-intro { max-width: 680px; color: var(--muted); font-size: 14px; line-height: 1.7; text-transform: uppercase; }
+      .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+      .panel { min-width: 0; border: var(--line) solid var(--ink); }
+      .panel-head { display: flex; justify-content: space-between; gap: 16px; border-bottom: var(--line) solid var(--ink); padding: 16px; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      .panel-head span:last-child { color: var(--teal); }
+      .old { padding: 32px; }
+      .old h2 { margin: 0; font-size: 38px; letter-spacing: -.06em; }
+      .old-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 36px; }
+      .old-card { border-top: 2px solid var(--ink); padding-top: 14px; }
+      .old-card h3 { margin: 0; font-size: 21px; }
+      .old-card p, .manifesto p, .principle p { color: var(--muted); font-size: 11px; line-height: 1.6; text-transform: uppercase; }
+      .manifesto { padding: 28px; }
+      .manifesto h2 { max-width: 760px; margin: 24px 0 28px; font-size: clamp(32px, 5vw, 76px); line-height: .92; letter-spacing: -.07em; text-transform: uppercase; }
+      .manifesto > p { max-width: 560px; }
+      .principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 36px -28px 0; border-top: var(--line) solid var(--ink); }
+      .principle { min-width: 0; padding: 24px; border-right: var(--line) solid var(--ink); }
+      .principle:last-child { border-right: 0; }
+      .principle strong { color: var(--teal); font-size: 28px; }
+      .principle h3 { margin: 18px 0 0; font-size: 18px; line-height: 1.05; text-transform: uppercase; }
+      .principle p { margin-bottom: 0; }
+      .annotation { margin-top: 48px; border-top: var(--line) solid var(--ink); padding-top: 18px; }
+      .annotation h2 { margin: 0; font-size: 16px; text-transform: uppercase; }
+      .annotation p { max-width: 780px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+      @media (max-width: 760px) { main { padding: 20px; } .comparison, .principles { grid-template-columns: 1fr; } .old-grid { grid-template-columns: 1fr; } .principles { margin-left: -28px; margin-right: -28px; } .principle { border-right: 0; border-bottom: var(--line) solid var(--ink); } .principle:last-child { border-bottom: 0; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="review-label">Khanh Nguyen / Landing page / Info</p>
+      <h1 class="review-title">From generic services to a point of view.</h1>
+      <p class="review-intro">A visual review of the implemented manifesto direction. The design keeps the existing brutalist system while making the section specific to software, data, automation, and robotics.</p>
+
+      <section class="comparison" aria-label="Before and after comparison">
+        <article class="panel">
+          <div class="panel-head"><span>Previous</span><span>Generic service grid</span></div>
+          <div class="old">
+            <p class="review-label">Let&apos;s make an impact</p>
+            <h2>Services</h2>
+            <div class="old-grid">
+              <div class="old-card"><h3>Brand</h3><p>Identity systems that define your visual language.</p></div>
+              <div class="old-card"><h3>Digital</h3><p>Web experiences built for impact.</p></div>
+              <div class="old-card"><h3>Print</h3><p>Tangible design that leaves a mark.</p></div>
+              <div class="old-card"><h3>Motion</h3><p>Dynamic visuals that tell stories.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><span>Implemented</span><span>Manifesto / 01</span></div>
+          <div class="manifesto">
+            <p class="review-label">Info / 01</p>
+            <h2>I build software for people doing difficult work.</h2>
+            <p>Complex data, connected devices, and operational workflows should not feel chaotic. I design and engineer interfaces that make systems easier to understand and act on.</p>
+            <div class="principles">
+              <div class="principle"><strong>01</strong><h3>Make complexity visible</h3><p>Give people the context they need to make better decisions.</p></div>
+              <div class="principle"><strong>02</strong><h3>Reduce friction</h3><p>Remove unnecessary steps from important workflows.</p></div>
+              <div class="principle"><strong>03</strong><h3>Build for the real workflow</h3><p>Design around how people actually work, not how systems are organized.</p></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="annotation">
+        <h2>Implementation notes</h2>
+        <p>The landing page now uses a semantic Info section with an explicit heading, a readable manifesto, three principles, and a compact identity line. The contact CTA and social footer remain unchanged. The layout collapses into full-width principle rows on mobile and preserves keyboard-readable text without requiring hover interactions.</p>
+      </section>
+    </main>
+  </body>
+</html>

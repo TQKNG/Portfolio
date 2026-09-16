@@ -93,49 +93,61 @@ const Index = () => {
               id="about"
               data-nav-id="info"
             >
-              {/* Services Grid */}
-              <div className="p-4 pb-4 lg:p-6 lg:pb-4">
-                <h4 className="text-xl font-bold text-brutalist-ink">
-                  LET&apos;S MAKE AN IMPACT
-                </h4>
-                <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-                  A FEW WAYS I TURN BOLD IDEAS INTO MEMORABLE EXPERIENCES
-                </p>
-              </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-8 lg:p-12">
-                <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
-                    BRAND
-                  </h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
-                    IDENTITY SYSTEMS THAT DEFINE YOUR VISUAL LANGUAGE
+              {/* Info Manifesto */}
+              <section aria-labelledby="info-heading">
+                <div className="border-b-4 border-brutalist-ink p-4 lg:p-6">
+                  <h2
+                    id="info-heading"
+                    className="mt-8 max-w-4xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-brutalist-ink sm:text-6xl lg:text-8xl"
+                  >
+                    I BUILD SOFTWARE FOR PEOPLE DOING DIFFICULT WORK.
+                  </h2>
+                  <p className="mt-8 max-w-2xl text-sm uppercase leading-relaxed tracking-wide text-brutalist-muted lg:text-base">
+                    Complex data, connected devices, and operational workflows should not feel chaotic. I design and engineer interfaces that make systems easier to understand and act on.
                   </p>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
-                    DIGITAL
-                  </h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
-                    WEB EXPERIENCES BUILT FOR IMPACT
+
+                <div className="grid border-b-4 border-brutalist-ink md:grid-cols-3">
+                  <article className="border-b-4 border-brutalist-ink p-6 last:border-b-0 md:border-b-0 md:border-r-4 lg:p-8">
+                    <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">01</p>
+                    <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">
+                      Make complexity visible
+                    </h3>
+                    <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
+                      Give people the context they need to make better decisions.
+                    </p>
+                  </article>
+                  <article className="border-b-4 border-brutalist-ink p-6 last:border-b-0 md:border-b-0 md:border-r-4 lg:p-8">
+                    <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">02</p>
+                    <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">
+                      Reduce friction
+                    </h3>
+                    <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
+                      Remove unnecessary steps from important workflows.
+                    </p>
+                  </article>
+                  <article className="p-6 lg:p-8">
+                    <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">03</p>
+                    <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">
+                      Build for the real workflow
+                    </h3>
+                    <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
+                      Design around how people actually work, not how systems are organized.
+                    </p>
+                  </article>
+                </div>
+
+                <div className="flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between lg:p-8">
+                  <div>
+                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-brutalist-teal">
+                      #DATA #AUTOMATION #ROBOTICS #PRODUCT SYSTEMS
+                    </p>
+                  </div>
+                  <p className="max-w-sm text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted lg:text-right">
+                    From the first question to the final interface, I look for the clearer path through the system.
                   </p>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
-                    PRINT
-                  </h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
-                    TANGIBLE DESIGN THAT LEAVES A MARK
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-brutalist-ink lg:text-3xl">
-                    MOTION
-                  </h3>
-                  <p className="mt-3 text-xs uppercase tracking-wide leading-relaxed text-brutalist-muted">
-                    DYNAMIC VISUALS THAT TELL STORIES
-                  </p>
-                </div>
-              </div>
+              </section>
 
               {/* Contact CTA Section */}
               <div className="scroll-mt-[72px] border-t-4 border-brutalist-ink p-4 lg:p-6" id="contact">
