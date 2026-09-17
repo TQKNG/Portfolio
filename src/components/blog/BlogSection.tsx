@@ -1,14 +1,28 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
 import { RevealRule } from "@/components/animations/RevealRule";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogFilterBar } from "@/components/blog/BlogFilterBar";
 import { getAllBlogPosts } from "@/data/blog";
+import {
+  BLOG_VIEW_STATE_KEY,
+  getInitialBlogViewState,
+  isValidBlogFilter,
+  serializeBlogViewState,
+  type BlogViewState,
+} from "@/components/blog/blogViewState";
 
 export const BlogSection = () => {
   const posts = getAllBlogPosts();
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [showAll, setShowAll] = useState(false);
+  const [viewState, setViewState] = useState<BlogViewState>(getInitialBlogViewState);
+  const { activeFilter, showAll } = viewState;
+
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      BLOG_VIEW_STATE_KEY,
+      serializeBlogViewState(viewState),
+    );
+  }, [viewState]);
 
   const filterOptions = useMemo(() => {
     const categories = [...new Set(posts.map((post) => post.category))].sort();
@@ -22,6 +36,12 @@ export const BlogSection = () => {
     ];
   }, [posts]);
 
+  useEffect(() => {
+    if (!isValidBlogFilter(activeFilter, filterOptions.map((option) => option.value))) {
+      setViewState({ activeFilter: "all", showAll: false });
+    }
+  }, [activeFilter, filterOptions]);
+
   const filteredPosts = posts.filter((post) => {
     if (activeFilter === "all") return true;
     const [type, value] = activeFilter.split(":");
@@ -30,8 +50,7 @@ export const BlogSection = () => {
   const visiblePosts = showAll ? filteredPosts : filteredPosts.slice(0, 6);
 
   const handleFilterChange = (value: string) => {
-    setActiveFilter(value);
-    setShowAll(false);
+    setViewState({ activeFilter: value, showAll: false });
   };
 
   return (
@@ -70,7 +89,12 @@ export const BlogSection = () => {
         <div className="flex justify-center px-6 pb-8">
           <button
             type="button"
-            onClick={() => setShowAll((current) => !current)}
+            onClick={() =>
+              setViewState((current) => ({
+                ...current,
+                showAll: !current.showAll,
+              }))
+            }
             className="border-4 border-brutalist-ink bg-brutalist-ink px-5 py-3 text-xs font-bold uppercase tracking-wide text-brutalist-cream transition-colors hover:bg-brutalist-teal"
           >
             {showAll ? "Show less" : "View more"}

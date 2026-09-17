@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Copy, Check } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { MainLayout } from "@/components/layout/MainLayout";
 
 const DesignSystem = () => {

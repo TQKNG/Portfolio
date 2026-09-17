@@ -192,12 +192,12 @@ export const AboutContent = () => {
                 Get in Touch
               </a>
               <a 
-                href={designer.socialLinks.instagram}
+                href={designer.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-brand-black bg-neutral-100 rounded-xl hover:bg-neutral-200 transition-colors"
               >
-                View Instagram
+                View LinkedIn
               </a>
             </div>
           </section>

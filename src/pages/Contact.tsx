@@ -58,12 +58,12 @@ export const Contact = () => {
                   <div>
                     <div className="text-sm text-neutral-600 mb-2">Follow</div>
                     <a
-                      href={designer.socialLinks.instagram}
+                      href={designer.socialLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xl text-neutral-950 hover:text-accent transition-colors"
                     >
-                      Instagram →
+                      LinkedIn →
                     </a>
                   </div>
                 </div>

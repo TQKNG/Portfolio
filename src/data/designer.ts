@@ -9,9 +9,9 @@ import { Designer } from "@/types";
  * Update this file with your actual information.
  */
 export const designer: Designer = {
-  name: "Jordan Rivers",
-  bio: "A mid-career visual designer with 8+ years of experience specializing in brand identity, digital design, and strategic creative solutions. I work with startups and established brands to create sophisticated, meaningful design systems that prioritize both aesthetics and functionality. My approach combines strategic thinking with meticulous craftsmanship, ensuring every project reflects attention to detail and design excellence.",
-  email: "jordan@example.com",
+  name: "Khanh Nguyen",
+  bio: "A software engineer focused on data products, connected devices, and operational workflows. I design and build interfaces that make complex systems easier to understand and act on, combining product thinking with practical engineering.",
+  email: "khanhnguyen.trq@gmail.com",
   photo: "https://images.unsplash.com/photo-1574869612971-0e38d321c0ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDA2OTF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NjQ2NzIwMTd8&ixlib=rb-4.1.0&q=80&w=1080", // Photo by Wilhelm Gunkel on Unsplash
   services: [
     "Brand Identity & Visual Systems",
@@ -25,8 +25,7 @@ export const designer: Designer = {
     "Motion & Animation Direction",
   ],
   socialLinks: {
-    instagram: "https://instagram.com/jordanrivers",
-    linkedin: "https://linkedin.com/in/jordanrivers",
-    email: "jordan@example.com",
+    linkedin: "https://linkedin.com/in/khanhngt",
+    email: "khanhnguyen.trq@gmail.com",
   },
 };
