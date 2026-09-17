@@ -1,56 +1,92 @@
-# Welcome to my Portfolio project
+# Khanh Nguyen Portfolio
 
-This project is built based on a template from lovable
+This repository contains Khanh Nguyen's portfolio website.
 
-Setup:
+The application is a Vite single-page application built with React, TypeScript, Tailwind CSS, Framer Motion, and shadcn/ui primitives.
 
-Install Bun using the [Bun installation guide](https://bun.sh/docs/installation).
+## Requirements
+
+- Node.js 22.13.0 or newer.
+- Bun for dependency installation and project scripts.
+
+## Getting started
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
 bun install
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 bun run dev
 ```
 
-**Use GitHub Codespaces**
+The development server runs on the Vite default port unless another port is configured by the local environment.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Commands
 
-## What technologies are used for this project?
+```sh
+bun run dev           # Start the Vite development server.
+bun run build         # Create a production build.
+bun run build:dev     # Create a development-mode build.
+bun run preview       # Serve the production build locally.
+bun run lint          # Run ESLint.
+bun run test          # Run the Vitest test suite once.
+bun run assets:check  # Validate referenced public assets.
+```
 
-This project is built with:
+Use `bun run test -- --watch` for an interactive Vitest session.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Application structure
 
-## Package Manager
+- `src/pages/` contains route-level pages.
+- `src/components/home/` contains the homepage sections.
+- `src/components/blog/` contains blog cards, filters, Markdown rendering, and blog state utilities.
+- `src/components/projects/` contains project previews and case study sections.
+- `src/components/layout/` contains shared production shells and footer components.
+- `src/components/navigation/` contains the production navigation and the legacy sidebar navigation used by secondary pages.
+- `src/components/ui/` contains the small set of retained shadcn/ui primitives.
+- `src/data/` contains project, blog, and designer data.
+- `src/content/blog/` contains Markdown blog content.
+- `src/lib/` contains shared utilities such as class composition and toast access.
+- `src/types/` contains shared TypeScript types.
+- `public/` contains static assets served from the site root.
+- `scripts/validate-assets.mjs` validates public asset references used by the source code.
+
+## Routes
+
+- `/` is the production portfolio homepage.
+- `/projects/:slug` renders a project case study.
+- `/blog/:slug` renders a blog post.
+- `/about` renders the legacy detailed about page.
+- `/contact` renders the dedicated contact page.
+- `/design-system` renders the internal design system reference page.
+- `/hero` and `/styleguide-hero6` are retained reference routes and are not part of the production navigation.
+- Unknown routes render the minimal not-found page with a link back to `/`.
+
+The homepage stores its blog filter and expanded-list state in `sessionStorage` so that navigating to a blog detail and returning does not lose the user's view.
+
+## Testing and validation
+
+Tests use Vitest with React Testing Library and are colocated with the blog components.
+
+The test suite covers blog view-state parsing, stale-filter fallback behavior, and blog filter interaction.
+
+Before submitting changes, run `bun run test`, `bun run lint`, `bun run build`, and `bun run assets:check`.
+
+When changing user-facing behavior, manually check the affected route in a browser at desktop and mobile widths.
+
+## Package management
 
 Use Bun for dependency installation and project scripts.
-Keep the committed `bun.lockb` lockfile synchronized with `package.json`, and do not commit a competing package-manager lockfile.
+
+Keep `bun.lockb` synchronized with `package.json`.
+
+Do not add a competing package-manager lockfile.
+
+## Reference materials
+
+The `tailwind-plus/` directory contains reference components and themes.
+
+Do not remove or reorganize `tailwind-plus/` unless specifically requested.
 
 ## Deployment
 
-This project is deployed to Vercel
+The site is deployed to Vercel.
 
-## Custom Domain 
-
-The custom domain is managed via Cloudfare
-
-# ./tailwind-plus folder:
-
-The tailwind-plus folder contains tailwind components and themes to be used as inspiration for the project. DO NOT REMOVE THE FOLDER UNLESS SPECIFICALLY TOLD TO DO SO
+The custom domain is managed through Cloudflare.
