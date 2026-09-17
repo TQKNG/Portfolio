@@ -2,6 +2,14 @@ import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
 import { RevealRule } from "@/components/animations/RevealRule";
 import { TextEffect } from "@/components/ui/text-effect";
 
+const principleVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 const principles = [
   ["01", "Make complexity visible", "Give people the context they need to make better decisions."],
   ["02", "Reduce friction", "Remove unnecessary steps from important workflows."],
@@ -20,11 +28,16 @@ export const HomeInfo = () => (
       </FadeIn>
       <FadeInStagger className="grid border-b-4 border-brutalist-ink md:grid-cols-3" staggerDelay={0.1}>
         {principles.map(([number, title, description], index) => (
-          <FadeIn key={number} className={`p-6 lg:p-8 ${index < 2 ? "border-b-4 border-brutalist-ink md:border-b-0 md:border-r-4" : ""}`}>
-            <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">{number}</p>
-            <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">{title}</h3>
-            <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">{description}</p>
-          </FadeIn>
+          <div
+            key={number}
+            className={`p-6 lg:p-8 ${index < 2 ? "border-b-4 border-brutalist-ink md:border-b-0 md:border-r-4" : ""}`}
+          >
+            <FadeIn variants={principleVariants}>
+              <p className="text-4xl font-bold tracking-[-0.06em] text-brutalist-teal">{number}</p>
+              <h3 className="mt-8 text-xl font-bold uppercase text-brutalist-ink lg:text-2xl">{title}</h3>
+              <p className="mt-4 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">{description}</p>
+            </FadeIn>
+          </div>
         ))}
       </FadeInStagger>
       <FadeIn className="flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between lg:p-8">

@@ -58,7 +58,7 @@ const revealItem: Variants = {
   },
 };
 
-const revealViewport = { once: true, amount: 0.15 } as const;
+const revealViewport = { once: false, amount: 0.15 } as const;
 
 const isValidLink = (value?: string) => {
   if (!value) return false;
