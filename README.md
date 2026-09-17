@@ -41,6 +41,7 @@ Use `bun run test -- --watch` for an interactive Vitest session.
 - `src/components/layout/` contains shared production shells and footer components.
 - `src/components/navigation/` contains the production navigation and the legacy sidebar navigation used by secondary pages.
 - `src/components/ui/` contains the small set of retained shadcn/ui primitives.
+- `src/store/` contains the small Zustand store for shared, session-persisted application state.
 - `src/data/` contains project, blog, and designer data.
 - `src/content/blog/` contains Markdown blog content.
 - `src/lib/` contains shared utilities such as class composition and toast access.
@@ -60,6 +61,12 @@ Use `bun run test -- --watch` for an interactive Vitest session.
 - Unknown routes render the minimal not-found page with a link back to `/`.
 
 The homepage stores its blog filter and expanded-list state in `sessionStorage` so that navigating to a blog detail and returning does not lose the user's view.
+
+Shared blog state is managed by Zustand without an application-wide provider.
+
+Transient state such as mobile navigation, project galleries, image fallbacks, form submission, and animation state remains local to its owning component.
+
+React Router remains the source of truth for route parameters, hashes, and navigation state.
 
 ## Testing and validation
 

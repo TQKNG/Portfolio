@@ -17,6 +17,7 @@ Use Node.js 22.13.0 or newer and Bun for dependency installation and project scr
 - `src/components/forms/` contains form components such as `ContactForm`.
 - `src/components/animations/` contains reusable Framer Motion wrappers.
 - `src/components/ui/` contains retained shared UI primitives and their variant definitions.
+- `src/store/` contains the focused Zustand store for shared, session-persisted state.
 - `src/data/` contains structured portfolio data.
 - `src/content/blog/` contains Markdown blog posts.
 - `src/lib/` contains shared utilities and integrations.
@@ -76,6 +77,16 @@ Name hooks with the `use` prefix and utilities in camelCase.
 Keep homepage sections and reusable behavior in focused components rather than expanding route-level page files.
 
 Keep structured portfolio copy in `src/data/` or `src/content/blog/` rather than duplicating it in page components.
+
+Use the Zustand store only for state shared across routes or intentionally persisted for the session.
+
+Keep transient component state local, including menus, galleries, forms, image fallbacks, and animations.
+
+Keep route parameters, hashes, and navigation state in React Router rather than duplicating them in the store.
+
+Use selectors when reading store state so unrelated components do not rerender.
+
+Preserve the existing `portfolio.blog.view-state` session-storage compatibility when changing blog state persistence.
 
 Prefer existing Tailwind utilities, shared UI primitives, and the `cn` utility over new global CSS or duplicate components.
 

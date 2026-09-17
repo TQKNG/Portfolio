@@ -1,28 +1,20 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { FadeIn, FadeInStagger } from "@/components/animations/FadeIn";
 import { RevealRule } from "@/components/animations/RevealRule";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogFilterBar } from "@/components/blog/BlogFilterBar";
 import { getAllBlogPosts } from "@/data/blog";
-import {
-  BLOG_VIEW_STATE_KEY,
-  getInitialBlogViewState,
-  isValidBlogFilter,
-  serializeBlogViewState,
-  type BlogViewState,
-} from "@/components/blog/blogViewState";
+import { isValidBlogFilter } from "@/components/blog/blogViewState";
+import { usePortfolioStore } from "@/store/portfolioStore";
 
 export const BlogSection = () => {
   const posts = getAllBlogPosts();
-  const [viewState, setViewState] = useState<BlogViewState>(getInitialBlogViewState);
-  const { activeFilter, showAll } = viewState;
-
-  useEffect(() => {
-    window.sessionStorage.setItem(
-      BLOG_VIEW_STATE_KEY,
-      serializeBlogViewState(viewState),
-    );
-  }, [viewState]);
+  const activeFilter = usePortfolioStore((state) => state.blog.activeFilter);
+  const showAll = usePortfolioStore((state) => state.blog.showAll);
+  const hasHydrated = usePortfolioStore((state) => state.hasHydrated);
+  const setBlogFilter = usePortfolioStore((state) => state.setBlogFilter);
+  const toggleBlogExpanded = usePortfolioStore((state) => state.toggleBlogExpanded);
+  const resetBlogView = usePortfolioStore((state) => state.resetBlogView);
 
   const filterOptions = useMemo(() => {
     const categories = [...new Set(posts.map((post) => post.category))].sort();
@@ -37,10 +29,12 @@ export const BlogSection = () => {
   }, [posts]);
 
   useEffect(() => {
+    if (!hasHydrated) return;
+
     if (!isValidBlogFilter(activeFilter, filterOptions.map((option) => option.value))) {
-      setViewState({ activeFilter: "all", showAll: false });
+      resetBlogView();
     }
-  }, [activeFilter, filterOptions]);
+  }, [activeFilter, filterOptions, hasHydrated, resetBlogView]);
 
   const filteredPosts = posts.filter((post) => {
     if (activeFilter === "all") return true;
@@ -50,7 +44,7 @@ export const BlogSection = () => {
   const visiblePosts = showAll ? filteredPosts : filteredPosts.slice(0, 6);
 
   const handleFilterChange = (value: string) => {
-    setViewState({ activeFilter: value, showAll: false });
+    setBlogFilter(value);
   };
 
   return (
@@ -73,7 +67,11 @@ export const BlogSection = () => {
         />
       </FadeIn>
       {visiblePosts.length > 0 ? (
-        <FadeInStagger className="grid grid-cols-1 items-stretch gap-4 px-6 pb-6 sm:grid-cols-2 lg:grid-cols-3" staggerDelay={0.08}>
+        <FadeInStagger
+          key={`${activeFilter}-${showAll ? "expanded" : "collapsed"}`}
+          className="grid grid-cols-1 items-stretch gap-4 px-6 pb-6 sm:grid-cols-2 lg:grid-cols-3"
+          staggerDelay={0.08}
+        >
           {visiblePosts.map((post) => (
             <FadeIn key={post.slug} className="h-full">
               <BlogCard post={post} />
@@ -89,12 +87,7 @@ export const BlogSection = () => {
         <div className="flex justify-center px-6 pb-8">
           <button
             type="button"
-            onClick={() =>
-              setViewState((current) => ({
-                ...current,
-                showAll: !current.showAll,
-              }))
-            }
+            onClick={toggleBlogExpanded}
             className="border-4 border-brutalist-ink bg-brutalist-ink px-5 py-3 text-xs font-bold uppercase tracking-wide text-brutalist-cream transition-colors hover:bg-brutalist-teal"
           >
             {showAll ? "Show less" : "View more"}
