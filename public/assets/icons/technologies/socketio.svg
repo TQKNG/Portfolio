@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Socket.IO">
+  <circle cx="32" cy="32" r="27" fill="#111"/>
+  <path d="M34 12 18 34h11l-3 18 20-25H35z" fill="#fff"/>
+</svg>

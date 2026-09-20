@@ -3,6 +3,19 @@ import { Project } from "@/types";
 const technologyIcons = {
   react: "/assets/icons/technologies/react.svg",
   typescript: "/assets/icons/technologies/typescript.svg",
+  nextjs: "/assets/icons/technologies/nextjs.svg",
+  python: "/assets/icons/technologies/python.svg",
+  fastApi: "/assets/icons/technologies/fastapi.svg",
+  langChain: "/assets/icons/technologies/langchain.svg",
+  openAi: "/assets/icons/technologies/openai.svg",
+  azure: "/assets/icons/technologies/azure.svg",
+  aspNet: "/assets/icons/technologies/aspnet.svg",
+  csharp: "/assets/icons/technologies/csharp.svg",
+  jquery: "/assets/icons/technologies/jquery.svg",
+  postgresql: "/assets/icons/technologies/postgresql.svg",
+  socketIo: "/assets/icons/technologies/socketio.svg",
+  oauth: "/assets/icons/technologies/oauth.svg",
+  githubActions: "/assets/icons/technologies/github-actions.svg",
   restApi: "/assets/icons/technologies/rest-api.svg",
   sql: "/assets/icons/technologies/sql.svg",
   responsiveWeb: "/assets/icons/technologies/responsive-web.svg",
@@ -14,16 +27,26 @@ const chatBokHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_brochure.png";
 const chatBokDemo =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/video/chatBok_Intro.mp4";
-const chatBokChatUI = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_chatUI.png"
-const chatBokConversation = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation.png"
-const chatBokConversationHistorical = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation-historical.png"
-const chatBokConversationAnalytic= "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation-analytic.png"
-const chatBokTestCase = "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_test-case.png"
-
+const chatBokChatUI =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_chatUI.png";
+const chatBokConversation =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation.png";
+const chatBokConversationHistorical =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation-historical.png";
+const chatBokConversationAnalytic =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_conversation-analytic.png";
+const chatBokTestCase =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/chatBok_test-case.png";
 
 const careHomeHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/carehome_brochure.png";
-  const careHomeDemo =
+const careHomeAdmin =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/carehome_admin.jpg";
+const careHomeApiService =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/carehome_api-service.png";
+const careHomeResponsiveDesign =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/carehome_responsive-design.png";
+const careHomeDemo =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/video/carehome_intro.mp4";
 const robotSuiteHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/robotsuite_brochure.png";
@@ -38,21 +61,25 @@ export const projects: Project[] = [
     slug: "brand-identity-refresh",
     title: "ChatBOK",
     subtitle:
-      "A database assistant that makes querying, diagnostics, and data exploration faster and more approachable.",
-    category: "AI / Data tooling",
+      "An AI database agent that turns natural-language questions into SQL queries and actionable data insights.",
+    category: "AI / Data engineering",
     year: "2024",
     description:
-      "ChatBOK brings database connections, natural-language query workflows, diagnostics, and descriptive analytics into one focused product experience.",
+      "ChatBOK helps users explore business databases through natural language, using relevant schema context to generate SQL and support historical, descriptive, predictive, and diagnostic analysis.",
     role: "Software Engineer",
     responsibilities:
-      "Database connectivity, query workflows, diagnostics, and analytics",
-    users: "Teams working with operational databases",
-    platform: "Responsive web application",
+      "AI agent architecture, semantic retrieval, SQL generation, database integration, testing, and deployment",
+    users: "Internal teams working with private, domain-specific enterprise data",
+    platform: "Internal chatbot interface for enterprise data",
     technologies: [
-      { name: "React", icon: technologyIcons.react },
+      { name: "Next.js 14", icon: technologyIcons.nextjs },
       { name: "TypeScript", icon: technologyIcons.typescript },
-      { name: "REST APIs", icon: technologyIcons.restApi },
-      { name: "SQL", icon: technologyIcons.sql },
+      { name: "FastAPI", icon: technologyIcons.fastApi },
+      { name: "Python", icon: technologyIcons.python },
+      { name: "LangChain", icon: technologyIcons.langChain },
+      { name: "OpenAI", icon: technologyIcons.openAi },
+      { name: "SQL databases", icon: technologyIcons.sql },
+      { name: "Azure / containers", icon: technologyIcons.azure },
     ],
     heroImage: chatBokHero,
     previewVideo: chatBokDemo,
@@ -64,13 +91,8 @@ export const projects: Project[] = [
       },
       {
         value: "85–90%",
-        label: "Query accuracy",
-        detail: "Reliable enough to support practical exploration workflows.",
-      },
-      {
-        value: "99%",
-        label: "Service uptime",
-        detail: "Availability maintained for day-to-day use.",
+        label: "Accuracy improvement",
+        detail: "Measured on medium-complexity joins and aggregations.",
       },
     ],
     sections: [
@@ -78,41 +100,41 @@ export const projects: Project[] = [
         id: "context",
         title: "Context",
         paragraphs: [
-          "ChatBOK is a database assistant for people who need to explore and understand operational data without moving between disconnected tools.",
-          "Khanh contributed across the product engineering surface, including database connectivity, query workflows, diagnostics, and descriptive analytics.",
+          "I built ChatBOK as an internal tool to help my team and me work with private enterprise data more efficiently, using natural-language questions instead of hand-written SQL.",
+          "I worked across the agent architecture, semantic retrieval, SQL generation, multi-database integration, evaluation, and deployment for historical, descriptive, predictive, and diagnostic analysis workflows.",
         ],
       },
       {
         id: "problem",
         title: "Problem",
         paragraphs: [
-          "Getting from a question to a trustworthy database result could take about 20 seconds, while the product also needed to work across multiple database connections and surface useful diagnostic context.",
-          "The difficult part was not only producing a query. The workflow had to keep results understandable and dependable enough for repeated use.",
+          "LangChain's predefined SQL agent did not have enough business or schema context to translate natural-language questions into dependable queries, especially when a request required multiple joins or aggregations.",
+          "Even simple descriptive and historical questions could take about 20 seconds, and the experience needed to work across SQL Server, MongoDB, and MariaDB while keeping generated results practical to validate.",
         ],
       },
       {
         id: "approach",
         title: "Approach",
         paragraphs: [
-          "The workflow was organized around a short path: connect a data source, express the question, inspect the response, and move into diagnostics or descriptive analysis when more context is needed.",
-          "Schema-aware context and response validation were prioritized over a broader but less predictable query experience.",
+          "The agent breaks each question into important nouns and verbs, embeds that intent, and uses semantic search to retrieve the most relevant tables, columns, schema descriptions, and business examples.",
+          "Retrieval-augmented generation, few-shot prompts, clearer column names, and representative SQL test cases give the model focused domain context before it generates a query.",
         ],
         decisions: [
           {
             observation:
-              "Query responses took about 20 seconds and needed stronger consistency before they could support routine exploration.",
+              "A generic SQL agent lacked the database context required for reliable joins, aggregations, and business-specific questions.",
             decision:
-              "Tighten the workflow around relevant database context and validate generated responses before presenting them to the user.",
+              "Encode table and schema descriptions as embeddings, then retrieve only the context relevant to each question.",
             result:
-              "Query response improved to 4 seconds while accuracy reached 85 to 90 percent.",
+              "Accuracy on medium-complexity questions improved by 85 to 90 percent.",
           },
           {
             observation:
-              "Database work spanned connection management, querying, diagnostics, and analysis.",
+              "Schema retrieval alone could not capture every domain rule or clarify inconsistent database terminology.",
             decision:
-              "Keep these tasks in one coherent product flow instead of treating them as unrelated utilities.",
+              "Add domain-specific examples through few-shot prompting and standardize column names so they describe their meaning clearly.",
             result:
-              "Users can move from connection to insight without leaving the ChatBOK experience.",
+              "The agent produced more consistent SQL while simple query time fell from about 20 seconds to 4 seconds.",
           },
         ],
       },
@@ -120,29 +142,29 @@ export const projects: Project[] = [
         id: "solution",
         title: "Solution",
         paragraphs: [
-          "The resulting interface combines a friendly query surface with multi-database connection management, issue diagnostics, and descriptive analytics.",
-          "The product views show how connection, query, and analysis tasks stay within one focused workflow.",
+          "The resulting application combines database selection, conversational querying, and four analysis modes in one responsive interface built with Next.js and FastAPI.",
+          "The LangChain and OpenAI agent retrieves targeted schema context before generating SQL, while a test matrix compares generated queries with expected results across retrieval, joins, and aggregation cases.",
         ],
         workflow: {
-          title: "From question to trusted result",
+          title: "From question to validated SQL",
           description:
-            "A short, schema-aware path keeps the user oriented from connection through validation and analysis.",
+            "A retrieval and evaluation pipeline supplies the agent with focused context before presenting an answer.",
           steps: [
             {
-              title: "Connect source",
-              detail: "Choose and establish the operational database connection.",
-            },
-            {
               title: "Ask question",
-              detail: "Express the information need in natural language.",
+              detail: "Express the required business information in natural language.",
             },
             {
-              title: "Validate query",
-              detail: "Use relevant schema context to check the generated response.",
+              title: "Retrieve context",
+              detail: "Find the relevant schema descriptions and domain examples through semantic search.",
             },
             {
-              title: "Inspect result",
-              detail: "Review the answer, diagnostics, and descriptive analysis together.",
+              title: "Generate and test",
+              detail: "Create SQL and compare it with representative expected-query cases.",
+            },
+            {
+              title: "Return insight",
+              detail: "Present the result through the selected analysis workflow.",
             },
           ],
         },
@@ -151,16 +173,16 @@ export const projects: Project[] = [
         id: "results",
         title: "Results",
         paragraphs: [
-          "Query response improved from 20 seconds to 4 seconds, with measured query accuracy of 85 to 90 percent and 99 percent service uptime.",
-          "Together, those results made the assistant faster to use and more dependable for recurring database work.",
+          "Response time for simple descriptive and historical questions fell from about 20 seconds to approximately 4 seconds.",
+          "For medium-complexity questions involving multiple joins and aggregations, query accuracy improved by 85 to 90 percent.",
         ],
       },
       {
         id: "learnings",
         title: "Learnings",
         paragraphs: [
-          "A conversational data product is only useful when speed, accuracy, and diagnostic transparency improve together.",
-          "A future iteration should continue strengthening validation and make uncertainty even more visible when a question cannot be answered reliably.",
+          "Reliable text-to-SQL depends less on a broad prompt than on the quality of the retrieved schema, business context, examples, and evaluation cases supplied to the model.",
+          "The next iteration should expand the test matrix, expose confidence and failure states more clearly, and keep domain knowledge maintainable as connected databases evolve.",
         ],
       },
     ],
@@ -168,51 +190,51 @@ export const projects: Project[] = [
       {
         id: "chatbok-product-overview",
         url: chatBokHero,
-        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        alt: "ChatBOK product overview introducing its natural-language database analysis capabilities",
         width: "full",
         caption:
-          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+          "See ChatBOK's natural-language database analysis workflows at a glance.",
       },
       {
         id: "chatbok-chat-ui",
         url: chatBokChatUI,
-        alt: "User friendly and custom branding user interface",
+        alt: "ChatBOK interface with database connections and four analysis modes",
         width: "full",
         caption:
-          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+          "Switch databases and start historical, predictive, descriptive, or diagnostic analysis.",
       },
       {
         id: "chatbok-conversation",
         url: chatBokConversation,
-        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        alt: "ChatBOK conversation showing natural-language questions and database answers",
         width: "full",
         caption:
-          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+          "Ask a question in plain language and receive a database-backed answer.",
       },
-       {
+      {
         id: "chatbok-conversation-historical",
         url: chatBokConversationHistorical,
-        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        alt: "ChatBOK historical analysis answering questions about temperature records",
         width: "full",
         caption:
-          "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+          "Review record counts, historical trends, and summary statistics.",
       },
       {
         id: "chatbok-conversation-analytic",
         url: chatBokConversationAnalytic,
-        alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
+        alt: "ChatBOK diagnostic analysis explaining temperature anomalies",
         width: "full",
         caption:
-        "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
+          "Investigate anomalies and get a plain-language diagnostic explanation.",
       },
       {
-       id: "chatbok-test-case",
-       url: chatBokTestCase,
-       alt: "ChatBOK interface overview showing query, diagnostics, and analytics capabilities",
-       width: "full",
-       caption:
-         "The core product surface brings database connection, natural-language querying, diagnostics, and descriptive analytics into one workspace.",
-     },
+        id: "chatbok-test-case",
+        url: chatBokTestCase,
+        alt: "ChatBOK evaluation matrix comparing expected and generated SQL queries",
+        width: "full",
+        caption:
+          "Compare expected and generated SQL across test cases and complexity levels.",
+      },
     ],
     gridWidth: 12,
     featured: true,
@@ -222,29 +244,44 @@ export const projects: Project[] = [
     slug: "fintech-dashboard",
     title: "Care Home Reception App",
     subtitle:
-      "A responsive reception workflow for safer check-ins, visitor guidance, alerts, and badge printing in care homes.",
-    category: "Care operations",
+      "An internal, robot-assisted reception platform for safer, paperless, and more reliable visitor check-in across devices.",
+    category: "Care operations / Robotics",
     year: "2024",
     description:
-      "The Care Home Reception App connects visitor check-in, health screening, navigation, notifications, and badge printing across devices.",
+      "The Care Home Reception App combines a visitor-facing robot workflow, an administrative portal, and service APIs to manage check-in, health screening, navigation, real-time alerts, and visitor identification.",
     role: "Software Engineer",
     responsibilities:
-      "Reception workflows, health screening, notifications, and responsive UI",
-    users: "Care-home visitors and reception teams",
-    platform: "Desktop, tablet, and mobile web",
+      "Visitor workflows, responsive UI, service APIs, WebSocket reliability, Azure monitoring, and recovery automation",
+    users: "Care-home visitors, reception teams, administrators, and hosts",
+    platform:
+      "Robot Android webview, administrative portal, desktop, tablet, and mobile web",
     technologies: [
-      { name: "React", icon: technologyIcons.react },
-      { name: "TypeScript", icon: technologyIcons.typescript },
-      { name: "Responsive Web", icon: technologyIcons.responsiveWeb },
-      { name: "REST APIs", icon: technologyIcons.restApi },
+      { name: "ASP.NET", icon: technologyIcons.aspNet },
+      { name: "C#", icon: technologyIcons.csharp },
+      { name: "jQuery", icon: technologyIcons.jquery },
+      { name: "PostgreSQL", icon: technologyIcons.postgresql },
+      { name: "Socket.IO", icon: technologyIcons.socketIo },
+      { name: "Google OAuth 2.0", icon: technologyIcons.oauth },
+      { name: "Azure Web App", icon: technologyIcons.azure },
+      { name: "GitHub Actions", icon: technologyIcons.githubActions },
     ],
     heroImage: careHomeHero,
     previewVideo: careHomeDemo,
     metrics: [
       {
-        value: "6",
-        label: "Connected workflows",
-        detail: "From arrival and screening through alerts and badge printing.",
+        value: "5s → 5m",
+        label: "WebSocket heartbeat",
+        detail: "Lower keep-alive traffic without losing voice-command connectivity.",
+      },
+      {
+        value: "<1 hour",
+        label: "Issue resolution",
+        detail: "Production issues identified and resolved within one hour.",
+      },
+      {
+        value: "99%",
+        label: "Service uptime",
+        detail: "Availability maintained for the visitor-facing experience.",
       },
     ],
     sections: [
@@ -252,41 +289,42 @@ export const projects: Project[] = [
         id: "context",
         title: "Context",
         paragraphs: [
-          "The Care Home Reception App supports the first moments of a visit, where speed, safety, and a welcoming experience need to coexist.",
-          "Khanh worked across the reception workflow, including check-in, health screening, visitor guidance, notifications, and responsive interaction patterns.",
+          "I built the Care Home Reception App to replace paperwork and create a safer, more welcoming visitor experience in care homes.",
+          "The product combined three connected surfaces: a visitor-facing robot workflow, an administrative portal, and service APIs for robot and platform integrations. I worked across responsive visitor workflows, health screening, navigation, real-time notifications, badge printing, administration, and communication between the robot webview and Azure-hosted services.",
         ],
       },
       {
         id: "problem",
         title: "Problem",
         paragraphs: [
-          "Reception teams needed to coordinate several connected tasks without making visitors repeat information or wait while staff moved between separate processes.",
-          "The interface also had to remain clear across shared kiosks, desktop screens, tablets, and phones.",
+          "The robot's Android webview relied on a persistent WebSocket connection for navigation and voice commands. The client sent a keep-alive request every five seconds, increasing traffic from hundreds of requests to peaks around 1,000 and contributing to HTTP 500, 502, and 503 errors during working hours.",
+          "A lost connection could interrupt a visitor during check-in. The platform needed to reduce unnecessary traffic, remain consistent across devices, and recover automatically when the Azure service became unhealthy.",
         ],
       },
       {
         id: "approach",
         title: "Approach",
         paragraphs: [
-          "The experience was treated as one arrival journey rather than six isolated features: check in, complete screening, find the destination, notify the right person, and produce identification.",
-          "Responsive behavior was considered part of the workflow so the same information could remain usable at reception and on smaller devices.",
+          "I reviewed Azure App Service metrics, application logs, request volume, response times, CPU usage, and server errors to identify the source of the instability.",
+          "I increased the WebSocket heartbeat interval from five seconds to five minutes, introduced monitoring alerts, and configured auto-heal rules based on actual request volume, memory usage, and operating schedules.",
+          "I also kept visitor configuration and operational controls in an administrative portal while exposing maps, locations, schedules, logs, and notifications through documented service APIs.",
         ],
         decisions: [
           {
             observation:
-              "Visitor arrival involved several dependent reception tasks with different safety and communication needs.",
+              "The robot sent a WebSocket keep-alive request every five seconds, creating unnecessary traffic and contributing to service instability.",
             decision:
-              "Connect the six core tasks in one guided reception flow with clear status changes.",
+              "Increase the heartbeat interval from five seconds to five minutes while preserving the voice-command connection.",
             result:
-              "Visitors and staff can move from arrival to notification and badge printing within one consistent experience.",
+              "Keep-alive request frequency fell 60-fold, lowering pressure on the Azure-hosted service.",
           },
           {
             observation:
-              "The reception experience needed to work on a kiosk as well as desktop, tablet, and mobile screens.",
+              "Restarting the service restored availability, but manual intervention was not sufficient for a visitor-facing system.",
             decision:
-              "Design the interaction model as a responsive web experience instead of tying it to one display size.",
+              "Add Azure alerts and auto-heal rules for request spikes, private-memory thresholds, and a scheduled daily restart.",
             result:
-              "The same workflow remains available across the devices used during a visit.",
+              "Production issues could be identified and resolved within one hour while maintaining 99 percent service uptime.",
           },
         ],
       },
@@ -294,33 +332,34 @@ export const projects: Project[] = [
         id: "solution",
         title: "Solution",
         paragraphs: [
-          "The product combines fast check-in, health screening, navigation and scheduling, real-time alerts, a cross-platform interface, and visitor badge printing.",
-          "The product view shows the relationship between the reception robot, shared display, and personal devices.",
+          "The completed platform supports contactless check-in, health screening, navigation and scheduling, real-time host notifications, responsive access, and badge printing.",
+          "The visitor workflow adapts across the reception robot, desktop displays, tablets, and mobile devices. Administrators can manage outbreak guidance, visitor limits, language, session timeout, and office contacts through a dedicated settings interface.",
+          "ASP.NET Core service APIs connect the robot to maps, locations, schedules, operational logs, and battery notifications.",
         ],
         workflow: {
-          title: "A connected visitor arrival",
+          title: "A reliable visitor arrival",
           description:
-            "Each step carries the visitor forward while keeping reception staff and hosts informed.",
+            "One guided workflow carries visitors from arrival through screening, guidance, notification, and identification.",
           steps: [
             {
               title: "Check in",
-              detail: "Capture the visitor and destination details.",
+              detail: "Capture visitor and destination details through the robot or another device.",
             },
             {
               title: "Screen",
-              detail: "Complete the required health and safety questions.",
+              detail: "Collect the required health and safety information.",
             },
             {
               title: "Guide",
-              detail: "Provide clear navigation to the correct destination.",
+              detail: "Provide navigation and scheduling information for the destination.",
             },
             {
               title: "Notify",
-              detail: "Alert the appropriate host or reception team member.",
+              detail: "Send a real-time alert to the appropriate staff member.",
             },
             {
               title: "Print badge",
-              detail: "Create visible identification for the visit.",
+              detail: "Produce visitor identification for the duration of the visit.",
             },
           ],
         },
@@ -329,16 +368,16 @@ export const projects: Project[] = [
         id: "results",
         title: "Results",
         paragraphs: [
-          "Six core reception workflows are represented in one product surface, reducing fragmentation across the arrival journey.",
-          "The result is a clearer handoff between visitor input, staff awareness, navigation, and identification.",
+          "Increasing the WebSocket heartbeat interval from five seconds to five minutes reduced keep-alive request frequency 60-fold while preserving the robot's voice-command functionality.",
+          "Azure alerts and auto-heal rules helped the team identify and resolve issues within one hour and maintain 99 percent uptime for the visitor-facing experience.",
         ],
       },
       {
         id: "learnings",
         title: "Learnings",
         paragraphs: [
-          "In care settings, a faster flow cannot come at the cost of clarity, privacy, or a welcoming tone.",
-          "Future iterations should be evaluated with reception teams and visitors across the full range of devices and arrival scenarios.",
+          "Real-time features must be evaluated against their cumulative production traffic. A heartbeat that appears inexpensive in isolation can become a reliability problem when it runs continuously across active clients.",
+          "Separating visitor workflows, administrative configuration, and robot services made each part of the platform easier to understand, operate, and recover.",
         ],
       },
     ],
@@ -346,10 +385,34 @@ export const projects: Project[] = [
       {
         id: "care-home-product-overview",
         url: careHomeHero,
-        alt: "Care Home Reception App across reception robot, desktop, tablet, and mobile devices",
+        alt: "Care Home Reception App overview showing a reception robot, laptop, tablet, and mobile interface",
         width: "full",
         caption:
-          "The responsive reception workflow connects check-in, health screening, guidance, notifications, and badge printing across shared and personal devices.",
+          "The platform connects contactless check-in, health screening, navigation, real-time alerts, responsive access, and badge printing across the reception robot and personal devices.",
+      },
+      {
+        id: "care-home-responsive-design",
+        url: careHomeResponsiveDesign,
+        alt: "Care Home visitor sign-in and health-screening form shown across mobile, tablet, and desktop breakpoints",
+        width: "full",
+        caption:
+          "The visitor sign-in and health-screening form adapts across device sizes without changing the arrival workflow.",
+      },
+      {
+        id: "care-home-admin",
+        url: careHomeAdmin,
+        alt: "Care Home administration interface for general, outbreak, and office settings",
+        width: "full",
+        caption:
+          "Reception administrators can configure visitor limits, outbreak guidance, language, session timeout, and office contacts from one settings view.",
+      },
+      {
+        id: "care-home-api-service",
+        url: careHomeApiService,
+        alt: "Care Home API documentation for robot maps, locations, schedules, logs, and battery notifications",
+        width: "full",
+        caption:
+          "Documented service APIs connect the robot to maps, locations, schedules, operational logs, and battery alerts.",
       },
     ],
     gridWidth: 6,

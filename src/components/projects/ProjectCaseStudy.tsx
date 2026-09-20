@@ -229,7 +229,11 @@ export const ImpactMetrics = ({ metrics }: ImpactMetricsProps) => {
           variants={revealContainer}
           className={cn(
             "mt-8 grid gap-px border-2 border-brutalist-cream/50 bg-brutalist-cream/50",
-            metrics.length === 1 ? "grid-cols-1" : "md:grid-cols-3",
+            metrics.length === 1
+              ? "grid-cols-1"
+              : metrics.length === 2
+                ? "md:grid-cols-2"
+                : "md:grid-cols-3",
           )}
         >
           {metrics.slice(0, 3).map((metric) => (
@@ -344,7 +348,10 @@ export const ProjectScreenshots = ({
             whileInView="visible"
             viewport={revealViewport}
             variants={revealContainer}
-            className="mt-10 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+            className={cn(
+              "mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2",
+              images.length === 4 ? "lg:grid-cols-2" : "lg:grid-cols-3",
+            )}
           >
             {images.map((image, index) => (
               <motion.figure
@@ -374,11 +381,8 @@ export const ProjectScreenshots = ({
                     <Maximize2 aria-hidden="true" className="h-4 w-4" />
                   </span>
                 </button>
-                <figcaption className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-4 border-t-2 border-brutalist-ink pt-3 text-xs font-bold uppercase leading-relaxed tracking-[0.1em] text-brutalist-muted">
-                  <span className="text-brutalist-teal">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span>{image.caption ?? image.alt}</span>
+                <figcaption className="mt-4 border-t-2 border-brutalist-ink pt-3 font-sans text-sm leading-relaxed text-brutalist-ink sm:text-base">
+                  {image.caption ?? image.alt}
                 </figcaption>
               </motion.figure>
             ))}
@@ -404,7 +408,7 @@ export const ProjectScreenshots = ({
               <DialogTitle className="font-mono text-xl font-bold uppercase tracking-[-0.03em] text-brutalist-ink sm:text-2xl">
                 {projectTitle} - Screen {String(selectedIndex + 1).padStart(2, "0")}
               </DialogTitle>
-              <DialogDescription className="mt-2 max-w-4xl font-sans text-sm leading-relaxed text-brutalist-muted">
+              <DialogDescription className="mt-2 max-w-4xl font-sans text-sm leading-relaxed text-brutalist-ink/80 sm:text-base">
                 {selectedImage.caption ?? selectedImage.alt}
               </DialogDescription>
             </div>
