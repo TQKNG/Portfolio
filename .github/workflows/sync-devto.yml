@@ -1,0 +1,60 @@
+name: Sync blog to DEV
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/content/blog/**"
+      - "scripts/sync-devto.mjs"
+      - "scripts/validate-blog.mjs"
+      - "scripts/lib/blog-content.mjs"
+      - ".github/workflows/sync-devto.yml"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate and compare without updating DEV
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-devto-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://www.khanhng.com' }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Validate blog content and remote images
+        run: bun run blog:validate -- --check-remote
+
+      - name: Run tests
+        run: bun run test
+
+      - name: Build application
+        run: bun run build
+
+      - name: Preview DEV changes
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run
+        run: bun run blog:sync
+
+      - name: Publish DEV changes
+        if: github.event_name == 'push' || !inputs.dry_run
+        run: bun run blog:sync -- --write

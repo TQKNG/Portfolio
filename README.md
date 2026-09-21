@@ -28,6 +28,8 @@ bun run preview       # Serve the production build locally.
 bun run lint          # Run ESLint.
 bun run test          # Run the Vitest test suite once.
 bun run assets:check  # Validate referenced public assets.
+bun run blog:validate # Validate blog metadata and media references.
+bun run blog:sync     # Preview changes that would be sent to DEV.
 ```
 
 Use `bun run test -- --watch` for an interactive Vitest session.
@@ -77,6 +79,14 @@ The test suite covers blog view-state parsing, stale-filter fallback behavior, a
 Before submitting changes, run `bun run test`, `bun run lint`, `bun run build`, and `bun run assets:check`.
 
 When changing user-facing behavior, manually check the affected route in a browser at desktop and mobile widths.
+
+## Blog publishing
+
+Markdown files in `src/content/blog/` are the source of truth for both the portfolio and DEV.
+
+Images are stored in the public `portfolio-assets` Azure Blob container and referenced by URL from Markdown.
+
+See [docs/blog-authoring.md](docs/blog-authoring.md) for the authoring, image upload, validation, and publishing workflow.
 
 ## Package management
 

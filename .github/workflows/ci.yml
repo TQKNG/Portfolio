@@ -30,5 +30,14 @@ jobs:
       - name: Run lint
         run: bun run lint
 
+      - name: Run tests
+        run: bun run test
+
+      - name: Validate blog content
+        run: bun run blog:validate
+
+      - name: Validate assets
+        run: bun run assets:check
+
       - name: Build application
         run: bun run build
