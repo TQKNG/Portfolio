@@ -7,7 +7,7 @@ tags: [azure, devops, cli, grafana]
 devToTags: [azure, devops, cli, grafana]
 publishedAt: 2026-08-12T20:04:12Z
 status: published
-syncToDev: true
+syncToDev: false
 devToId: 4380724
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/deploy-grafana-to-azure/cover-v1.png
 coverImageAlt: Retro Azure CLI and Grafana workstations connected through cloud infrastructure
@@ -340,4 +340,3 @@ Deletion stops the ongoing costs for resources in that group. Check your subscri
 - [Managed identity image pulls for Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/managed-identity-image-pull)
 - [Azure Database for PostgreSQL private access](https://learn.microsoft.com/en-us/azure/postgresql/network/concepts-networking-private)
 - [ACR roles and ABAC repository permissions](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-rbac-built-in-roles-overview)
-

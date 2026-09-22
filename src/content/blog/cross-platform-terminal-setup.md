@@ -8,7 +8,7 @@ devToTags: [terminal, productivity, development, backend]
 publishedAt: 2026-09-08T16:45:22Z
 updatedAt: 2026-09-08T16:47:57Z
 status: published
-syncToDev: true
+syncToDev: false
 devToId: 4608211
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/cross-platform-terminal-setup/cover-v1.png
 coverImageAlt: Retro terminal workspaces connected through a shared command-line structure
@@ -104,4 +104,3 @@ I can move between machines and focus on the work because the editor, server, te
 
 > **Key takeaway:** Standardize the mental model first.
 > Standardize individual shortcuts only when they remain reliable.
-

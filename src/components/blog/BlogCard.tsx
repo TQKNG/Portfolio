@@ -13,6 +13,16 @@ const formatDate = (date: string) =>
     year: "numeric",
   });
 
+const coverStyles: Record<string, string> = {
+  Accessibility: "bg-gradient-to-br from-cyan-300 via-sky-500 to-blue-700",
+  "Behind the Work": "bg-gradient-to-br from-fuchsia-300 via-purple-500 to-indigo-800",
+  "Design Systems": "bg-gradient-to-br from-amber-200 via-orange-500 to-red-700",
+  Engineering: "bg-gradient-to-br from-lime-200 via-emerald-500 to-teal-800",
+  "Field Notes": "bg-gradient-to-br from-yellow-200 via-pink-400 to-rose-700",
+  "Product Thinking": "bg-gradient-to-br from-violet-300 via-blue-500 to-cyan-700",
+  Process: "bg-gradient-to-br from-orange-200 via-rose-500 to-purple-800",
+};
+
 export const BlogCard = ({ post }: BlogCardProps) => (
   <Link
     to={`/blog/${post.slug}`}
@@ -23,9 +33,18 @@ export const BlogCard = ({ post }: BlogCardProps) => (
         <AssetImage
           src={post.coverImage}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover grayscale"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-      ) : null}
+      ) : (
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 overflow-hidden ${coverStyles[post.category] ?? "bg-gradient-to-br from-teal-300 via-blue-500 to-indigo-800"}`}
+        >
+          <span className="absolute -right-5 -top-8 h-28 w-28 rotate-12 border-8 border-white/40" />
+          <span className="absolute -bottom-10 left-8 h-24 w-24 rounded-full bg-white/25" />
+          <span className="absolute bottom-3 right-8 h-8 w-20 -rotate-6 bg-black/20" />
+        </div>
+      )}
       <span className="relative z-10 border-2 border-brutalist-ink bg-brutalist-cream px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-brutalist-ink">
         {post.category}
       </span>

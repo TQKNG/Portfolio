@@ -7,7 +7,7 @@ tags: [codex, automation, emailmanagement, productivity]
 devToTags: [codex, automation, emailmanagement, productivity]
 publishedAt: 2026-07-22T05:30:03Z
 status: published
-syncToDev: true
+syncToDev: false
 devToId: 4202232
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/codex-email-cleanup/cover-v1.png
 coverImageAlt: A large pile of email envelopes moving through an automated sorting system into an organized inbox
@@ -126,4 +126,3 @@ It was turning an abandoned inbox into a system where:
 ---
 
 *This article was created with AI assistance*
-

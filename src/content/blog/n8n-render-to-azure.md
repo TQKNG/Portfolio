@@ -7,7 +7,7 @@ tags: [azure, devops, bicep, cicd]
 devToTags: [azure, devops, bicep, cicd]
 publishedAt: 2026-06-10T04:01:55Z
 status: published
-syncToDev: true
+syncToDev: false
 devToId: 3862305
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/n8n-render-to-azure/cover-v1.png
 coverImageAlt: An automation workflow crossing a bridge from a small cloud into structured, protected cloud infrastructure
@@ -144,4 +144,3 @@ This creates a simple zero-trust-inspired flow.
 - GitHub Actions Docs: https://docs.github.com/actions
 - Docker Docs: https://docs.docker.com
 - Caddy Server Docs: https://caddyserver.com/docs
-
