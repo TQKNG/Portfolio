@@ -51,8 +51,8 @@ export const ContactForm = () => {
       }
 
       // UI-only: Show success toast
-      toast.success("Message sent successfully!", {
-        description: "Thank you for reaching out. I'll get back to you soon.",
+      toast.success("Thank you for contacting me!", {
+        description: "Your message has been sent. I'll get back to you soon.",
       });
 
       // Reset form after successful submission

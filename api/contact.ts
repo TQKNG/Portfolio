@@ -4,8 +4,21 @@ const recentRequests = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 5;
 
-function getClientKey(request: Request) {
-  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+type VercelRequest = {
+  method?: string;
+  headers: Record<string, string | string[] | undefined>;
+  body?: unknown;
+};
+
+type VercelResponse = {
+  status: (statusCode: number) => VercelResponse;
+  json: (body: unknown) => void;
+};
+
+function getClientKey(request: VercelRequest) {
+  const forwardedFor = request.headers["x-forwarded-for"];
+  const value = Array.isArray(forwardedFor) ? forwardedFor[0] : forwardedFor;
+  return value?.split(",")[0]?.trim() || "unknown";
 }
 
 function isRateLimited(key: string) {
@@ -22,27 +35,28 @@ function isRateLimited(key: string) {
   return false;
 }
 
-export default async function handler(request: Request) {
+export default async function handler(request: VercelRequest, response: VercelResponse) {
   if (request.method !== "POST") {
-    return Response.json({ error: "Method not allowed" }, { status: 405 });
+    return response.status(405).json({ error: "Method not allowed" });
   }
 
   if (isRateLimited(getClientKey(request))) {
-    return Response.json({ error: "Too many requests" }, { status: 429 });
+    return response.status(429).json({ error: "Too many requests" });
   }
 
   try {
-    const payload = await request.json();
-    const result = contactSchema.safeParse(payload);
+    const result = contactSchema.safeParse(
+      typeof request.body === "string" ? JSON.parse(request.body) : request.body,
+    );
 
     if (!result.success) {
-      return Response.json({ error: "Invalid form submission" }, { status: 400 });
+      return response.status(400).json({ error: "Invalid form submission" });
     }
 
     const { name, email, message, website } = result.data;
 
     if (website) {
-      return Response.json({ success: true });
+      return response.status(200).json({ success: true });
     }
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -51,7 +65,7 @@ export default async function handler(request: Request) {
 
     if (!apiKey || !to || !from) {
       console.error("Contact email environment variables are not configured");
-      return Response.json({ error: "Email service is unavailable" }, { status: 500 });
+      return response.status(500).json({ error: "Email service is unavailable" });
     }
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
@@ -70,12 +84,17 @@ export default async function handler(request: Request) {
     });
 
     if (!resendResponse.ok) {
-      console.error("Resend request failed", { status: resendResponse.status });
-      return Response.json({ error: "Unable to send message" }, { status: 502 });
+      const errorBody = await resendResponse.text();
+      console.error("Resend request failed", {
+        status: resendResponse.status,
+        body: errorBody,
+      });
+      return response.status(502).json({ error: "Unable to send message" });
     }
 
-    return Response.json({ success: true });
-  } catch {
-    return Response.json({ error: "Invalid request" }, { status: 400 });
+    return response.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Contact function failed", error);
+    return response.status(500).json({ error: "Unable to process message" });
   }
 }
