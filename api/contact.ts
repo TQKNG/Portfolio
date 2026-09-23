@@ -1,4 +1,11 @@
-import { contactSchema } from "../src/lib/contact-schema";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().email().max(255),
+  message: z.string().trim().min(1).max(1000),
+  website: z.string().max(0).optional(),
+});
 
 const recentRequests = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000;
