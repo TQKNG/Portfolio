@@ -6,7 +6,7 @@ category: Cloud Engineering
 tags: [azure, devops, bicep, cicd]
 devToTags: [azure, devops, bicep, cicd]
 publishedAt: 2026-06-10T04:01:55Z
-status: unpublished
+status: published
 syncToDev: false
 devToId: 3862305
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/n8n-render-to-azure/cover-v1.png

@@ -7,7 +7,7 @@ tags: [design systems, ui, product design]
 devToTags: [designsystems, ui, product, design]
 publishedAt: 2025-02-14
 readingTime: 5 min read
-status: unpublished
+status: published
 syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/building-calm-in-complex-interfaces/cover-v1.svg
 coverImageAlt: Colorful structured blocks forming a calm interface

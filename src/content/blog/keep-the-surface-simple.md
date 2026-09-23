@@ -7,7 +7,7 @@ tags: ui, design systems, simplicity
 devToTags: [ui, designsystems, simplicity]
 publishedAt: 2024-07-19
 readingTime: 5 min read
-status: unpublished
+status: published
 syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/keep-the-surface-simple/cover-v1.svg
 coverImageAlt: A simple colorful interface surface with a focused control

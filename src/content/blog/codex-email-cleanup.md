@@ -6,7 +6,7 @@ category: AI Automation
 tags: [codex, automation, emailmanagement, productivity]
 devToTags: [codex, automation, emailmanagement, productivity]
 publishedAt: 2026-07-22T05:30:03Z
-status: unpublished
+status: published
 syncToDev: false
 devToId: 4202232
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/codex-email-cleanup/cover-v1.png

@@ -7,7 +7,7 @@ tags: [portfolio, visual design, typography]
 devToTags: [portfolio, visualdesign, typography]
 publishedAt: 2025-01-10
 readingTime: 6 min read
-status: unpublished
+status: published
 syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/notes-from-a-brutalist-portfolio/cover-v1.svg
 coverImageAlt: Colorful bold blocks representing a portfolio system

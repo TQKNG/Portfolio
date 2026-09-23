@@ -7,7 +7,7 @@ tags: [terminal, productivity, development, backend]
 devToTags: [terminal, productivity, development, backend]
 publishedAt: 2026-09-08T16:45:22Z
 updatedAt: 2026-09-08T16:47:57Z
-status: unpublished
+status: published
 syncToDev: false
 devToId: 4608211
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/cross-platform-terminal-setup/cover-v1.png

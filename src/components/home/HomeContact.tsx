@@ -9,7 +9,7 @@ export const HomeContact = () => (
       </FadeIn>
       <FadeIn>
         <form className="max-w-xl space-y-4">
-          <input type="email" placeholder="khanhnguyen.trq@gmail.com" aria-label="Email address" className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal" />
+          <input type="email" placeholder="YOUR EMAIL" aria-label="Email address" className="w-full border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal" />
           <textarea placeholder="YOUR MESSAGE" aria-label="Message" rows={4} className="w-full resize-none border-4 border-brutalist-ink bg-transparent px-4 py-3 text-sm font-bold text-brutalist-ink placeholder:text-brutalist-placeholder focus:outline-none focus:ring-2 focus:ring-brutalist-teal" />
           <button type="submit" className="border-4 border-brutalist-ink bg-brutalist-ink px-6 py-3 text-sm font-bold text-brutalist-cream transition-colors hover:border-brutalist-teal hover:bg-brutalist-teal">SEND →</button>
         </form>

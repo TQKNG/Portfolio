@@ -6,7 +6,7 @@ category: Cloud Engineering
 tags: [azure, devops, cli, grafana]
 devToTags: [azure, devops, cli, grafana]
 publishedAt: 2026-08-12T20:04:12Z
-status: unpublished
+status: published
 syncToDev: false
 devToId: 4380724
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/deploy-grafana-to-azure/cover-v1.png

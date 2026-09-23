@@ -7,7 +7,7 @@ tags: [craft, frontend, details]
 devToTags: [craft, frontend, details]
 publishedAt: 2024-11-30
 readingTime: 3 min read
-status: unpublished
+status: published
 syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/the-small-details-ship-with-you/cover-v1.svg
 coverImageAlt: Small colorful interface details arranged into a finished composition

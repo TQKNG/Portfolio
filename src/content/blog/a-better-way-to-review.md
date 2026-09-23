@@ -7,7 +7,7 @@ tags: collaboration, process, teams
 devToTags: [collaboration, process, teams]
 publishedAt: 2024-08-26
 readingTime: 3 min read
-status: unpublished
+status: published
 syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/a-better-way-to-review/cover-v1.svg
 coverImageAlt: Colorful review cards moving toward a shared decision
