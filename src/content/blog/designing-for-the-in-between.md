@@ -7,8 +7,8 @@ tags: ux, product, craft
 devToTags: [ux, product, craft]
 publishedAt: 2024-09-14
 readingTime: 4 min read
-status: published
-syncToDev: true
+status: unpublished
+syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/designing-for-the-in-between/cover-v1.svg
 coverImageAlt: A colorful transition between two interface states
 ---

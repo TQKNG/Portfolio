@@ -7,8 +7,8 @@ tags: [process, engineering, iteration]
 devToTags: [process, engineering, iteration]
 publishedAt: 2025-01-28
 readingTime: 4 min read
-status: published
-syncToDev: true
+status: unpublished
+syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/ship-the-first-draft/cover-v1.svg
 coverImageAlt: A colorful paper plane moving toward a first destination
 ---

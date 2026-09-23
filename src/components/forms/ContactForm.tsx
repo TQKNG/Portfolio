@@ -1,45 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/lib/toast";
+import { contactSchema, type ContactFormData } from "@/lib/contact-schema";
 import { Loader2 } from "lucide-react";
-
-/**
- * Contact Form Validation Schema
- * 
- * Validates all user inputs with appropriate length limits
- * and format requirements for security and data integrity.
- */
-const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, { message: "Name is required" })
-    .max(100, { message: "Name must be less than 100 characters" }),
-  email: z
-    .string()
-    .trim()
-    .email({ message: "Invalid email address" })
-    .max(255, { message: "Email must be less than 255 characters" }),
-  message: z
-    .string()
-    .trim()
-    .min(1, { message: "Message is required" })
-    .max(1000, { message: "Message must be less than 1000 characters" }),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
 
 /**
  * ContactForm Component
  * 
  * Contact form with real-time validation, loading states, and toast notifications.
- * Currently UI-only (no backend integration).
- * 
  * Features:
  * - Real-time validation using react-hook-form + zod
  * - Loading spinner during submission
@@ -48,9 +20,9 @@ type ContactFormData = z.infer<typeof contactSchema>;
  * - Proper input sanitization and length limits
  * 
  * Security:
- * - Client-side validation with zod schema
+ * - Client-side validation with a shared zod schema
+ * - Server-side validation in the Vercel Function
  * - Input length limits and trimming
- * - Email format validation
  */
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,8 +40,15 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call delay (2 seconds)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Contact request failed");
+      }
 
       // UI-only: Show success toast
       toast.success("Message sent successfully!", {
@@ -78,8 +57,7 @@ export const ContactForm = () => {
 
       // Reset form after successful submission
       reset();
-    } catch (error) {
-      // Handle any errors
+    } catch {
       toast.error("Something went wrong", {
         description: "Please try again later or contact me directly via email.",
       });
@@ -90,6 +68,14 @@ export const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-px w-px opacity-0"
+        {...register("website")}
+      />
       {/* Full Name Field */}
       <div className="space-y-2">
         <label

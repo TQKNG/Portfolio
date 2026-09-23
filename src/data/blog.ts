@@ -58,10 +58,15 @@ export const parsePost = (source: string): BlogPost => {
     publishedAt: parseValue(metadata.publishedAt ?? ""),
     updatedAt: metadata.updatedAt ? parseValue(metadata.updatedAt) : undefined,
     readingTime: calculateReadingTime(trimmedContent),
-    status: parseValue(metadata.status ?? "published") === "draft" ? "draft" : "published",
+    status:
+      parseValue(metadata.status ?? "published") === "draft"
+        ? "draft"
+        : "published",
     syncToDev: parseBoolean(metadata.syncToDev, false),
     devToId: Number.isFinite(parsedDevToId) ? parsedDevToId : undefined,
-    coverImage: metadata.coverImage ? parseValue(metadata.coverImage) : undefined,
+    coverImage: metadata.coverImage
+      ? parseValue(metadata.coverImage)
+      : undefined,
     coverImageAlt: metadata.coverImageAlt
       ? parseValue(metadata.coverImageAlt)
       : undefined,

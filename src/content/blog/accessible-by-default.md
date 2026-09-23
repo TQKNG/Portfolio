@@ -7,8 +7,8 @@ tags: [accessibility, frontend, inclusive design]
 devToTags: [accessibility, frontend, inclusive, design]
 publishedAt: 2024-12-18
 readingTime: 4 min read
-status: published
-syncToDev: true
+status: unpublished
+syncToDev: false
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/accessible-by-default/cover-v1.svg
 coverImageAlt: A bright path through layered accessible interface controls
 ---

@@ -7,7 +7,7 @@ tags: [ai, productivity, systemdesign, programming]
 devToTags: [ai, productivity, systemdesign, programming]
 publishedAt: 2026-09-08T15:41:17Z
 updatedAt: 2026-09-08T16:46:00Z
-status: published
+status: unpublished
 syncToDev: false
 devToId: 4607812
 coverImage: https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/blog/ai-coding-bottleneck/cover-v1.png
