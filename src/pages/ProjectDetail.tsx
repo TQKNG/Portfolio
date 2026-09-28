@@ -144,7 +144,7 @@ const ProjectDetailContent = ({ project }: { project: Project }) => {
         </main>
 
         <footer className="border-t-4 border-brutalist-ink">
-          <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-5 py-5 text-xs font-bold uppercase tracking-[0.12em] text-brutalist-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
+          <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-5 py-5 text-xs font-bold tracking-[0.12em] text-brutalist-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
             <span>© {new Date().getFullYear()} Khanh Nguyen</span>
             <div className="flex gap-5">
               <a
@@ -167,7 +167,7 @@ const ProjectDetailContent = ({ project }: { project: Project }) => {
                 to="/#contact"
                 className="inline-flex min-h-11 items-center transition-colors hover:text-brutalist-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal"
               >
-                Mail
+                Contact
               </Link>
             </div>
           </div>

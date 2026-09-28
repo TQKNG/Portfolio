@@ -45,24 +45,24 @@ export const BlogCard = ({ post }: BlogCardProps) => (
           <span className="absolute bottom-3 right-8 h-8 w-20 -rotate-6 bg-black/20" />
         </div>
       )}
-      <span className="relative z-10 border-2 border-brutalist-ink bg-brutalist-cream px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-brutalist-ink">
+      <span className="relative z-10 border-2 border-brutalist-ink bg-brutalist-cream px-2 py-1 text-xs font-bold uppercase tracking-wide text-brutalist-ink">
         {post.category}
       </span>
     </div>
     <div className="flex flex-1 flex-col p-4">
-      <div className="flex items-center justify-between gap-3 text-[10px] uppercase tracking-wide text-brutalist-muted">
+      <div className="flex items-center justify-between gap-3 text-xs text-brutalist-muted">
         <span>{formatDate(post.publishedAt)}</span>
         <span>{post.readingTime}</span>
       </div>
       <h3 className="mt-3 text-xl font-bold text-brutalist-ink group-hover:text-brutalist-teal">
         {post.title}
       </h3>
-      <p className="mt-3 text-xs uppercase leading-relaxed tracking-wide text-brutalist-muted">
+      <p className="mt-3 text-sm leading-relaxed text-brutalist-muted">
         {post.excerpt}
       </p>
       <div className="mt-auto flex flex-wrap gap-1 pt-5">
         {post.tags.slice(0, 2).map((tag) => (
-          <span key={tag} className="text-[10px] font-bold uppercase text-brutalist-ink">
+          <span key={tag} className="text-xs font-bold uppercase text-brutalist-ink">
             #{tag}
           </span>
         ))}

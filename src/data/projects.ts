@@ -1,6 +1,6 @@
 import { Project } from "@/types";
 
-const technologyIcons = {
+export const technologyIcons = {
   react: "/assets/icons/technologies/react.svg",
   typescript: "/assets/icons/technologies/typescript.svg",
   nextjs: "/assets/icons/technologies/nextjs.svg",
@@ -50,6 +50,8 @@ const careHomeDemo =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/video/carehome_intro.mp4";
 const robotSuiteHero =
   "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/image/robotsuite_brochure.png";
+const robotSuiteDemo =
+  "https://cs210032002b3e09a5d.blob.core.windows.net/portfolio-assets/video/robotsuite_intro.mp4";
 
 /**
  * Project content is intentionally kept separate from the case-study UI.
@@ -449,6 +451,7 @@ export const projects: Project[] = [
       },
     ],
     heroImage: robotSuiteHero,
+    previewVideo: robotSuiteDemo,
     metrics: [
       {
         value: "18s → 2s",

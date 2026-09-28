@@ -27,7 +27,7 @@ const NotFound = () => {
             <h1 className="mt-8 text-3xl font-bold uppercase sm:text-5xl">
               Page Not Found
             </h1>
-            <p className="mx-auto mt-5 max-w-md text-sm uppercase leading-relaxed tracking-wide text-brutalist-muted">
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed tracking-wide text-brutalist-muted">
               This page does not exist or has been moved.
             </p>
             <Button

@@ -6,7 +6,7 @@ const navItems = [
   { label: "WORK", sectionId: "work", navId: "work" },
   { label: "BLOG", sectionId: "blog", navId: "blog" },
   { label: "INFO", sectionId: "about", navId: "info" },
-  { label: "MAIL", sectionId: "contact", navId: "mail" },
+  { label: "CONTACT", sectionId: "contact", navId: "mail" },
 ];
 
 export const SiteNav = () => {
@@ -96,7 +96,7 @@ export const SiteNav = () => {
   };
 
   const navLinkClass = (navId: string) =>
-    `relative inline-flex min-h-11 items-center overflow-hidden border-2 border-brutalist-ink px-2.5 text-[0.65rem] font-bold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal sm:px-4 sm:text-xs ${
+    `relative inline-flex min-h-11 items-center overflow-hidden border-2 border-brutalist-ink px-2 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brutalist-teal sm:px-4 ${
       activeNav === navId
         ? "text-brutalist-cream"
         : "text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream"

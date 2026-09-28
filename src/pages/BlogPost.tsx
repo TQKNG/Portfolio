@@ -89,13 +89,13 @@ const BlogPost = () => {
         <Link to="/#blog" className="text-xs font-bold uppercase text-brutalist-teal hover:underline">
           ← Back to blogs
         </Link>
-        <div className="mt-10 flex flex-wrap gap-x-4 gap-y-2 text-[10px] font-bold uppercase tracking-wide text-brutalist-muted">
+        <div className="mt-10 flex flex-wrap gap-x-4 gap-y-2 text-[10px] font-bold tracking-wide text-brutalist-muted">
           <span>{post.category}</span>
           <span>{formatDate(post.publishedAt)}</span>
           <span>{post.readingTime}</span>
         </div>
         <h1 className="mt-4 text-4xl font-bold leading-none text-brutalist-ink sm:text-5xl lg:text-6xl">{post.title}</h1>
-        <p className="mt-6 text-sm uppercase leading-relaxed tracking-wide text-brutalist-muted">{post.excerpt}</p>
+        <p className="mt-6 text-sm leading-relaxed tracking-wide text-brutalist-muted">{post.excerpt}</p>
         {post.coverImage ? (
           <AssetImage
             src={post.coverImage}

@@ -26,7 +26,7 @@ export const SocialLinks = () => {
       show: !!socialLinks.linkedin,
     },
     {
-      name: "Email",
+      name: "Contact",
       href: `mailto:${socialLinks.email}`,
       icon: Mail,
       show: !!socialLinks.email,
@@ -41,8 +41,8 @@ export const SocialLinks = () => {
             <a
               key={link.name}
               href={link.href}
-              target={link.name !== "Email" ? "_blank" : undefined}
-              rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
+              target={link.name !== "Contact" ? "_blank" : undefined}
+              rel={link.name !== "Contact" ? "noopener noreferrer" : undefined}
               className="text-neutral-600 hover:text-brand-black transition-colors"
               aria-label={link.name}
             >

@@ -57,7 +57,7 @@ export const MermaidDiagram = ({ chart }: MermaidDiagramProps) => {
 
   if (!svg) {
     return (
-      <div className="border-2 border-brutalist-ink p-4 text-xs font-bold uppercase tracking-wide text-brutalist-muted">
+      <div className="border-2 border-brutalist-ink p-4 text-xs font-bold tracking-wide text-brutalist-muted">
         Rendering diagram…
       </div>
     );

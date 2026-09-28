@@ -54,8 +54,8 @@ export const BlogSection = () => {
         <div className="p-4 pb-4 lg:p-6 lg:pb-4">
           <RevealRule className="mb-5 h-1 w-24 bg-brutalist-teal" />
           <h4 className="text-xl font-bold text-brutalist-ink">LET&apos;S SHARE</h4>
-          <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">
-            THOUGHTS ON CODE, DESIGN, AND THE WORK IN BETWEEN
+          <p className="mt-1 text-sm text-brutalist-muted">
+            Thoughts on code, design, and the work in between
           </p>
         </div>
       </FadeIn>
@@ -79,7 +79,7 @@ export const BlogSection = () => {
           ))}
         </FadeInStagger>
       ) : (
-        <div className="mx-6 mb-6 border-4 border-dashed border-brutalist-ink p-8 text-xs font-bold uppercase tracking-wide text-brutalist-muted">
+        <div className="mx-6 mb-6 border-4 border-dashed border-brutalist-ink p-8 text-xs font-bold tracking-wide text-brutalist-muted">
           No notes match this filter yet.
         </div>
       )}

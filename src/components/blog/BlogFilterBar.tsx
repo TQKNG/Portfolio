@@ -19,7 +19,7 @@ export const BlogFilterBar = ({
           type="button"
           onClick={() => onFilterChange(option.value)}
           aria-pressed={isActive}
-          className={`border-2 border-brutalist-ink px-3 py-2 text-[10px] font-bold uppercase tracking-wide transition-colors ${
+          className={`border-2 border-brutalist-ink px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
             isActive
               ? "bg-brutalist-ink text-brutalist-cream"
               : "text-brutalist-ink hover:bg-brutalist-ink hover:text-brutalist-cream"

@@ -14,7 +14,7 @@ export const HomeProjects = () => {
           <div className="p-4 pb-4 lg:p-6 lg:pb-4">
             <RevealRule className="mb-5 h-1 w-24 bg-brutalist-teal" />
             <h2 className="text-xl font-bold text-brutalist-ink">LET&apos;S EXPLORE</h2>
-            <p className="mt-1 text-xs uppercase tracking-wide text-brutalist-muted">SELECT A PROJECT TO VIEW THE FULL CASE STUDY</p>
+            <p className="mt-1 text-sm text-brutalist-muted">Select a project to view the full case study.</p>
           </div>
         </FadeIn>
         <FadeInStagger className="space-y-2 px-6 pb-6 pt-0" staggerDelay={0.08}>
@@ -27,8 +27,8 @@ export const HomeProjects = () => {
                 </div>
                 <div className="flex items-center justify-between p-4">
                   <div>
-                    <h3 className="text-sm font-bold text-brutalist-ink transition-colors group-hover:text-brutalist-teal">{project.title.toUpperCase()}</h3>
-                    <p className="text-xs text-brutalist-muted">{project.subtitle}</p>
+                    <h3 className="text-sm font-bold text-brutalist-ink transition-colors group-hover:text-brutalist-teal">{project.title}</h3>
+                    <p className="text-sm text-brutalist-muted">{project.subtitle}</p>
                   </div>
                   <span className="text-xs font-bold text-brutalist-muted">{project.year}</span>
                 </div>
