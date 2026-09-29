@@ -65,7 +65,7 @@ export const projects: Project[] = [
     subtitle:
       "An AI database agent that turns natural-language questions into SQL queries and actionable data insights.",
     category: "AI / Data engineering",
-    year: "2024",
+    year: "2025",
     description:
       "ChatBOK helps users explore business databases through natural language, using relevant schema context to generate SQL and support historical, descriptive, predictive, and diagnostic analysis.",
     role: "Software Engineer",
@@ -427,7 +427,7 @@ export const projects: Project[] = [
     subtitle:
       "An operational command center for observing, managing, and engaging a connected robot fleet.",
     category: "Robotics operations",
-    year: "2023",
+    year: "2026",
     description:
       "KCODE Robot Suite brings fleet health, live location, task activity, alerts, and engagement analytics into a single operational view.",
     role: "Software Engineer",
@@ -685,28 +685,41 @@ export const projects: Project[] = [
   },
 ];
 
-export const getAllProjects = (): Project[] => projects;
+const projectOrder = [
+  "editorial-magazine",
+  "brand-identity-refresh",
+  "fintech-dashboard",
+];
+
+export const getAllProjects = (): Project[] =>
+  projectOrder
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter((project): project is Project => project !== undefined);
 
 export const getFeaturedProjects = (): Project[] =>
-  projects.filter((project) => project.featured);
+  getAllProjects().filter((project) => project.featured);
 
 export const getProjectBySlug = (slug: string): Project | undefined =>
   projects.find((project) => project.slug === slug);
 
 export const getNextProject = (currentSlug: string): Project | null => {
-  const currentIndex = projects.findIndex(
+  const orderedProjects = getAllProjects();
+  const currentIndex = orderedProjects.findIndex(
     (project) => project.slug === currentSlug,
   );
 
   if (currentIndex === -1) return null;
-  return projects[(currentIndex + 1) % projects.length];
+  return orderedProjects[(currentIndex + 1) % orderedProjects.length];
 };
 
 export const getPreviousProject = (currentSlug: string): Project | null => {
-  const currentIndex = projects.findIndex(
+  const orderedProjects = getAllProjects();
+  const currentIndex = orderedProjects.findIndex(
     (project) => project.slug === currentSlug,
   );
 
   if (currentIndex === -1) return null;
-  return projects[(currentIndex - 1 + projects.length) % projects.length];
+  return orderedProjects[
+    (currentIndex - 1 + orderedProjects.length) % orderedProjects.length
+  ];
 };
