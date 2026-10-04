@@ -134,7 +134,7 @@ export const ContactForm = () => {
         </label>
         <Textarea
           id="message"
-          placeholder="Tell me about your project..."
+          placeholder="Your message..."
           rows={6}
           {...register("message")}
           disabled={isSubmitting}
