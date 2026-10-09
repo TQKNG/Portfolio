@@ -13,6 +13,8 @@ const technologies = [
   { name: "SQL", icon: technologyIcons.sql },
   { name: "Azure", icon: technologyIcons.azure },
   { name: "OpenAI", icon: technologyIcons.openAi },
+  { name: "LangChain", icon: technologyIcons.langChain },
+  { name: "Codex", icon: technologyIcons.codex },
 ];
 
 export const HomeHero = () => {
@@ -60,7 +62,7 @@ export const HomeHero = () => {
               {technologies.map((technology) => (
                 <li
                   key={technology.name}
-                  className="inline-flex items-center gap-1.5 border-2 border-brutalist-ink px-2 py-1.5 text-xs font-bold text-brutalist-ink transition-colors hover:bg-brutalist-ink hover:text-brutalist-cream"
+                  className="inline-flex items-center gap-1.5 border-2 border-brutalist-ink px-1.5 py-1.5 text-xs font-bold text-brutalist-ink transition-colors hover:bg-brutalist-ink hover:text-brutalist-cream"
                 >
                   <img
                     src={technology.icon}

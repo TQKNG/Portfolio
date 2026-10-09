@@ -6,7 +6,8 @@ export const technologyIcons = {
   nextjs: "/assets/icons/technologies/nextjs.svg",
   python: "/assets/icons/technologies/python.svg",
   fastApi: "/assets/icons/technologies/fastapi.svg",
-  langChain: "/assets/icons/technologies/langchain.svg",
+  langChain: "/assets/icons/technologies/langchain.webp",
+  codex: "/assets/icons/technologies/codex.png",
   openAi: "/assets/icons/technologies/openai.svg",
   azure: "/assets/icons/technologies/azure.svg",
   aspNet: "/assets/icons/technologies/aspnet.svg",
@@ -439,6 +440,7 @@ export const projects: Project[] = [
       { name: "React", icon: technologyIcons.react },
       { name: "TypeScript", icon: technologyIcons.typescript },
       { name: "REST APIs", icon: technologyIcons.restApi },
+      { name: "Codex", icon: technologyIcons.codex },
       { name: "SQL", icon: technologyIcons.sql },
       { name: "Responsive Web", icon: technologyIcons.responsiveWeb },
       {
