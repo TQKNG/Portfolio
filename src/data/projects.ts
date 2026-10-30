@@ -61,7 +61,7 @@ const robotSuiteDemo =
 export const projects: Project[] = [
   {
     id: "1",
-    slug: "brand-identity-refresh",
+    slug: "chatbok",
     title: "ChatBOK",
     subtitle:
       "An AI database agent that turns natural-language questions into SQL queries and actionable data insights.",
@@ -244,7 +244,7 @@ export const projects: Project[] = [
   },
   {
     id: "2",
-    slug: "fintech-dashboard",
+    slug: "care-home-reception-app",
     title: "Care Home Reception App",
     subtitle:
       "An internal, robot-assisted reception platform for safer, paperless, and more reliable visitor check-in across devices.",
@@ -423,7 +423,7 @@ export const projects: Project[] = [
   },
   {
     id: "3",
-    slug: "editorial-magazine",
+    slug: "kcode-robot-suite",
     title: "KCODE Robot Suite",
     subtitle:
       "An operational command center for observing, managing, and engaging a connected robot fleet.",
@@ -681,9 +681,9 @@ export const projects: Project[] = [
 ];
 
 const projectOrder = [
-  "editorial-magazine",
-  "brand-identity-refresh",
-  "fintech-dashboard",
+  "kcode-robot-suite",
+  "chatbok",
+  "care-home-reception-app",
 ];
 
 export const getAllProjects = (): Project[] =>

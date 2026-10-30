@@ -43,6 +43,10 @@ const BlogPost = () => {
   const post = slug ? getBlogPostBySlug(slug) : undefined;
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [slug]);
+
+  useEffect(() => {
     if (!post) return;
 
     const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
