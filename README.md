@@ -78,6 +78,8 @@ The test suite covers blog view-state parsing, stale-filter fallback behavior, a
 
 Before submitting changes, run `bun run test`, `bun run lint`, `bun run build`, and `bun run assets:check`.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution and pull request guidance.
+
 When changing user-facing behavior, manually check the affected route in a browser at desktop and mobile widths.
 
 ## Blog publishing
